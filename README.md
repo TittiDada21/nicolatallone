@@ -99,6 +99,15 @@ src/
 - Componenti chiave: `HeroEventCard`, `GlassPanel`.
 - Font di default: Helvetica/Arial. Aggiungi Google Fonts modificando `index.html` se serve.
 
+## Workflow Git
+
+**IMPORTANTE**: Dopo ogni modifica, fare sempre commit e push:
+```bash
+git add -A
+git commit -m "Descrizione modifiche"
+git push
+```
+
 ## Script utili
 
 | Comando        | Descrizione                    |
