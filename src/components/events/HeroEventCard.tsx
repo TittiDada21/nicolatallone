@@ -87,6 +87,11 @@ export function HeroEventCard() {
                 <FiRefreshCw aria-hidden />
               </button>
             )}
+            {!user && isConfigured && (
+              <button type="button" className={styles.loginButton} onClick={() => setModalOpen(true)}>
+                Login
+              </button>
+            )}
             {user && formatted && (
               <button type="button" className={styles.editButton} onClick={handleEdit}>
                 Modifica

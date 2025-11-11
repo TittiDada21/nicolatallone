@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Cormorant+SC:wght@400;500;600&display=swap');
+
 *,
 *::before,
 *::after {
@@ -5,7 +7,17 @@
 }
 
 :root {
-  font-family: 'Helvetica Neue', Arial, sans-serif;
+  --font-primary: 'EB Garamond', 'Garamond', 'Georgia', serif;
+  --font-display: 'Cormorant Garamond', 'EB Garamond', 'Garamond', serif;
+  --font-accent: 'Cormorant SC', 'Cormorant Garamond', 'EB Garamond', serif;
+  --color-neo-green: #00ad01;
+  --color-deep-fern: #023601;
+  --color-slate-haze: #5f605f;
+  --color-violet-flare: #b88eff;
+  --gradient-brand: linear-gradient(135deg, rgba(2, 54, 1, 0.92), rgba(184, 142, 255, 0.85));
+  --gradient-hover: linear-gradient(120deg, rgba(0, 173, 1, 0.18), rgba(184, 142, 255, 0.24));
+  --gradient-strong: linear-gradient(120deg, rgba(0, 173, 1, 0.6), rgba(184, 142, 255, 0.75));
+  font-family: var(--font-primary);
   line-height: 1.6;
   font-weight: 400;
   color: #f5f7fa;
@@ -24,6 +36,7 @@ body {
 }
 
 body {
+  font-family: var(--font-primary);
   background: transparent;
 }
 
@@ -37,4 +50,20 @@ a {
 
 button {
   font-family: inherit;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+h4,
+h5,
+h6,
+.text-accent {
+  font-family: var(--font-accent);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
