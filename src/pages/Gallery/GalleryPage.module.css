@@ -15,7 +15,7 @@
   max-width: 1400px;
   background: rgb(0, 100, 0) !important;
   backdrop-filter: none !important;
-  position: relative;
+  position: relative !important;
 }
 
 .header {
@@ -151,9 +151,9 @@
 }
 
 .addButton {
-  position: absolute;
-  top: 2rem;
-  right: 2rem;
+  position: absolute !important;
+  top: 1.5rem;
+  right: 1.5rem;
   width: 62px;
   height: 62px;
   border-radius: 50%;
