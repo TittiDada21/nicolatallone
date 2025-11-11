@@ -5,6 +5,7 @@ import { CONTENT_ROUTES } from '@/data/navigation'
 import { AppLayout } from '@/layouts/AppLayout'
 import { GalleryPage } from '@/pages/Gallery/GalleryPage'
 import { ContentPage } from '@/pages/Content/ContentPage'
+import { EventsPage } from '@/pages/Events/EventsPage'
 import { HomePage } from '@/pages/Home/HomePage'
 import { AuthProvider } from '@/providers/AuthProvider'
 import { EventProvider } from '@/providers/EventProvider'
@@ -16,7 +17,8 @@ function App() {
         <Routes>
           <Route element={<AppLayout />}>
             <Route index element={<HomePage />} />
-            {CONTENT_ROUTES.map(({ key, path }) => (
+            <Route path="/eventi/:type" element={<EventsPage />} />
+            {CONTENT_ROUTES.filter(({ key }) => !key.startsWith('eventi/')).map(({ key, path }) => (
               <Route key={path} path={path} element={<ContentPage pageKey={key} />} />
             ))}
             <Route path="/galleria" element={<GalleryPage />} />

@@ -104,28 +104,19 @@ export function HeroEventCard() {
           {formatted && !loading && (
             <>
               <p className={styles.datetime}>{formatted.formattedDate}</p>
-              {formatted.description && <p className={styles.description}>{formatted.description}</p>}
 
-              <div className={styles.meta}>
-                {formatted.address && (
-                  <p className={styles.metaRow}>
-                    <FiMapPin aria-hidden />
-                    {formatted.locationUrl ? (
-                      <a href={formatted.locationUrl} target="_blank" rel="noreferrer">
-                        {formatted.address}
-                      </a>
-                    ) : (
-                      formatted.address
-                    )}
-                  </p>
-                )}
-
-                {formatted.isFree ? (
-                  <span className={styles.badge}>Offerta libera</span>
-                ) : (
-                  formatted.price && <span className={styles.badge}>€ {formatted.price}</span>
-                )}
-              </div>
+              {formatted.address && (
+                <p className={styles.metaRow}>
+                  <FiMapPin aria-hidden />
+                  {formatted.locationUrl ? (
+                    <a href={formatted.locationUrl} target="_blank" rel="noreferrer">
+                      {formatted.address}
+                    </a>
+                  ) : (
+                    formatted.address
+                  )}
+                </p>
+              )}
 
               {formatted.externalUrl && (
                 <a
