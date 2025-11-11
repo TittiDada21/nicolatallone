@@ -54,14 +54,14 @@ const mapEvent = (raw: EventRow): EventRecord => ({
   id: raw.id,
   title: raw.title,
   description: raw.description,
-  startsAt: raw.starts_at ?? raw.startsAt,
+  startsAt: raw.starts_at ?? raw.startsAt ?? new Date().toISOString(),
   address: raw.address,
   isFree: Boolean(raw.is_free ?? raw.isFree),
   price: raw.price,
   externalUrl: raw.external_url ?? raw.externalUrl,
   locationUrl: raw.location_url ?? raw.locationUrl,
-  createdAt: raw.created_at,
-  updatedAt: raw.updated_at,
+  createdAt: raw.created_at ?? undefined,
+  updatedAt: raw.updated_at ?? undefined,
 })
 
 const sortByDateAsc = (a: EventRecord, b: EventRecord) =>
