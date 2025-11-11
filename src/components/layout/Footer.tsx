@@ -55,6 +55,12 @@ export function Footer() {
           Galleria
         </Link>
 
+        <div className={styles.poweredBy}>
+          <a href="https://www.dada21.com" target="_blank" rel="noreferrer" className={styles.poweredByLink}>
+            powered by dada21
+          </a>
+        </div>
+
         <div className={styles.socialGroup}>
           {SOCIAL_LINKS.map((item) => {
             const { icon: Icon, label } = item

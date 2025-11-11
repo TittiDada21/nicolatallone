@@ -34,6 +34,24 @@
   border-color: rgba(255, 255, 255, 0.4);
 }
 
+.poweredBy {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.poweredByLink {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.poweredByLink:hover,
+.poweredByLink:focus-visible {
+  color: rgba(255, 255, 255, 0.8);
+}
+
 .socialGroup {
   display: flex;
   gap: 1rem;
