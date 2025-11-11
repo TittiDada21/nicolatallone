@@ -1,0 +1,202 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 6, 12, 0.75);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 1.5rem;
+}
+
+.modal {
+  width: min(640px, 100%);
+  background: rgba(14, 14, 20, 0.92);
+  border-radius: 24px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 24px 48px rgba(6, 6, 12, 0.4);
+  color: #f5f7fa;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.modalHeader h2 {
+  margin: 0;
+  font-size: 1.6rem;
+  letter-spacing: 0.04em;
+}
+
+.closeButton {
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: 2rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.spinner {
+  font-size: 2rem;
+  animation: spin 1s linear infinite;
+}
+
+.loginForm,
+.galleryForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.loginForm label,
+.galleryForm label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.modal input,
+.modal textarea {
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.75rem 1rem;
+  color: inherit;
+  font: inherit;
+  resize: vertical;
+}
+
+.fullRow {
+  grid-column: 1 / -1;
+}
+
+.fileUpload {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+}
+
+.fileInput {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+}
+
+.uploadIcon {
+  font-size: 1.2rem;
+  color: rgba(245, 214, 123, 0.85);
+}
+
+.preview {
+  margin-top: 0.5rem;
+  border-radius: 14px;
+  overflow: hidden;
+  max-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.preview img,
+.preview video {
+  max-width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+}
+
+.error {
+  margin: 0;
+  color: #ff9b9b;
+  font-size: 0.9rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.primaryButton,
+.secondaryButton,
+.deleteButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.5rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.1);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.primaryButton {
+  background: rgba(245, 214, 123, 0.75);
+  color: #1b1b23;
+  border-color: rgba(245, 214, 123, 0.95);
+}
+
+.secondaryButton {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.deleteButton {
+  border-color: rgba(255, 120, 120, 0.45);
+  color: #ff9b9b;
+}
+
+.signOut {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 640px) {
+  .modal {
+    padding: 1.5rem;
+  }
+}
+

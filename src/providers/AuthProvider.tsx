@@ -6,7 +6,6 @@ import type { User } from '@supabase/supabase-js'
 import { hasSupabase, supabase } from '@/lib/supabaseClient'
 
 type SignInPayload = {
-  email: string
   password: string
 }
 
@@ -52,11 +51,12 @@ export function AuthProvider({ children }: PropsWithChildren) {
     }
   }, [])
 
-  const signIn = async ({ email, password }: SignInPayload) => {
+  const signIn = async ({ password }: SignInPayload) => {
     if (!supabase) {
       throw new Error('Supabase non configurato')
     }
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
+    const adminEmail = import.meta.env.VITE_ADMIN_EMAIL || 'cellist@nicolatallone.com'
+    const { error } = await supabase.auth.signInWithPassword({ email: adminEmail, password })
     if (error) {
       throw error
     }

@@ -46,7 +46,7 @@ export function AdminEventModal({
   const [form, setForm] = useState<EventFormValues>(createEmptyForm)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [loginState, setLoginState] = useState({ email: '', password: '' })
+  const [loginState, setLoginState] = useState({ password: '' })
 
   useEffect(() => {
     if (!open) {
@@ -154,21 +154,13 @@ export function AdminEventModal({
         ) : !user ? (
           <form className={styles.loginForm} onSubmit={handleLogin}>
             <label>
-              Email admin
-              <input
-                type="email"
-                value={loginState.email}
-                onChange={(event) => setLoginState((prev) => ({ ...prev, email: event.target.value }))}
-                required
-              />
-            </label>
-            <label>
-              Password
+              Password admin
               <input
                 type="password"
                 value={loginState.password}
                 onChange={(event) => setLoginState((prev) => ({ ...prev, password: event.target.value }))}
                 required
+                autoFocus
               />
             </label>
             {error && <p className={styles.error}>{error}</p>}
