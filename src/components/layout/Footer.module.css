@@ -58,6 +58,68 @@
   border-color: rgba(255, 255, 255, 0.32);
 }
 
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popup {
+  background: linear-gradient(135deg, rgba(18, 18, 24, 0.95), rgba(18, 18, 24, 0.85));
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 2rem;
+  min-width: 300px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.popup h3 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.popupContent {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.popupValue {
+  flex: 1;
+  font-size: 1rem;
+  word-break: break-all;
+}
+
+.copyButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: inherit;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.copyButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
 @media (max-width: 768px) {
   .footer {
     padding: 1rem 1.5rem;
@@ -65,6 +127,11 @@
 
   .galleryButton {
     padding: 0.55rem 1.25rem;
+  }
+
+  .popup {
+    min-width: 280px;
+    padding: 1.5rem;
   }
 }
 
