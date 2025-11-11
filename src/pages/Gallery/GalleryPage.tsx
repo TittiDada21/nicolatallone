@@ -6,6 +6,7 @@ import { hasSupabase, supabase } from '@/lib/supabaseClient'
 import { useAuth } from '@/providers/AuthProvider'
 import type { GalleryItem } from '@/types/gallery'
 import { AdminGalleryModal } from '@/components/gallery/AdminGalleryModal'
+import { GallerySlideshow } from '@/components/gallery/GallerySlideshow'
 
 import styles from './GalleryPage.module.css'
 
@@ -25,6 +26,8 @@ export function GalleryPage() {
   const [error, setError] = useState<string | null>(null)
   const [modalOpen, setModalOpen] = useState(false)
   const [editing, setEditing] = useState<GalleryItem | null>(null)
+  const [slideshowOpen, setSlideshowOpen] = useState(false)
+  const [slideshowIndex, setSlideshowIndex] = useState(0)
 
   const loadGallery = async () => {
     if (!supabase) {
@@ -78,6 +81,17 @@ export function GalleryPage() {
     if (error) throw error
   }
 
+  const handleImageClick = (index: number) => {
+    if (items[index]?.type === 'image') {
+      setSlideshowIndex(index)
+      setSlideshowOpen(true)
+    }
+  }
+
+  const handleSlideshowNavigate = (index: number) => {
+    setSlideshowIndex(index)
+  }
+
   return (
     <div className={styles.wrapper}>
       <GlassPanel size="wide" className={styles.panel}>
@@ -93,16 +107,29 @@ export function GalleryPage() {
         ) : (
           <>
             <div className={styles.grid}>
-              {items.map((item) => (
+              {items.map((item, index) => (
                 <figure key={item.id} className={styles.card}>
-                  <img
-                    src={item.thumbnailUrl ?? item.url}
-                    alt={item.title}
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement
-                      target.src = 'https://placehold.co/400x300/333/FFF?text=Immagine+non+disponibile'
-                    }}
-                  />
+                  {item.type === 'image' ? (
+                    <img
+                      src={item.thumbnailUrl ?? item.url}
+                      alt={item.title}
+                      className={styles.clickableImage}
+                      onClick={() => handleImageClick(index)}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement
+                        target.src = 'https://placehold.co/400x300/333/FFF?text=Immagine+non+disponibile'
+                      }}
+                    />
+                  ) : (
+                    <img
+                      src={item.thumbnailUrl ?? item.url}
+                      alt={item.title}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement
+                        target.src = 'https://placehold.co/400x300/333/FFF?text=Immagine+non+disponibile'
+                      }}
+                    />
+                  )}
                   <figcaption>{item.title}</figcaption>
                   {item.type === 'video' && (
                     <a href={item.url} target="_blank" rel="noreferrer" className={styles.videoLink}>
@@ -145,6 +172,13 @@ export function GalleryPage() {
         onClose={handleCloseModal}
         onSuccess={loadGallery}
         onDelete={editing ? handleDelete : undefined}
+      />
+      <GallerySlideshow
+        open={slideshowOpen}
+        items={items}
+        currentIndex={slideshowIndex}
+        onClose={() => setSlideshowOpen(false)}
+        onNavigate={handleSlideshowNavigate}
       />
     </div>
   )

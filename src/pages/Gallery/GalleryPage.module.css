@@ -73,6 +73,16 @@
   display: block;
 }
 
+.clickableImage {
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.clickableImage:hover {
+  transform: scale(1.02);
+  opacity: 0.9;
+}
+
 .card figcaption {
   margin: 0;
   font-size: 0.95rem;
