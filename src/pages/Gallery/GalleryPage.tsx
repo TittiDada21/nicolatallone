@@ -95,6 +95,16 @@ export function GalleryPage() {
   return (
     <div className={styles.wrapper}>
       <GlassPanel size="wide" className={styles.panel}>
+        {user && (
+          <button
+            type="button"
+            className={styles.addButton}
+            onClick={handleCreate}
+            aria-label="Aggiungi elemento"
+          >
+            <FiPlus aria-hidden />
+          </button>
+        )}
         <div className={styles.header}>
           <h1>Galleria</h1>
           <p>Foto e video aggiornati da Supabase Storage.</p>
@@ -149,19 +159,11 @@ export function GalleryPage() {
                 </figure>
               ))}
             </div>
-            <div className={styles.footer}>
-              <button
-                type="button"
-                className={styles.addButton}
-                onClick={handleCreate}
-                aria-label="Aggiungi elemento"
-              >
-                <FiPlus aria-hidden />
-              </button>
-              {!user && hasSupabase && (
+            {!user && hasSupabase && (
+              <div className={styles.footer}>
                 <p className={styles.hint}>Accedi con la password admin per aggiungere foto.</p>
-              )}
-            </div>
+              </div>
+            )}
           </>
         )}
       </GlassPanel>

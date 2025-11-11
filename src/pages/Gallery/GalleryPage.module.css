@@ -15,6 +15,7 @@
   max-width: 1400px;
   background: rgb(0, 100, 0) !important;
   backdrop-filter: none !important;
+  position: relative;
 }
 
 .header {
@@ -150,6 +151,9 @@
 }
 
 .addButton {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
   width: 62px;
   height: 62px;
   border-radius: 50%;
@@ -162,6 +166,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 10;
 }
 
 .addButton:hover,
