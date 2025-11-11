@@ -95,7 +95,14 @@ export function GalleryPage() {
             <div className={styles.grid}>
               {items.map((item) => (
                 <figure key={item.id} className={styles.card}>
-                  <img src={item.thumbnailUrl ?? item.url} alt={item.title} />
+                  <img
+                    src={item.thumbnailUrl ?? item.url}
+                    alt={item.title}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement
+                      target.src = 'https://placehold.co/400x300/333/FFF?text=Immagine+non+disponibile'
+                    }}
+                  />
                   <figcaption>{item.title}</figcaption>
                   {item.type === 'video' && (
                     <a href={item.url} target="_blank" rel="noreferrer" className={styles.videoLink}>
