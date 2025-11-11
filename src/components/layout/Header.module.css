@@ -8,7 +8,7 @@
   justify-content: space-between;
   padding: 1.5rem 2.5rem;
   z-index: 10;
-  background: linear-gradient(90deg, rgba(12, 12, 18, 0.85), rgba(12, 12, 18, 0.75));
+  background: linear-gradient(90deg, rgba(12, 12, 18, 0.5), rgba(12, 12, 18, 0.4));
   backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -60,6 +60,16 @@
   letter-spacing: 0.02em;
 }
 
+.navItemWithDropdown::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 2.5rem;
+  z-index: 1;
+}
+
 .navTrigger {
   padding: 0.6rem 0;
   cursor: default;
@@ -93,6 +103,7 @@
   transform: translateY(10px);
   transition: all 0.2s ease-in-out;
   pointer-events: none;
+  z-index: 2;
 }
 
 .dropdownLink {

@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.25rem 2rem;
-  background: linear-gradient(90deg, rgba(18, 18, 24, 0.7), rgba(18, 18, 24, 0.08));
+  background: linear-gradient(90deg, rgba(18, 18, 24, 0.45), rgba(18, 18, 24, 0.05));
   backdrop-filter: blur(14px);
   z-index: 10;
 }
