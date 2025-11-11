@@ -13,19 +13,19 @@ const LINKS: LinkItem[] = [
   {
     id: 'spotify',
     title: 'Ascolta su Spotify',
-    url: '', // verrà fornito dall'utente
+    url: 'https://open.spotify.com/intl-it/artist/4PwVOfl7JZJIOJv35dogVU',
     icon: <FaSpotify />,
   },
   {
     id: 'youtube',
     title: 'Guarda su YouTube',
-    url: '', // verrà fornito dall'utente
+    url: 'https://www.youtube.com/channel/UC37K4rUHIH2rolI3cS4vw3Q',
     icon: <FaYoutube />,
   },
   {
     id: 'amazon',
     title: 'Acquista su Amazon',
-    url: '', // verrà fornito dall'utente
+    url: 'https://www.amazon.com/music/player/artists/B09V5MW1T1/nicola-raffaello-tallone',
     icon: <FaAmazon />,
   },
 ]
