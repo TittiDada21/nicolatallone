@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Cormorant+SC:wght@400;500;600&display=swap');
-
 *,
 *::before,
 *::after {
@@ -7,9 +5,9 @@
 }
 
 :root {
-  --font-primary: 'EB Garamond', 'Garamond', 'Georgia', serif;
-  --font-display: 'Cormorant Garamond', 'EB Garamond', 'Garamond', serif;
-  --font-accent: 'Cormorant SC', 'Cormorant Garamond', 'EB Garamond', serif;
+  --font-primary: 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Helvetica Neue', Arial, sans-serif;
+  --font-accent: 'Helvetica Neue', Arial, sans-serif;
   --color-neo-green: #00ad01;
   --color-deep-fern: #023601;
   --color-slate-haze: #5f605f;
@@ -50,20 +48,4 @@ a {
 
 button {
   font-family: inherit;
-}
-
-h1,
-h2,
-h3 {
-  font-family: var(--font-display);
-  font-weight: 600;
-}
-
-h4,
-h5,
-h6,
-.text-accent {
-  font-family: var(--font-accent);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
 }
