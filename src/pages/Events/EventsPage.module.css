@@ -4,6 +4,22 @@
   justify-content: center;
   width: 100%;
   padding: 2rem 1rem;
+  position: relative;
+}
+
+.wrapper::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+}
+
+.wrapper.futuri::before {
+  background-color: var(--color-violet-flare);
+}
+
+.wrapper.passati::before {
+  background: linear-gradient(135deg, #0b0b10, var(--color-deep-fern));
 }
 
 .header {

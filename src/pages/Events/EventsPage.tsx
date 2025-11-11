@@ -34,7 +34,7 @@ export function EventsPage() {
       : 'Archivio storico degli eventi passati, utile per stampa e promoter.'
 
   return (
-    <div className={styles.wrapper}>
+    <div className={`${styles.wrapper} ${type === 'futuri' ? styles.futuri : styles.passati}`}>
       <GlassPanel size="wide">
         <div className={styles.header}>
           <h1>{title}</h1>

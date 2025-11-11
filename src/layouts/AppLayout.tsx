@@ -10,6 +10,7 @@ export function AppLayout() {
   const location = useLocation()
   const isAlbumPage = location.pathname === '/progetti/album'
   const isGalleryPage = location.pathname === '/galleria'
+  const isEventsPage = location.pathname.startsWith('/eventi')
 
   useEffect(() => {
     if (isGalleryPage) {
@@ -27,7 +28,7 @@ export function AppLayout() {
 
   return (
     <div className={styles.app}>
-      {!isAlbumPage && !isGalleryPage && (
+      {!isAlbumPage && !isGalleryPage && !isEventsPage && (
         <>
           <div className={styles.background} aria-hidden />
           <div className={styles.overlay} aria-hidden />
