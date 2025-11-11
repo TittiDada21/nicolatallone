@@ -72,7 +72,7 @@
 
 .navTrigger {
   padding: 0.6rem 0.15rem;
-  cursor: default;
+  cursor: pointer;
   font-size: 1.05rem;
   line-height: 1;
   display: inline-flex;
@@ -97,10 +97,10 @@
   display: flex;
   flex-direction: column;
   min-width: 220px;
-  background: rgba(18, 18, 24, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(150deg, rgba(2, 54, 1, 0.95), rgba(6, 6, 10, 0.88), rgba(184, 142, 255, 0.82));
+  border: 1px solid rgba(184, 142, 255, 0.35);
   border-radius: 14px;
-  box-shadow: 0 18px 40px rgba(12, 12, 18, 0.45);
+  box-shadow: 0 18px 44px rgba(2, 54, 1, 0.45);
   overflow: hidden;
   opacity: 0;
   transform: translateY(10px);
@@ -115,12 +115,24 @@
   text-decoration: none;
   font-size: 0.9rem;
   background: transparent;
-  transition: background 0.15s ease;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.dropdownLink + .dropdownLink {
+  border-top: 1px solid rgba(95, 96, 95, 0.35);
 }
 
 .dropdownLink:hover,
 .dropdownLink:focus-visible {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--gradient-hover);
+  color: var(--color-violet-flare);
+  transform: translateX(6px);
+}
+
+.dropdownLink.activeLink {
+  background: var(--gradient-hover);
+  color: var(--color-neo-green);
+  font-weight: 600;
 }
 
 .navLink,
@@ -149,7 +161,14 @@
 }
 
 .activeLink {
-  color: #f5d67b;
+  color: var(--color-neo-green);
+  font-weight: 600;
+}
+
+.navLink.activeLink::after,
+.linkButton.activeLink::after {
+  transform: scaleX(1);
+  opacity: 1;
 }
 
 .externalIcon {
@@ -163,17 +182,25 @@
 
 .mobileToggle {
   display: none;
-  background: rgba(17, 17, 22, 0.65);
+  background: rgba(95, 96, 95, 0.25);
   color: inherit;
   border-radius: 12px;
   padding: 0.6rem;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(184, 142, 255, 0.3);
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.mobileToggle:hover,
+.mobileToggle:focus-visible {
+  background: var(--gradient-hover);
+  border-color: rgba(184, 142, 255, 0.55);
+  color: var(--color-violet-flare);
 }
 
 .mobileNav {
   position: fixed;
   inset: 0;
-  background: rgba(6, 6, 10, 0.85);
+  background: linear-gradient(160deg, rgba(2, 54, 1, 0.9), rgba(6, 6, 10, 0.94));
   backdrop-filter: blur(18px);
   opacity: 0;
   pointer-events: none;
@@ -221,24 +248,65 @@
 .mobileLink {
   width: 100%;
   text-align: left;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid transparent;
+  background: rgba(95, 96, 95, 0.22);
+  border: 1px solid rgba(184, 142, 255, 0.25);
   border-radius: 14px;
   padding: 0.85rem 1rem;
   color: inherit;
   font: inherit;
   letter-spacing: 0.04em;
   cursor: pointer;
-  transition: border-color 0.15s ease;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .mobileLink:hover,
 .mobileLink:focus-visible {
-  border-color: rgba(255, 255, 255, 0.25);
+  background: var(--gradient-hover);
+  border-color: rgba(184, 142, 255, 0.6);
+  color: var(--color-violet-flare);
+  transform: translateX(4px);
 }
 
 .mobileLinkActive {
-  border-color: rgba(245, 214, 123, 0.8);
+  border-color: var(--color-neo-green);
+  background: rgba(0, 173, 1, 0.18);
+  color: var(--color-neo-green);
+}
+
+.navTrigger::after,
+.navLink::after,
+.linkButton::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.35rem;
+  height: 2px;
+  background: var(--gradient-strong);
+  border-radius: 999px;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  opacity: 0;
+}
+
+.navItemWithDropdown:hover .navTrigger,
+.navItemWithDropdown:focus-within .navTrigger,
+.navLink:hover,
+.navLink:focus-visible,
+.linkButton:hover,
+.linkButton:focus-visible {
+  color: var(--color-violet-flare);
+}
+
+.navItemWithDropdown:hover .navTrigger::after,
+.navItemWithDropdown:focus-within .navTrigger::after,
+.navLink:hover::after,
+.navLink:focus-visible::after,
+.linkButton:hover::after,
+.linkButton:focus-visible::after {
+  transform: scaleX(1);
+  opacity: 1;
 }
 
 @media (max-width: 960px) {
