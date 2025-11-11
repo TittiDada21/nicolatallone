@@ -1,12 +1,18 @@
 .wrapper {
   width: 100%;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  padding: 8rem 2rem 4rem;
+  background: linear-gradient(135deg, rgba(2, 54, 1, 0.95), rgba(184, 142, 255, 0.88), rgba(2, 54, 1, 0.92));
+  background-attachment: fixed;
 }
 
 .panel {
   gap: 2rem;
+  width: 100%;
+  max-width: 1400px;
 }
 
 .header {
@@ -38,8 +44,11 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-rows: auto;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1400px;
 }
 
 .card {
@@ -56,9 +65,11 @@
 
 .card img {
   width: 100%;
-  height: 160px;
-  object-fit: cover;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
   border-radius: 12px;
+  display: block;
 }
 
 .card figcaption {
