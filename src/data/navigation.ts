@@ -117,10 +117,6 @@ export const NAV_ITEMS: NavigationItem[] = [
     ],
   },
   {
-    label: 'Galleria',
-    path: '/galleria',
-  },
-  {
     label: 'Silarte',
     path: '/silarte',
     externalHref: 'https://silarte.org',
