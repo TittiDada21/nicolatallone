@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
-import { FiPlus } from 'react-icons/fi'
+import { useEffect, useState, useRef } from 'react'
+import { FiPlus, FiTrash2 } from 'react-icons/fi'
+import { FaLock } from 'react-icons/fa'
 
 import { GlassPanel } from '@/components/common/GlassPanel'
 import { hasSupabase, supabase } from '@/lib/supabaseClient'
@@ -9,6 +10,73 @@ import { AdminGalleryModal } from '@/components/gallery/AdminGalleryModal'
 import { GallerySlideshow } from '@/components/gallery/GallerySlideshow'
 
 import styles from './GalleryPage.module.css'
+
+type EditableTitleProps = {
+  title: string
+  onUpdate: (newTitle: string) => void
+  canEdit: boolean
+}
+
+function EditableTitle({ title, onUpdate, canEdit }: EditableTitleProps) {
+  const [isEditing, setIsEditing] = useState(false)
+  const [value, setValue] = useState(title)
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    setValue(title)
+  }, [title])
+
+  useEffect(() => {
+    if (isEditing && inputRef.current) {
+      inputRef.current.focus()
+      inputRef.current.select()
+    }
+  }, [isEditing])
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      onUpdate(value)
+      setIsEditing(false)
+    } else if (e.key === 'Escape') {
+      setValue(title)
+      setIsEditing(false)
+    }
+  }
+
+  const handleBlur = () => {
+    if (value.trim() && value !== title) {
+      onUpdate(value)
+    } else {
+      setValue(title)
+    }
+    setIsEditing(false)
+  }
+
+  if (isEditing) {
+    return (
+      <input
+        ref={inputRef}
+        type="text"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        onKeyDown={handleKeyDown}
+        onBlur={handleBlur}
+        className={styles.editableTitleInput}
+      />
+    )
+  }
+
+  return (
+    <figcaption
+      className={canEdit ? styles.editableTitle : undefined}
+      onClick={canEdit ? () => setIsEditing(true) : undefined}
+      title={canEdit ? 'Clicca per modificare' : undefined}
+      style={canEdit ? undefined : { cursor: 'default' }}
+    >
+      {title}
+    </figcaption>
+  )
+}
 
 const FALLBACK_GALLERY: GalleryItem[] = [
   {
@@ -81,6 +149,35 @@ export function GalleryPage() {
     if (error) throw error
   }
 
+  const handleDeleteItem = async (item: GalleryItem) => {
+    if (!supabase) return
+    if (item.url.includes('storage.supabase.co')) {
+      const filePath = item.url.split('/').pop()?.split('?')[0]
+      if (filePath) {
+        await supabase.storage.from('gallery').remove([filePath])
+      }
+    }
+    const { error } = await supabase.from('gallery_items').delete().eq('id', item.id)
+    if (error) {
+      console.error('Errore eliminazione:', error)
+      return
+    }
+    void loadGallery()
+  }
+
+  const handleTitleUpdate = async (item: GalleryItem, newTitle: string) => {
+    if (!supabase || !newTitle.trim()) return
+    const { error } = await supabase
+      .from('gallery_items')
+      .update({ title: newTitle.trim() })
+      .eq('id', item.id)
+    if (error) {
+      console.error('Errore aggiornamento titolo:', error)
+      return
+    }
+    void loadGallery()
+  }
+
   const handleImageClick = (index: number) => {
     if (items[index]?.type === 'image') {
       setSlideshowIndex(index)
@@ -95,14 +192,34 @@ export function GalleryPage() {
   return (
     <div className={styles.wrapper}>
       <GlassPanel size="wide" className={styles.panel}>
-        <button
-          type="button"
-          className={styles.addButton}
-          onClick={handleCreate}
-          aria-label="Aggiungi elemento"
-        >
-          <FiPlus aria-hidden />
-        </button>
+        {user ? (
+          <button
+            type="button"
+            className={styles.addButton}
+            onClick={handleCreate}
+            aria-label="Aggiungi elemento"
+          >
+            <FiPlus aria-hidden />
+          </button>
+        ) : (
+          <FaLock
+            className={styles.adminIcon}
+            onClick={() => {
+              setEditing(null)
+              setModalOpen(true)
+            }}
+            aria-label="Admin"
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                setEditing(null)
+                setModalOpen(true)
+              }
+            }}
+          />
+        )}
         <div className={styles.header}>
           <h1>Galleria</h1>
           <p>Collezione di foto e video.</p>
@@ -150,7 +267,11 @@ export function GalleryPage() {
                       }}
                     />
                   )}
-                  <figcaption>{item.title}</figcaption>
+                  <EditableTitle
+                    title={item.title}
+                    onUpdate={(newTitle) => handleTitleUpdate(item, newTitle)}
+                    canEdit={!!user}
+                  />
                   {item.type === 'video' && (
                     <a href={item.url} target="_blank" rel="noreferrer" className={styles.videoLink}>
                       Guarda il video
@@ -159,11 +280,11 @@ export function GalleryPage() {
                   {user && (
                     <button
                       type="button"
-                      className={styles.editButton}
-                      onClick={() => handleEdit(item)}
-                      aria-label="Modifica"
+                      className={styles.deleteIconButton}
+                      onClick={() => handleDeleteItem(item)}
+                      aria-label="Elimina"
                     >
-                      Modifica
+                      <FiTrash2 aria-hidden />
                     </button>
                   )}
                 </figure>

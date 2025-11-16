@@ -191,3 +191,83 @@
   box-shadow: 0 18px 35px rgba(245, 214, 123, 0.35);
 }
 
+.adminIcon {
+  position: absolute !important;
+  top: 1rem;
+  right: 1rem;
+  width: 24px;
+  height: 24px;
+  color: rgba(255, 100, 100, 1);
+  fill: rgba(255, 100, 100, 1);
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 4px;
+  padding: 4px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  z-index: 1;
+}
+
+.adminIcon:hover,
+.adminIcon:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 8px 20px rgba(255, 100, 100, 0.4);
+}
+
+.editableTitle {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  transition: background 0.2s ease, color 0.2s ease;
+  position: relative;
+}
+
+.editableTitle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 1);
+}
+
+.editableTitleInput {
+  width: 100%;
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  font-family: inherit;
+  outline: none;
+}
+
+.editableTitleInput:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(245, 214, 123, 0.6);
+}
+
+.deleteIconButton {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 100, 100, 0.3);
+  background: rgba(255, 100, 100, 0.1);
+  color: rgba(255, 150, 150, 0.9);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  align-self: flex-start;
+}
+
+.deleteIconButton:hover,
+.deleteIconButton:focus-visible {
+  background: rgba(255, 100, 100, 0.2);
+  border-color: rgba(255, 100, 100, 0.5);
+  transform: scale(1.05);
+}
+
