@@ -7,8 +7,7 @@ export type PageContent = {
 export const PAGE_CONFIG: Record<string, PageContent> = {
   'cv/generale': {
     title: 'BIO Nicola Raffaello Tallone',
-    description:
-      'Panoramica sintetica della formazione, delle collaborazioni e dei riconoscimenti artistici di Nicola Raffaello Tallone.',
+    description: '',
     body: [
       'Nicola Tallone, violoncellista svizzero, si diploma in Violoncello al Conservatorio Giuseppe Verdi di Milano con Christian Bellisario e ottiene il Master of Arts in Music Pedagogy al Conservatorio della Svizzera Italiana di Lugano con Enrico Dindo, dopo aver seguito il corso di alto perfezionamento all\'Accademia "Fondazione Walter Stauffer" di Cremona con Rocco Filippini.',
       'Con il suo Quartetto d\'archi "Intime Voci" approfondisce le sue conoscenze della musica da camera alla Musikhochschule di Basilea con Rainer Schmidt (Quartetto Hagen). Dal 2014 è aggiunto presso l\'OSI (Orchestra della Svizzera italiana). Dal 2017 è Direttore Artistico della Primavera Musicale – festival musicale organizzato dall\'Associazione Silarte che riunisce artisti di generi diversi. Appassionato di cinema e in particolare di colonne sonore, Nicola inizia nel 2020 a comporre musica elettronica e pubblica l\'Album NiT SOLO (2023) su tutte le piattafrome musicali online.',

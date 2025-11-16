@@ -146,29 +146,7 @@ export function AdminEventModal({
           <div className={styles.message}>
             <p>Configura Supabase per utilizzare la gestione eventi.</p>
           </div>
-        ) : authLoading ? (
-          <div className={styles.message}>
-            <FiLoader className={styles.spinner} aria-hidden />
-            <p>Verifico la sessione…</p>
-          </div>
-        ) : !user ? (
-          <form className={styles.loginForm} onSubmit={handleLogin}>
-            <label>
-              Password admin
-              <input
-                type="password"
-                value={loginState.password}
-                onChange={(event) => setLoginState((prev) => ({ ...prev, password: event.target.value }))}
-                required
-                autoFocus
-              />
-            </label>
-            {error && <p className={styles.error}>{error}</p>}
-            <button type="submit" className={styles.primaryButton}>
-              Accedi
-            </button>
-          </form>
-        ) : (
+        ) : user ? (
           <form className={styles.eventForm} onSubmit={handleSubmit}>
             <div className={styles.formGrid}>
               <label>
@@ -290,6 +268,28 @@ export function AdminEventModal({
 
             <button type="button" className={styles.signOut} onClick={() => signOut()}>
               Esci
+            </button>
+          </form>
+        ) : authLoading ? (
+          <div className={styles.message}>
+            <FiLoader className={styles.spinner} aria-hidden />
+            <p>Verifico la sessione…</p>
+          </div>
+        ) : (
+          <form className={styles.loginForm} onSubmit={handleLogin}>
+            <label>
+              Password admin
+              <input
+                type="password"
+                value={loginState.password}
+                onChange={(event) => setLoginState((prev) => ({ ...prev, password: event.target.value }))}
+                required
+                autoFocus
+              />
+            </label>
+            {error && <p className={styles.error}>{error}</p>}
+            <button type="submit" className={styles.primaryButton}>
+              Accedi
             </button>
           </form>
         )}

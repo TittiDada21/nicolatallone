@@ -1,11 +1,7 @@
-import { useEffect, useMemo, useState } from 'react'
-import { FiExternalLink, FiMapPin, FiPlus } from 'react-icons/fi'
+import { useEffect, useMemo } from 'react'
+import { FiExternalLink, FiMapPin } from 'react-icons/fi'
 
-import { useAuth } from '@/providers/AuthProvider'
 import { useEvents } from '@/providers/EventProvider'
-import type { EventFormValues, EventRecord } from '@/types/event'
-
-import { AdminEventModal } from './AdminEventModal'
 
 import styles from './HeroEventCard.module.css'
 
@@ -21,10 +17,7 @@ const formatDateTime = (isoString: string) => {
 }
 
 export function HeroEventCard() {
-  const { upcomingEvent, loading, error, refresh, isConfigured, createEvent, updateEvent, deleteEvent } = useEvents()
-  const { user } = useAuth()
-  const [modalOpen, setModalOpen] = useState(false)
-  const [editing, setEditing] = useState<EventRecord | null>(null)
+  const { upcomingEvent, loading, error, refresh, isConfigured } = useEvents()
 
   useEffect(() => {
     const handleVisibilityChange = () => {
@@ -58,41 +51,8 @@ export function HeroEventCard() {
     }
   }, [upcomingEvent])
 
-  const handleCreate = () => {
-    setEditing(null)
-    setModalOpen(true)
-  }
-
-  const handleEdit = () => {
-    if (upcomingEvent) {
-      setEditing(upcomingEvent)
-      setModalOpen(true)
-    }
-  }
-
-  const handleCloseModal = () => {
-    setModalOpen(false)
-    setEditing(null)
-  }
-
-  const handleSubmit = async (values: EventFormValues) => {
-    if (editing) {
-      await updateEvent(editing.id, values)
-    } else {
-      await createEvent(values)
-    }
-    handleCloseModal()
-  }
-
-  const handleDelete = async () => {
-    if (!editing) return
-    await deleteEvent(editing.id)
-    handleCloseModal()
-  }
-
   return (
-    <>
-      <section className={styles.card}>
+    <section className={styles.card}>
         <header className={styles.cardHeader}>
           <div>
             <span className={styles.cardLabel}>Prossimo evento</span>
@@ -100,24 +60,6 @@ export function HeroEventCard() {
               <h1 className={styles.cardTitle}>{formatted.title}</h1>
             ) : (
               <h1 className={styles.cardTitle}>Nessun evento in programma</h1>
-            )}
-          </div>
-
-          <div className={styles.actions}>
-            {isConfigured && (
-              <button
-                type="button"
-                className={styles.addButtonHeader}
-                onClick={handleCreate}
-                aria-label="Aggiungi evento"
-              >
-                <FiPlus aria-hidden />
-              </button>
-            )}
-            {user && formatted && (
-              <button type="button" className={styles.editButton} onClick={handleEdit}>
-                Modifica
-              </button>
             )}
           </div>
         </header>
@@ -168,16 +110,6 @@ export function HeroEventCard() {
           )}
         </div>
       </section>
-
-      <AdminEventModal
-        open={modalOpen}
-        mode={editing ? 'edit' : 'create'}
-        initialEvent={editing}
-        onClose={handleCloseModal}
-        onSubmit={handleSubmit}
-        onDelete={editing ? handleDelete : undefined}
-      />
-    </>
   )
 }
 

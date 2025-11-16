@@ -1,8 +1,12 @@
-import { useMemo } from 'react'
-import { FiExternalLink, FiMapPin } from 'react-icons/fi'
+import { useEffect, useMemo, useState } from 'react'
+import { FiEdit2, FiExternalLink, FiMapPin, FiPlus } from 'react-icons/fi'
 import { useParams } from 'react-router-dom'
 
+import { useAuth } from '@/providers/AuthProvider'
 import { useEvents } from '@/providers/EventProvider'
+import type { EventFormValues, EventRecord } from '@/types/event'
+
+import { AdminEventModal } from '@/components/events/AdminEventModal'
 
 import styles from './EventsPage.module.css'
 
@@ -20,7 +24,11 @@ const formatDateTime = (isoString: string) => {
 
 export function EventsPage() {
   const { type } = useParams<{ type: 'futuri' | 'passati' }>()
-  const { futureEvents, pastEvents, loading, error } = useEvents()
+  const { user } = useAuth()
+  const { futureEvents, pastEvents, loading, error, isConfigured, createEvent, updateEvent, deleteEvent } = useEvents()
+  const [adminMode, setAdminMode] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
+  const [editing, setEditing] = useState<EventRecord | null>(null)
 
   const events = useMemo(() => {
     return type === 'futuri' ? futureEvents : pastEvents
@@ -28,10 +36,93 @@ export function EventsPage() {
 
   const title = type === 'futuri' ? 'Eventi futuri' : 'Eventi passati'
 
+  useEffect(() => {
+    if (user) {
+      setAdminMode(false)
+      setModalOpen(false)
+      setEditing(null)
+    }
+  }, [user])
+
+  const toggleAdminMode = () => {
+    setAdminMode((prev) => !prev)
+    setModalOpen(false)
+    setEditing(null)
+  }
+
+  const handleCreate = () => {
+    setEditing(null)
+    setModalOpen(true)
+  }
+
+  const handleEdit = (event: EventRecord) => {
+    setEditing(event)
+    setModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setModalOpen(false)
+    setEditing(null)
+  }
+
+  const handleSubmit = async (values: EventFormValues) => {
+    if (editing) {
+      await updateEvent(editing.id, values)
+    } else {
+      await createEvent(values)
+    }
+    handleCloseModal()
+  }
+
+  const handleDelete = async () => {
+    if (!editing) return
+    await deleteEvent(editing.id)
+    handleCloseModal()
+  }
+
   return (
     <div className={`${styles.wrapper} ${type === 'futuri' ? styles.futuri : styles.passati}`}>
       <div className={styles.container}>
-        <h1 className={styles.title}>{title}</h1>
+        <div className={styles.headerRow}>
+          <h1 className={styles.title}>{title}</h1>
+          <div className={styles.headerActions}>
+            {isConfigured && (
+              <>
+                {user ? (
+                  <button
+                    type="button"
+                    className={styles.addButton}
+                    onClick={handleCreate}
+                    aria-label="Aggiungi evento"
+                  >
+                    <FiPlus aria-hidden />
+                  </button>
+                ) : (
+                  <>
+                    {adminMode && (
+                      <button
+                        type="button"
+                        className={styles.addButton}
+                        onClick={handleCreate}
+                        aria-label="Aggiungi evento"
+                      >
+                        <FiPlus aria-hidden />
+                      </button>
+                    )}
+                    <button
+                      type="button"
+                      className={`${styles.adminButton} ${adminMode ? styles.adminButtonActive : ''}`}
+                      onClick={toggleAdminMode}
+                      aria-label={adminMode ? 'Esci da modalità admin' : 'Attiva modalità admin'}
+                    >
+                      <span>Admin</span>
+                    </button>
+                  </>
+                )}
+              </>
+            )}
+          </div>
+        </div>
 
         {loading && <p className={styles.placeholder}>Carico gli eventi…</p>}
         {!loading && error && <p className={styles.placeholder}>Errore: {error}</p>}
@@ -43,8 +134,22 @@ export function EventsPage() {
           <div className={styles.eventsList}>
             {events.map((event) => (
               <article key={event.id} className={styles.eventCard}>
-                <h2 className={styles.eventTitle}>{event.title}</h2>
-                <p className={styles.eventDate}>{formatDateTime(event.startsAt)}</p>
+                <div className={styles.eventCardHeader}>
+                  <div>
+                    <h2 className={styles.eventTitle}>{event.title}</h2>
+                    <p className={styles.eventDate}>{formatDateTime(event.startsAt)}</p>
+                  </div>
+                  {(adminMode || user) && (
+                    <button
+                      type="button"
+                      className={styles.editButton}
+                      onClick={() => handleEdit(event)}
+                      aria-label="Modifica evento"
+                    >
+                      <FiEdit2 aria-hidden />
+                    </button>
+                  )}
+                </div>
 
                 {event.description && (
                   <p className={styles.eventDescription}>{event.description}</p>
@@ -87,6 +192,15 @@ export function EventsPage() {
           </div>
         )}
       </div>
+
+      <AdminEventModal
+        open={modalOpen}
+        mode={editing ? 'edit' : 'create'}
+        initialEvent={editing}
+        onClose={handleCloseModal}
+        onSubmit={handleSubmit}
+        onDelete={editing ? handleDelete : undefined}
+      />
     </div>
   )
 }
