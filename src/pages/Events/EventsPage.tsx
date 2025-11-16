@@ -24,7 +24,7 @@ const formatDateTime = (isoString: string) => {
 
 export function EventsPage() {
   const { type } = useParams<{ type: 'futuri' | 'passati' }>()
-  const { user } = useAuth()
+  const { user, signOut } = useAuth()
   const { futureEvents, pastEvents, loading, error, isConfigured, createEvent, updateEvent, deleteEvent } = useEvents()
   const [adminMode, setAdminMode] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
@@ -38,11 +38,12 @@ export function EventsPage() {
 
   useEffect(() => {
     if (user) {
-      setAdminMode(false)
-      setModalOpen(false)
-      setEditing(null)
+      void signOut()
     }
-  }, [user])
+    setAdminMode(false)
+    setModalOpen(false)
+    setEditing(null)
+  }, [])
 
   const toggleAdminMode = () => {
     setAdminMode((prev) => !prev)

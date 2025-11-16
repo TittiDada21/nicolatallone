@@ -1,9 +1,15 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { FiFacebook, FiInstagram, FiMail, FiMessageCircle } from 'react-icons/fi'
 import { Copy, Check } from 'lucide-react'
 
+import { CONTENT_ROUTES } from '@/data/navigation'
+
 import styles from './Footer.module.css'
+
+const GENERIC_CONTENT_PATHS = CONTENT_ROUTES.filter(({ key }) => !key.startsWith('eventi/') && key !== 'progetti/album').map(
+  ({ path }) => path,
+)
 
 const SOCIAL_LINKS = [
   {
@@ -33,31 +39,88 @@ const SOCIAL_LINKS = [
 ]
 
 export function Footer() {
+  const location = useLocation()
   const [popup, setPopup] = useState<{ label: string; value: string } | null>(null)
   const [copied, setCopied] = useState(false)
   const [isAtBottom, setIsAtBottom] = useState(false)
 
+  const isGalleryPage = location.pathname === '/galleria'
+  const isContentPage = GENERIC_CONTENT_PATHS.includes(location.pathname)
+
   useEffect(() => {
+    if (!isGalleryPage && !isContentPage) {
+      setIsAtBottom(true)
+      return
+    }
+
+    setIsAtBottom(false)
+
     const checkScroll = () => {
       const windowHeight = window.innerHeight
-      const documentHeight = document.documentElement.scrollHeight
-      const scrollTop = window.scrollY || document.documentElement.scrollTop
+      const html = document.documentElement
+      const body = document.body
       
-      const needsScroll = documentHeight > windowHeight
-      const isBottom = scrollTop + windowHeight >= documentHeight - 50
+      const documentHeight = Math.max(
+        html.scrollHeight,
+        html.offsetHeight,
+        body.scrollHeight,
+        body.offsetHeight
+      )
+      
+      const scrollTop = window.pageYOffset || html.scrollTop || body.scrollTop || 0
+      
+      const hasScroll = documentHeight > windowHeight + 10
+      if (!hasScroll) {
+        setIsAtBottom(true)
+        return
+      }
+      
+      const threshold = 300
+      const distanceFromBottom = documentHeight - (scrollTop + windowHeight)
+      const scrolledToBottom = distanceFromBottom <= threshold
 
-      setIsAtBottom(!needsScroll || isBottom)
+      setIsAtBottom(scrolledToBottom)
     }
 
-    checkScroll()
-    window.addEventListener('scroll', checkScroll)
+    const scrollHandler = () => {
+      requestAnimationFrame(checkScroll)
+    }
+    
+    const initCheck = () => {
+      setTimeout(() => checkScroll(), 200)
+      setTimeout(() => checkScroll(), 800)
+      setTimeout(() => checkScroll(), 1500)
+    }
+    
+    initCheck()
+    window.addEventListener('scroll', scrollHandler, { passive: true })
     window.addEventListener('resize', checkScroll)
+    
+    const images = document.querySelectorAll('img')
+    if (images.length > 0) {
+      let loadedCount = 0
+      images.forEach((img) => {
+        if (img.complete) {
+          loadedCount++
+        } else {
+          img.addEventListener('load', () => {
+            loadedCount++
+            if (loadedCount === images.length) {
+              setTimeout(checkScroll, 100)
+            }
+          })
+        }
+      })
+      if (loadedCount === images.length) {
+        setTimeout(checkScroll, 100)
+      }
+    }
 
     return () => {
-      window.removeEventListener('scroll', checkScroll)
+      window.removeEventListener('scroll', scrollHandler)
       window.removeEventListener('resize', checkScroll)
     }
-  }, [])
+  }, [isGalleryPage, isContentPage])
 
   const handleCopy = async (value: string) => {
     await navigator.clipboard.writeText(value)
@@ -73,14 +136,14 @@ export function Footer() {
 
   return (
     <>
-      <footer className={`${styles.footer} ${isAtBottom ? styles.visible : styles.hidden}`}>
+      <footer className={`${styles.footer} ${!isAtBottom ? styles.hidden : styles.visible}`}>
         <Link to="/galleria" className={styles.galleryButton}>
           Galleria
         </Link>
 
         <div className={styles.poweredBy}>
           <a href="https://www.dada21.com" target="_blank" rel="noreferrer" className={styles.poweredByLink}>
-            powered by dada21
+            Powered by <strong>Dada21</strong>
           </a>
         </div>
 

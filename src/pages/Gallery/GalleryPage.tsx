@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from 'react'
 import { FiPlus, FiTrash2 } from 'react-icons/fi'
 import { FaLock } from 'react-icons/fa'
 
-import { GlassPanel } from '@/components/common/GlassPanel'
 import { hasSupabase, supabase } from '@/lib/supabaseClient'
 import { useAuth } from '@/providers/AuthProvider'
 import type { GalleryItem } from '@/types/gallery'
@@ -192,37 +191,39 @@ export function GalleryPage() {
 
   return (
     <div className={styles.wrapper}>
-      <GlassPanel size="wide" className={styles.panel}>
-        {user ? (
-          <button
-            type="button"
-            className={styles.addButton}
-            onClick={handleCreate}
-            aria-label="Aggiungi elemento"
-          >
-            <FiPlus aria-hidden />
-          </button>
-        ) : (
-          <FaLock
-            className={styles.adminIcon}
-            onClick={() => {
-              setEditing(null)
-              setModalOpen(true)
-            }}
-            aria-label="Admin"
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault()
-                setEditing(null)
-                setModalOpen(true)
-              }
-            }}
-          />
-        )}
+      <div className={styles.container}>
         <div className={styles.header}>
-          <h1>Galleria</h1>
+          <div className={styles.headerRow}>
+            <h1>Galleria</h1>
+            {user ? (
+              <button
+                type="button"
+                className={styles.addButton}
+                onClick={handleCreate}
+                aria-label="Aggiungi elemento"
+              >
+                <FiPlus aria-hidden />
+              </button>
+            ) : (
+              <FaLock
+                className={styles.adminIcon}
+                onClick={() => {
+                  setEditing(null)
+                  setModalOpen(true)
+                }}
+                aria-label="Admin"
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    setEditing(null)
+                    setModalOpen(true)
+                  }
+                }}
+              />
+            )}
+          </div>
           <p>Collezione di foto e video.</p>
           {!hasSupabase && <p className={styles.hint}>Collega Supabase per sostituire questo contenuto di esempio.</p>}
         </div>
@@ -293,7 +294,7 @@ export function GalleryPage() {
             </div>
           </>
         )}
-      </GlassPanel>
+      </div>
       <AdminGalleryModal
         open={modalOpen}
         mode={editing ? 'edit' : 'create'}
