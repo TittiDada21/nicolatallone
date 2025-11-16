@@ -133,11 +133,6 @@ export function GalleryPage() {
     setModalOpen(true)
   }
 
-  const handleEdit = (item: GalleryItem) => {
-    setEditing(item)
-    setModalOpen(true)
-  }
-
   const handleCloseModal = () => {
     setModalOpen(false)
     setEditing(null)
