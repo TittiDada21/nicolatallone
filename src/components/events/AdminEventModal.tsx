@@ -42,7 +42,7 @@ export function AdminEventModal({
   onSubmit,
   onDelete,
 }: AdminEventModalProps) {
-  const { user, signIn, signOut, loading: authLoading, isConfigured } = useAuth()
+  const { user, signIn, loading: authLoading, isConfigured } = useAuth()
   const [form, setForm] = useState<EventFormValues>(createEmptyForm)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -254,9 +254,6 @@ export function AdminEventModal({
             {error && <p className={styles.error}>{error}</p>}
 
             <div className={styles.actions}>
-              <button type="button" className={styles.secondaryButton} onClick={onClose}>
-                Chiudi
-              </button>
               {onDelete && (
                 <button type="button" className={styles.deleteButton} onClick={handleDelete}>
                   <FiTrash2 aria-hidden />
@@ -267,17 +264,6 @@ export function AdminEventModal({
                 {saving ? 'Salvo…' : 'Salva'}
               </button>
             </div>
-
-            <button
-              type="button"
-              className={styles.signOut}
-              onClick={() => {
-                sessionStorage.removeItem('events_admin_mode')
-                signOut()
-              }}
-            >
-              Esci
-            </button>
           </form>
         ) : authLoading ? (
           <div className={styles.message}>
