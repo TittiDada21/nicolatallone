@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react'
-import { FiExternalLink, FiMapPin, FiPlus, FiRefreshCw } from 'react-icons/fi'
+import { useEffect, useMemo, useState } from 'react'
+import { FiExternalLink, FiMapPin, FiPlus } from 'react-icons/fi'
 
 import { useAuth } from '@/providers/AuthProvider'
 import { useEvents } from '@/providers/EventProvider'
@@ -25,6 +25,28 @@ export function HeroEventCard() {
   const { user } = useAuth()
   const [modalOpen, setModalOpen] = useState(false)
   const [editing, setEditing] = useState<EventRecord | null>(null)
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (!document.hidden && isConfigured) {
+        void refresh()
+      }
+    }
+
+    const handleFocus = () => {
+      if (isConfigured) {
+        void refresh()
+      }
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    window.addEventListener('focus', handleFocus)
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+      window.removeEventListener('focus', handleFocus)
+    }
+  }, [refresh, isConfigured])
 
   const formatted = useMemo(() => {
     if (!upcomingEvent) {
@@ -83,13 +105,13 @@ export function HeroEventCard() {
 
           <div className={styles.actions}>
             {isConfigured && (
-              <button type="button" className={styles.refreshButton} onClick={() => refresh()}>
-                <FiRefreshCw aria-hidden />
-              </button>
-            )}
-            {!user && isConfigured && (
-              <button type="button" className={styles.loginButton} onClick={() => setModalOpen(true)}>
-                Login
+              <button
+                type="button"
+                className={styles.addButtonHeader}
+                onClick={handleCreate}
+                aria-label="Aggiungi evento"
+              >
+                <FiPlus aria-hidden />
               </button>
             )}
             {user && formatted && (
@@ -139,22 +161,9 @@ export function HeroEventCard() {
         </div>
 
         <div className={styles.cardFooter}>
-          <button
-            type="button"
-            className={styles.addButton}
-            onClick={handleCreate}
-            aria-label="Aggiungi evento"
-          >
-            <FiPlus aria-hidden />
-          </button>
           {!isConfigured && (
             <p className={styles.configHint}>
               Collega Supabase per attivare la gestione eventi in tempo reale.
-            </p>
-          )}
-          {!user && isConfigured && (
-            <p className={styles.configHint}>
-              Accedi con le credenziali admin per aggiungere o modificare gli eventi.
             </p>
           )}
         </div>

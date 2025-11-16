@@ -30,7 +30,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6rem 2rem 4rem;
+  padding: 6rem 2rem 6rem;
   position: relative;
 }
 
@@ -43,9 +43,18 @@
   align-items: flex-start;
 }
 
+.main.contentMain {
+  padding: 0;
+  align-items: stretch;
+  justify-content: flex-start;
+  background: #fffefa;
+  color: #161616;
+  min-height: 100vh;
+}
+
 @media (max-width: 768px) {
   .main {
-    padding: 5rem 1.5rem 3rem;
+    padding: 5rem 1.5rem 6rem;
   }
 
   .main.albumMain {
@@ -54,6 +63,10 @@
 
   .main.galleryMain {
     padding: 0;
+  }
+
+  .main.contentMain {
+    min-height: 100vh;
   }
 }
 

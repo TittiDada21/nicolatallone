@@ -10,6 +10,19 @@
   background: linear-gradient(90deg, rgba(18, 18, 24, 0.7), rgba(18, 18, 24, 0.08));
   backdrop-filter: blur(14px);
   z-index: 10;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.footer.hidden {
+  transform: translateY(100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.footer.visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .galleryButton {

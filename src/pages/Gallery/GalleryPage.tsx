@@ -105,7 +105,7 @@ export function GalleryPage() {
         </button>
         <div className={styles.header}>
           <h1>Galleria</h1>
-          <p>Foto e video aggiornati da Supabase Storage.</p>
+          <p>Collezione di foto e video.</p>
           {!hasSupabase && <p className={styles.hint}>Collega Supabase per sostituire questo contenuto di esempio.</p>}
         </div>
         {loading ? (
@@ -122,6 +122,12 @@ export function GalleryPage() {
                       src={item.thumbnailUrl ?? item.url}
                       alt={item.title}
                       className={styles.clickableImage}
+                      loading={index < 8 ? 'eager' : 'lazy'}
+                      decoding="async"
+                      onLoad={(e) => {
+                        const target = e.target as HTMLImageElement
+                        target.classList.add(styles.loaded)
+                      }}
                       onClick={() => handleImageClick(index)}
                       onError={(e) => {
                         const target = e.target as HTMLImageElement
@@ -132,6 +138,12 @@ export function GalleryPage() {
                     <img
                       src={item.thumbnailUrl ?? item.url}
                       alt={item.title}
+                      loading={index < 8 ? 'eager' : 'lazy'}
+                      decoding="async"
+                      onLoad={(e) => {
+                        const target = e.target as HTMLImageElement
+                        target.classList.add(styles.loaded)
+                      }}
                       onError={(e) => {
                         const target = e.target as HTMLImageElement
                         target.src = 'https://placehold.co/400x300/333/FFF?text=Immagine+non+disponibile'
@@ -157,11 +169,6 @@ export function GalleryPage() {
                 </figure>
               ))}
             </div>
-            {!user && hasSupabase && (
-              <div className={styles.footer}>
-                <p className={styles.hint}>Accedi con la password admin per aggiungere foto.</p>
-              </div>
-            )}
           </>
         )}
       </GlassPanel>

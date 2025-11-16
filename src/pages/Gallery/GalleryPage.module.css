@@ -17,6 +17,7 @@
   backdrop-filter: none !important;
   position: relative !important;
   overflow: visible !important;
+  z-index: 1;
 }
 
 .header {
@@ -73,6 +74,18 @@
   object-fit: contain;
   border-radius: 12px;
   display: block;
+  background: rgba(255, 255, 255, 0.05);
+  min-height: 200px;
+  transition: opacity 0.3s ease;
+}
+
+.card img[loading='lazy'] {
+  opacity: 0;
+}
+
+.card img.loaded,
+.card img[loading='eager'] {
+  opacity: 1;
 }
 
 .clickableImage {
@@ -167,7 +180,7 @@
   display: flex !important;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 1;
   margin: 0;
   padding: 0;
 }

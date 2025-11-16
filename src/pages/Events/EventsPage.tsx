@@ -2,7 +2,6 @@ import { useMemo } from 'react'
 import { FiExternalLink, FiMapPin } from 'react-icons/fi'
 import { useParams } from 'react-router-dom'
 
-import { GlassPanel } from '@/components/common/GlassPanel'
 import { useEvents } from '@/providers/EventProvider'
 
 import styles from './EventsPage.module.css'
@@ -28,18 +27,11 @@ export function EventsPage() {
   }, [type, futureEvents, pastEvents])
 
   const title = type === 'futuri' ? 'Eventi futuri' : 'Eventi passati'
-  const description =
-    type === 'futuri'
-      ? 'Elenco completo degli eventi futuri sincronizzati con Supabase, con maggiori dettagli rispetto alla card sulla home.'
-      : 'Archivio storico degli eventi passati, utile per stampa e promoter.'
 
   return (
     <div className={`${styles.wrapper} ${type === 'futuri' ? styles.futuri : styles.passati}`}>
-      <GlassPanel size="wide">
-        <div className={styles.header}>
-          <h1>{title}</h1>
-          <p>{description}</p>
-        </div>
+      <div className={styles.container}>
+        <h1 className={styles.title}>{title}</h1>
 
         {loading && <p className={styles.placeholder}>Carico gli eventi…</p>}
         {!loading && error && <p className={styles.placeholder}>Errore: {error}</p>}
@@ -94,7 +86,7 @@ export function EventsPage() {
             ))}
           </div>
         )}
-      </GlassPanel>
+      </div>
     </div>
   )
 }

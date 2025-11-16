@@ -40,6 +40,10 @@
   text-transform: uppercase;
 }
 
+.logoTextWide {
+  letter-spacing: 0.25em;
+}
+
 .desktopNav {
   display: flex;
   align-items: center;
@@ -81,6 +85,12 @@
   position: relative;
   transition: color 0.2s ease;
   isolation: isolate;
+}
+
+.navList:hover .navItemWithDropdown:not(:hover) .dropdown {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(10px);
 }
 
 .navItemWithDropdown:hover .dropdown,
@@ -169,6 +179,13 @@
 .linkButton.activeLink::after {
   transform: scaleX(1);
   opacity: 1;
+}
+
+.navList:hover .navLink.activeLink:not(:hover)::after,
+.navList:hover .linkButton.activeLink:not(:hover)::after,
+.navList:hover .navItemWithDropdown:not(:hover) .navTrigger.activeLink::after {
+  transform: scaleX(0);
+  opacity: 0;
 }
 
 .externalIcon {

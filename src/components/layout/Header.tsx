@@ -6,7 +6,7 @@ import { NAV_ITEMS, type NavigationItem } from '@/data/navigation'
 
 import styles from './Header.module.css'
 
-const NAME_LINES = ['Nicola', 'Raffaello Tallone']
+const NAME_LINES = ['Nicola Raffaello', 'Tallone']
 
 const flattenItems = (items: NavigationItem[]) =>
   items
@@ -49,8 +49,8 @@ export function Header() {
       <Link to="/" className={styles.logo}>
         <img src="/media/official-logo-icon.png" alt="Nicola Raffaello Tallone logo" className={styles.logoMark} />
         <div className={styles.logoText}>
-          {NAME_LINES.map((line) => (
-            <span key={line}>{line}</span>
+          {NAME_LINES.map((line, index) => (
+            <span key={line} className={index === 1 ? styles.logoTextWide : ''}>{line}</span>
           ))}
         </div>
       </Link>

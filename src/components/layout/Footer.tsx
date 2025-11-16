@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FiFacebook, FiInstagram, FiMail, FiMessageCircle } from 'react-icons/fi'
 import { Copy, Check } from 'lucide-react'
@@ -35,6 +35,29 @@ const SOCIAL_LINKS = [
 export function Footer() {
   const [popup, setPopup] = useState<{ label: string; value: string } | null>(null)
   const [copied, setCopied] = useState(false)
+  const [isAtBottom, setIsAtBottom] = useState(false)
+
+  useEffect(() => {
+    const checkScroll = () => {
+      const windowHeight = window.innerHeight
+      const documentHeight = document.documentElement.scrollHeight
+      const scrollTop = window.scrollY || document.documentElement.scrollTop
+      
+      const needsScroll = documentHeight > windowHeight
+      const isBottom = scrollTop + windowHeight >= documentHeight - 50
+
+      setIsAtBottom(!needsScroll || isBottom)
+    }
+
+    checkScroll()
+    window.addEventListener('scroll', checkScroll)
+    window.addEventListener('resize', checkScroll)
+
+    return () => {
+      window.removeEventListener('scroll', checkScroll)
+      window.removeEventListener('resize', checkScroll)
+    }
+  }, [])
 
   const handleCopy = async (value: string) => {
     await navigator.clipboard.writeText(value)
@@ -50,7 +73,7 @@ export function Footer() {
 
   return (
     <>
-      <footer className={styles.footer}>
+      <footer className={`${styles.footer} ${isAtBottom ? styles.visible : styles.hidden}`}>
         <Link to="/galleria" className={styles.galleryButton}>
           Galleria
         </Link>
