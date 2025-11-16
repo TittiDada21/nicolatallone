@@ -88,7 +88,7 @@ const FALLBACK_GALLERY: GalleryItem[] = [
 ]
 
 export function GalleryPage() {
-  const { user } = useAuth()
+  const { user, signOut } = useAuth()
   const [items, setItems] = useState<GalleryItem[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -96,6 +96,12 @@ export function GalleryPage() {
   const [editing, setEditing] = useState<GalleryItem | null>(null)
   const [slideshowOpen, setSlideshowOpen] = useState(false)
   const [slideshowIndex, setSlideshowIndex] = useState(0)
+
+  useEffect(() => {
+    if (user) {
+      void signOut()
+    }
+  }, [])
 
   const loadGallery = async () => {
     if (!supabase) {

@@ -13,8 +13,9 @@
   gap: 2rem;
   width: 100%;
   max-width: 1400px;
-  background: rgb(0, 100, 0) !important;
-  backdrop-filter: none !important;
+  background: linear-gradient(90deg, rgba(12, 12, 18, 0.85), rgba(12, 12, 18, 0.75)) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
   position: relative !important;
   overflow: visible !important;
   z-index: 1;
