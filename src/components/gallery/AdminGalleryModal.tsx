@@ -185,6 +185,7 @@ export function AdminGalleryModal({
     try {
       await signIn(loginState)
       sessionStorage.setItem('gallery_admin_mode', 'true')
+      onClose()
     } catch (loginError) {
       const message = loginError instanceof Error ? loginError.message : 'Accesso non riuscito'
       setError(message)

@@ -273,25 +273,27 @@ export function GalleryPage() {
                       }}
                     />
                   )}
-                  <EditableTitle
-                    title={item.title}
-                    onUpdate={(newTitle) => handleTitleUpdate(item, newTitle)}
-                    canEdit={!!user}
-                  />
+                  <div className={styles.captionRow}>
+                    <EditableTitle
+                      title={item.title}
+                      onUpdate={(newTitle) => handleTitleUpdate(item, newTitle)}
+                      canEdit={!!user}
+                    />
+                    {user && (
+                      <button
+                        type="button"
+                        className={styles.deleteIconButton}
+                        onClick={() => handleDeleteItem(item)}
+                        aria-label="Elimina"
+                      >
+                        <FiTrash2 aria-hidden />
+                      </button>
+                    )}
+                  </div>
                   {item.type === 'video' && (
                     <a href={item.url} target="_blank" rel="noreferrer" className={styles.videoLink}>
                       Guarda il video
                     </a>
-                  )}
-                  {user && (
-                    <button
-                      type="button"
-                      className={styles.deleteIconButton}
-                      onClick={() => handleDeleteItem(item)}
-                      aria-label="Elimina"
-                    >
-                      <FiTrash2 aria-hidden />
-                    </button>
                   )}
                 </figure>
               ))}

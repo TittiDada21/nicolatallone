@@ -108,6 +108,20 @@
   color: rgba(255, 255, 255, 0.85);
 }
 
+.captionRow {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.captionRow figcaption {
+  flex: 1;
+}
+
+.captionRow .editableTitleInput {
+  flex: 1;
+}
+
 @media (max-width: 1280px) {
   .grid {
     column-count: 3;
@@ -253,19 +267,22 @@
 }
 
 .deleteIconButton {
-  margin-top: 0.5rem;
-  padding: 0.5rem;
-  border-radius: 8px;
+  margin-top: 0;
+  padding: 0.35rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
   border: 1px solid rgba(255, 100, 100, 0.3);
   background: rgba(255, 100, 100, 0.1);
   color: rgba(255, 150, 150, 0.9);
-  font-size: 1rem;
+  font-size: 0.9rem;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-  align-self: flex-start;
+  align-self: center;
+  flex-shrink: 0;
 }
 
 .deleteIconButton:hover,

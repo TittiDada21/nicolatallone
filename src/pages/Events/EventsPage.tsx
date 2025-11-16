@@ -26,7 +26,6 @@ export function EventsPage() {
   const { type } = useParams<{ type: 'futuri' | 'passati' }>()
   const { user, signOut } = useAuth()
   const { futureEvents, pastEvents, loading, error, isConfigured, createEvent, updateEvent, deleteEvent } = useEvents()
-  const [adminMode, setAdminMode] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
   const [editing, setEditing] = useState<EventRecord | null>(null)
 
@@ -37,28 +36,23 @@ export function EventsPage() {
   const title = type === 'futuri' ? 'Eventi futuri' : 'Eventi passati'
 
   useEffect(() => {
-    const adminMode = sessionStorage.getItem('events_admin_mode')
-    if (adminMode === 'true') {
+    const adminFlag = sessionStorage.getItem('events_admin_mode')
+    if (adminFlag === 'true') {
       sessionStorage.removeItem('events_admin_mode')
       void signOut()
-      setAdminMode(false)
     } else if (user) {
       void signOut()
-      setAdminMode(false)
-    } else {
-      setAdminMode(false)
     }
     setModalOpen(false)
     setEditing(null)
   }, [])
 
-  const toggleAdminMode = () => {
-    setAdminMode((prev) => !prev)
-    setModalOpen(false)
+  const handleCreate = () => {
     setEditing(null)
+    setModalOpen(true)
   }
 
-  const handleCreate = () => {
+  const handleOpenAdminLogin = () => {
     setEditing(null)
     setModalOpen(true)
   }
@@ -106,26 +100,14 @@ export function EventsPage() {
                     <FiPlus aria-hidden />
                   </button>
                 ) : (
-                  <>
-                    {adminMode && (
-                      <button
-                        type="button"
-                        className={styles.addButton}
-                        onClick={handleCreate}
-                        aria-label="Aggiungi evento"
-                      >
-                        <FiPlus aria-hidden />
-                      </button>
-                    )}
-                    <button
-                      type="button"
-                      className={`${styles.adminButton} ${adminMode ? styles.adminButtonActive : ''}`}
-                      onClick={toggleAdminMode}
-                      aria-label={adminMode ? 'Esci da modalità admin' : 'Attiva modalità admin'}
-                    >
-                      <span>Admin</span>
-                    </button>
-                  </>
+                  <button
+                    type="button"
+                    className={styles.adminButton}
+                    onClick={handleOpenAdminLogin}
+                    aria-label="Area admin"
+                  >
+                    <span>Admin</span>
+                  </button>
                 )}
               </>
             )}
@@ -147,7 +129,7 @@ export function EventsPage() {
                     <h2 className={styles.eventTitle}>{event.title}</h2>
                     <p className={styles.eventDate}>{formatDateTime(event.startsAt)}</p>
                   </div>
-                  {(adminMode || user) && (
+                  {user && (
                     <button
                       type="button"
                       className={styles.editButton}

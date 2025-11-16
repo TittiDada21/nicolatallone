@@ -127,6 +127,7 @@ export function AdminEventModal({
     try {
       await signIn(loginState)
       sessionStorage.setItem('events_admin_mode', 'true')
+      onClose()
     } catch (loginError) {
       const message = loginError instanceof Error ? loginError.message : 'Accesso non riuscito'
       setError(message)
