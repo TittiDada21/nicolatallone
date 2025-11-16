@@ -24,7 +24,7 @@ function App() {
               <Route key={path} path={path} element={<ContentPage pageKey={key} />} />
             ))}
             <Route path="/galleria" element={<GalleryPage />} />
-            <Route path="/silarte" element={<ExternalRedirect href="https://silarte.org" />} />
+            <Route path="/silarte" element={<ExternalRedirect href="https://associazionesilarte.ch" />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
         </Routes>

@@ -119,7 +119,7 @@ export const NAV_ITEMS: NavigationItem[] = [
   {
     label: 'Silarte',
     path: '/silarte',
-    externalHref: 'https://silarte.org',
+    externalHref: 'https://associazionesilarte.ch',
   },
 ]
 
