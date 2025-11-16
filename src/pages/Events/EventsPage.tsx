@@ -37,10 +37,17 @@ export function EventsPage() {
   const title = type === 'futuri' ? 'Eventi futuri' : 'Eventi passati'
 
   useEffect(() => {
-    if (user) {
+    const adminMode = sessionStorage.getItem('events_admin_mode')
+    if (adminMode === 'true') {
+      sessionStorage.removeItem('events_admin_mode')
       void signOut()
+      setAdminMode(false)
+    } else if (user) {
+      void signOut()
+      setAdminMode(false)
+    } else {
+      setAdminMode(false)
     }
-    setAdminMode(false)
     setModalOpen(false)
     setEditing(null)
   }, [])

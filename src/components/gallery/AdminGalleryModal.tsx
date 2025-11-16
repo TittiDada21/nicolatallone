@@ -184,6 +184,7 @@ export function AdminGalleryModal({
     setError(null)
     try {
       await signIn(loginState)
+      sessionStorage.setItem('gallery_admin_mode', 'true')
     } catch (loginError) {
       const message = loginError instanceof Error ? loginError.message : 'Accesso non riuscito'
       setError(message)
@@ -297,7 +298,14 @@ export function AdminGalleryModal({
               </button>
             </div>
 
-            <button type="button" className={styles.signOut} onClick={() => signOut()}>
+            <button
+              type="button"
+              className={styles.signOut}
+              onClick={() => {
+                sessionStorage.removeItem('gallery_admin_mode')
+                signOut()
+              }}
+            >
               Esci
             </button>
           </form>

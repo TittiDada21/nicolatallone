@@ -97,7 +97,11 @@ export function GalleryPage() {
   const [slideshowIndex, setSlideshowIndex] = useState(0)
 
   useEffect(() => {
-    if (user) {
+    const adminMode = sessionStorage.getItem('gallery_admin_mode')
+    if (adminMode === 'true') {
+      sessionStorage.removeItem('gallery_admin_mode')
+      void signOut()
+    } else if (user) {
       void signOut()
     }
   }, [])

@@ -126,6 +126,7 @@ export function AdminEventModal({
     setError(null)
     try {
       await signIn(loginState)
+      sessionStorage.setItem('events_admin_mode', 'true')
     } catch (loginError) {
       const message = loginError instanceof Error ? loginError.message : 'Accesso non riuscito'
       setError(message)
@@ -266,7 +267,14 @@ export function AdminEventModal({
               </button>
             </div>
 
-            <button type="button" className={styles.signOut} onClick={() => signOut()}>
+            <button
+              type="button"
+              className={styles.signOut}
+              onClick={() => {
+                sessionStorage.removeItem('events_admin_mode')
+                signOut()
+              }}
+            >
               Esci
             </button>
           </form>
