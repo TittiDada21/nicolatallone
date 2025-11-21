@@ -264,73 +264,6 @@
   color: #f5d67b;
 }
 
-@media (max-width: 768px) {
-  /* Mobile: riduco i margini verticali per portare i contenuti above the fold */
-  .container {
-    padding: calc(5.5rem + env(safe-area-inset-top)) 1.25rem 4rem;
-    gap: 2rem;
-  }
-
-  /* Mobile: titolo e azioni scorrono in colonna per chiarezza gerarchica */
-  .headerRow {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
-  }
-
-  /* Mobile: porto le azioni vicino al pollice e con più spazio tra pulsanti */
-  .headerActions {
-    width: 100%;
-    justify-content: flex-start;
-    gap: 1rem;
-  }
-
-  /* Mobile: dimensione titolo contenuta per evitare wrapping eccessivo */
-  .title {
-    font-size: clamp(2rem, 6vw, 2.4rem);
-  }
-
-  /* Mobile: riduco gap per accelerare la scansione delle card */
-  .eventsList {
-    gap: 1.5rem;
-  }
-
-  /* Mobile: card più snelle con angoli generosi e tappabili */
-  .eventCard {
-    padding: 1.5rem;
-    gap: 0.75rem;
-  }
-
-  .eventCardHeader {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  /* Mobile: rendo la data più leggibile riducendo lo spacing tra lettere */
-  .eventDate {
-    letter-spacing: 0.12em;
-    font-size: 0.95rem;
-  }
-
-  /* Mobile: metadati impilati evitano orizzontal scroll e facilitano tap */
-  .eventMeta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-
-  .badge {
-    align-self: flex-start;
-  }
-
-  /* Mobile: link di dettaglio a tutta larghezza per target più ampio */
-  .externalLink {
-    width: 100%;
-    justify-content: center;
-    margin-top: 0.75rem;
-  }
-}
-
 @media (max-width: 640px) {
   .headerRow {
     flex-direction: column;
@@ -353,3 +286,4 @@
     align-self: flex-end;
   }
 }
+

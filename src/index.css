@@ -42,22 +42,6 @@ body {
   height: 100vh;
 }
 
-@media (max-width: 768px) {
-  /* Mobile: riattivo lo scroll per evitare sezioni troncate da header/footer fissi */
-  html,
-  body {
-    min-height: 100%;
-    height: auto;
-    overflow: auto;
-  }
-
-  /* Mobile: il root segue l'altezza del contenuto per consentire layout fluidi */
-  #root {
-    min-height: 100vh;
-    height: auto;
-  }
-}
-
 a {
   color: inherit;
 }

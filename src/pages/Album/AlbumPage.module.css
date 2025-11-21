@@ -79,32 +79,25 @@
 }
 
 @media (max-width: 768px) {
-  /* Mobile: accorcio il padding per mostrare prima titolo e CTA */
   .wrapper {
-    padding: calc(4.5rem + env(safe-area-inset-top)) 1.25rem 3rem;
+    padding: 5rem 1.5rem 3rem;
   }
 
-  /* Mobile: distanza minore tra i blocchi per mantenere focus */
   .container {
-    gap: 1.25rem;
+    gap: 1.5rem;
   }
 
-  /* Mobile: pulsanti più alti e con radius maggiori per tap sicuro */
   .link {
-    padding: 1.1rem 1.25rem;
-    border-radius: 16px;
-    min-height: 64px;
+    padding: 1rem 1.5rem;
   }
 
-  /* Mobile: icone ridotte per lasciare più spazio al testo */
   .icon {
-    font-size: 1.35rem;
-    min-width: 1.75rem;
+    font-size: 1.5rem;
+    min-width: 2rem;
   }
 
-  /* Mobile: testo leggermente più grande e con line-height rilassata */
   .linkTitle {
-    font-size: 1.05rem;
-    line-height: 1.4;
+    font-size: 1rem;
   }
 }
+

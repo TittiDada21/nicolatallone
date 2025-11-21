@@ -155,20 +155,5 @@
     font-size: 1rem;
     margin-top: 1rem;
   }
-
-  /* Mobile: aumento il padding interno per evitare tocchi accidentali sui bordi */
-  .imageContainer {
-    padding: 0 0.5rem;
-  }
-
-  /* Mobile: consento più spazio verticale per i testi di supporto */
-  .image {
-    max-height: calc(100% - 120px);
-  }
-
-  /* Mobile: caption centrata con margini laterali per una lettura più agevole */
-  .caption {
-    padding: 0 0.5rem;
-    line-height: 1.5;
-  }
 }
+

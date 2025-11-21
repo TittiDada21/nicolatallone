@@ -53,20 +53,10 @@
 }
 
 @media (max-width: 768px) {
-  /* Mobile: permetto al layout di crescere verticalmente evitando ritagli */
-  .app {
-    min-height: 100%;
-    overflow: visible;
-  }
-
-  /* Mobile: porto i contenuti subito a vista con padding ridotto e safe-area */
   .main {
-    padding: calc(4.5rem + env(safe-area-inset-top)) 1.25rem calc(5.5rem + env(safe-area-inset-bottom));
-    align-items: stretch;
-    justify-content: flex-start;
+    padding: 5rem 1.5rem 6rem;
   }
 
-  /* Mobile: mantengo le pagine full-bleed ma con scorrimento naturale */
   .main.albumMain {
     padding: 0;
   }
@@ -75,8 +65,8 @@
     padding: 0;
   }
 
-  /* Mobile: evito height fisse in content per migliorare la leggibilità */
   .main.contentMain {
-    min-height: 100%;
+    min-height: 100vh;
   }
 }
+
