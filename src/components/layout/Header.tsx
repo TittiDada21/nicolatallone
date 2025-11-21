@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FiExternalLink, FiMenu, FiX } from 'react-icons/fi'
 
@@ -20,6 +21,7 @@ const flattenItems = (items: NavigationItem[]) =>
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set())
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -42,6 +44,18 @@ export function Header() {
       navigate(item.path)
       setMobileOpen(false)
     }
+  }
+
+  const toggleExpanded = (label: string) => {
+    setExpandedItems((prev) => {
+      const next = new Set(prev)
+      if (next.has(label)) {
+        next.delete(label)
+      } else {
+        next.add(label)
+      }
+      return next
+    })
   }
 
   return (
@@ -105,7 +119,7 @@ export function Header() {
         </ul>
       </nav>
 
-  <button
+      <button
         type="button"
         className={styles.mobileToggle}
         aria-label={mobileOpen ? 'Chiudi menu' : 'Apri menu'}
@@ -114,29 +128,68 @@ export function Header() {
         {mobileOpen ? <FiX /> : <FiMenu />}
       </button>
 
-      <div className={`${styles.mobileNav} ${mobileOpen ? styles.mobileNavOpen : ''}`}>
-        <div className={styles.mobileNavContent}>
-          <div className={styles.mobileHeader}>
-            <span>Menu</span>
-            <button type="button" onClick={() => setMobileOpen(false)} aria-label="Chiudi menu">
-              <FiX />
-            </button>
-          </div>
-          <div className={styles.mobileLinks}>
-            {allLeafItems.map((item) => (
-              <button
-                key={item.path}
-                type="button"
-                className={`${styles.mobileLink} ${isActive(item.path) ? styles.mobileLinkActive : ''}`}
-                onClick={() => handleNavigate(item)}
-              >
-                {item.label}
-                {item.externalHref && <FiExternalLink aria-hidden className={styles.externalIcon} />}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
+      {mobileOpen &&
+        createPortal(
+          <div className={`${styles.mobileNav} ${styles.mobileNavOpen}`}>
+            <div className={styles.mobileNavContent}>
+              <div className={styles.mobileHeader}>
+                <span>Menu</span>
+                <button type="button" onClick={() => setMobileOpen(false)} aria-label="Chiudi menu">
+                  <FiX />
+                </button>
+              </div>
+              <div className={styles.mobileLinks}>
+                {NAV_ITEMS.map((item) => {
+                  if (item.children) {
+                    const isExpanded = expandedItems.has(item.label)
+                    return (
+                      <div key={item.label} className={styles.mobileGroup}>
+                        <button
+                          type="button"
+                          className={styles.mobileGroupHeader}
+                          onClick={() => toggleExpanded(item.label)}
+                        >
+                          <span>{item.label}</span>
+                          <span className={styles.mobileGroupIcon}>{isExpanded ? '−' : '+'}</span>
+                        </button>
+                        {isExpanded && (
+                          <div className={styles.mobileGroupChildren}>
+                            {item.children.map((child) => (
+                              <button
+                                key={child.path}
+                                type="button"
+                                className={`${styles.mobileLink} ${styles.mobileSubLink} ${
+                                  isActive(child.path) ? styles.mobileLinkActive : ''
+                                }`}
+                                onClick={() => handleNavigate(child)}
+                              >
+                                {child.label}
+                                {child.externalHref && <FiExternalLink aria-hidden className={styles.externalIcon} />}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    )
+                  }
+
+                  return (
+                    <button
+                      key={item.label}
+                      type="button"
+                      className={`${styles.mobileLink} ${isActive(item.path) ? styles.mobileLinkActive : ''}`}
+                      onClick={() => handleNavigate(item)}
+                    >
+                      {item.label}
+                      {item.externalHref && <FiExternalLink aria-hidden className={styles.externalIcon} />}
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+          </div>,
+          document.body,
+        )}
     </header>
   )
 }

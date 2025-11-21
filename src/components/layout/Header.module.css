@@ -217,13 +217,15 @@
 .mobileNav {
   position: fixed;
   inset: 0;
-  background: linear-gradient(160deg, rgba(2, 54, 1, 0.9), rgba(6, 6, 10, 0.94));
-  backdrop-filter: blur(18px);
+  background: linear-gradient(160deg, rgba(2, 54, 1, 1), rgba(6, 6, 10, 1));
+  backdrop-filter: blur(20px);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease;
   display: flex;
   justify-content: flex-end;
+  overflow: hidden;
+  z-index: 9999;
 }
 
 .mobileNavOpen {
@@ -237,6 +239,27 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.mobileNavContent::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mobileNavContent::-webkit-scrollbar-track {
+  background: rgba(12, 12, 18, 0.5);
+  border-radius: 3px;
+}
+
+.mobileNavContent::-webkit-scrollbar-thumb {
+  background: rgba(184, 142, 255, 0.4);
+  border-radius: 3px;
+}
+
+.mobileNavContent::-webkit-scrollbar-thumb:hover {
+  background: rgba(184, 142, 255, 0.6);
 }
 
 .mobileHeader {
@@ -246,30 +269,85 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.95);
+  flex-shrink: 0;
 }
 
 .mobileHeader button {
   background: none;
   border: none;
-  color: inherit;
+  color: rgba(255, 255, 255, 0.95);
   font-size: 1.5rem;
   cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.mobileHeader button:hover,
+.mobileHeader button:focus-visible {
+  color: var(--color-violet-flare);
 }
 
 .mobileLinks {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  flex: 1;
+  min-height: 0;
+}
+
+.mobileGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mobileGroupHeader {
+  width: 100%;
+  text-align: left;
+  background: rgba(18, 18, 24, 0.85);
+  border: 2px solid rgba(200, 160, 255, 0.6);
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
+  color: rgba(255, 255, 255, 0.95);
+  font: inherit;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobileGroupHeader:hover,
+.mobileGroupHeader:focus-visible {
+  background: rgba(30, 30, 40, 0.95);
+  border-color: rgba(220, 180, 255, 0.9);
+  border-width: 2px;
+  color: var(--color-violet-flare);
+}
+
+.mobileGroupIcon {
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.mobileGroupChildren {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-left: 1rem;
 }
 
 .mobileLink {
   width: 100%;
   text-align: left;
-  background: rgba(95, 96, 95, 0.22);
-  border: 1px solid rgba(184, 142, 255, 0.25);
+  background: rgba(18, 18, 24, 0.75);
+  border: 2px solid rgba(200, 160, 255, 0.55);
   border-radius: 14px;
   padding: 0.85rem 1rem;
-  color: inherit;
+  color: rgba(255, 255, 255, 0.9);
   font: inherit;
   letter-spacing: 0.04em;
   cursor: pointer;
@@ -278,16 +356,28 @@
 
 .mobileLink:hover,
 .mobileLink:focus-visible {
-  background: var(--gradient-hover);
-  border-color: rgba(184, 142, 255, 0.6);
+  background: rgba(30, 30, 40, 0.9);
+  border-color: rgba(220, 180, 255, 0.85);
+  border-width: 2px;
   color: var(--color-violet-flare);
   transform: translateX(4px);
 }
 
+.mobileSubLink {
+  font-size: 0.95em;
+  font-weight: 400;
+  padding: 0.7rem 1rem;
+  background: rgba(12, 12, 18, 0.8);
+  border-color: rgba(200, 160, 255, 0.5);
+  border-width: 2px;
+}
+
 .mobileLinkActive {
   border-color: var(--color-neo-green);
-  background: rgba(0, 173, 1, 0.18);
+  border-width: 2px;
+  background: rgba(0, 173, 1, 0.25);
   color: var(--color-neo-green);
+  font-weight: 600;
 }
 
 .navTrigger::after,

@@ -10,6 +10,73 @@ import { GallerySlideshow } from '@/components/gallery/GallerySlideshow'
 
 import styles from './GalleryPage.module.css'
 
+type LazyImageProps = {
+  src: string
+  alt: string
+  index: number
+  isMobile: boolean
+  className?: string
+  onClick?: () => void
+  onError?: (e: React.SyntheticEvent<HTMLImageElement>) => void
+}
+
+function LazyImage({ src, alt, index, isMobile, className, onClick, onError }: LazyImageProps) {
+  const [isInView, setIsInView] = useState(index < (isMobile ? 4 : 8))
+  const imgRef = useRef<HTMLImageElement>(null)
+
+  useEffect(() => {
+    if (isInView) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsInView(true)
+            observer.disconnect()
+          }
+        })
+      },
+      {
+        rootMargin: isMobile ? '200px' : '400px',
+        threshold: 0.01,
+      },
+    )
+
+    const currentRef = imgRef.current
+    if (currentRef) {
+      observer.observe(currentRef)
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef)
+      }
+      observer.disconnect()
+    }
+  }, [isInView, isMobile])
+
+  if (!isInView) {
+    return <div className={styles.imagePlaceholder} ref={imgRef} />
+  }
+
+  return (
+    <img
+      ref={imgRef}
+      src={src}
+      alt={alt}
+      className={className}
+      loading={index < (isMobile ? 4 : 8) ? 'eager' : 'lazy'}
+      decoding="async"
+      onLoad={(e) => {
+        const target = e.target as HTMLImageElement
+        target.classList.add(styles.loaded)
+      }}
+      onClick={onClick}
+      onError={onError}
+    />
+  )
+}
+
 type EditableTitleProps = {
   title: string
   onUpdate: (newTitle: string) => void
@@ -95,6 +162,16 @@ export function GalleryPage() {
   const [editing, setEditing] = useState<GalleryItem | null>(null)
   const [slideshowOpen, setSlideshowOpen] = useState(false)
   const [slideshowIndex, setSlideshowIndex] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   useEffect(() => {
     const adminMode = sessionStorage.getItem('gallery_admin_mode')
@@ -228,7 +305,7 @@ export function GalleryPage() {
               />
             )}
           </div>
-          <p>Collezione di foto e video.</p>
+          <p className={styles.subtitle}>L'angolo visuale si allargherà, l'attimo si dilaterà: la sua galleria fotografica divenne una galleria artistica.</p>
           {!hasSupabase && <p className={styles.hint}>Collega Supabase per sostituire questo contenuto di esempio.</p>}
         </div>
         {loading ? (
@@ -241,16 +318,12 @@ export function GalleryPage() {
               {items.map((item, index) => (
                 <figure key={item.id} className={styles.card}>
                   {item.type === 'image' ? (
-                    <img
+                    <LazyImage
                       src={item.thumbnailUrl ?? item.url}
                       alt={item.title}
+                      index={index}
+                      isMobile={isMobile}
                       className={styles.clickableImage}
-                      loading={index < 8 ? 'eager' : 'lazy'}
-                      decoding="async"
-                      onLoad={(e) => {
-                        const target = e.target as HTMLImageElement
-                        target.classList.add(styles.loaded)
-                      }}
                       onClick={() => handleImageClick(index)}
                       onError={(e) => {
                         const target = e.target as HTMLImageElement
@@ -258,15 +331,11 @@ export function GalleryPage() {
                       }}
                     />
                   ) : (
-                    <img
+                    <LazyImage
                       src={item.thumbnailUrl ?? item.url}
                       alt={item.title}
-                      loading={index < 8 ? 'eager' : 'lazy'}
-                      decoding="async"
-                      onLoad={(e) => {
-                        const target = e.target as HTMLImageElement
-                        target.classList.add(styles.loaded)
-                      }}
+                      index={index}
+                      isMobile={isMobile}
                       onError={(e) => {
                         const target = e.target as HTMLImageElement
                         target.src = 'https://placehold.co/400x300/333/FFF?text=Immagine+non+disponibile'
