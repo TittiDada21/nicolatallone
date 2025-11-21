@@ -187,18 +187,45 @@
 }
 
 @media (max-width: 640px) {
+  /* Mobile: compatto il pannello ma mantengo respiro tra i blocchi */
   .card {
-    padding: 2rem;
+    padding: 1.75rem;
+    gap: 1.25rem;
   }
 
+  /* Mobile: porto titoli/azioni in colonna per migliorare la scansione */
   .cardHeader {
     flex-direction: column;
     align-items: flex-start;
+    gap: 0.5rem;
   }
 
+  /* Mobile: alleggerisco le azioni e le allineo per tap con il pollice */
   .actions {
     width: 100%;
     justify-content: flex-end;
   }
-}
 
+  /* Mobile: riduco letter-spacing per massimizzare la leggibilità */
+  .cardLabel,
+  .datetime {
+    letter-spacing: 0.12em;
+    font-size: 0.95rem;
+  }
+
+  /* Mobile: aumento interlinea per i testi descrittivi */
+  .description,
+  .metaRow {
+    line-height: 1.6;
+    font-size: 1rem;
+  }
+
+  /* Mobile: porto il link esterno su una riga dedicata, più toccabile */
+  .externalLink {
+    padding: 0.85rem 1rem;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.08);
+    width: 100%;
+    justify-content: center;
+  }
+}

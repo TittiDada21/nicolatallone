@@ -130,13 +130,32 @@
 }
 
 @media (max-width: 768px) {
+  /* Mobile: riduco padding e gap per portare il contenuto entro la viewport */
   .inner {
-    padding: 6rem 1.5rem 3rem;
-    gap: 2rem;
+    padding: calc(5rem + env(safe-area-inset-top)) 1.25rem 3rem;
+    gap: 1.75rem;
   }
 
+  /* Mobile: separazione più compatta ma ancora leggibile tra heading e testo */
   .pageHeader {
-    padding-bottom: 2rem;
+    padding-bottom: 1.5rem;
+  }
+
+  /* Mobile: scalo il titolo per evitare eccessivo wrapping */
+  .pageHeader h1 {
+    font-size: clamp(2rem, 6vw, 2.6rem);
+  }
+
+  /* Mobile: aumento contrasto e line-height del sottotitolo */
+  .pageHeader p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(20, 20, 20, 0.85);
+  }
+
+  /* Mobile: paragrafi leggermente più piccoli ma con respiro maggiore */
+  .body {
+    font-size: 1rem;
+    line-height: 1.8;
   }
 }
-
