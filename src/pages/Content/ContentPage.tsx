@@ -50,7 +50,7 @@ export function ContentPage({ pageKey }: ContentPageProps) {
       <div className={styles.inner}>
         <header className={styles.pageHeader}>
           <h1>{page.title}</h1>
-          <p>{page.description}</p>
+          <p className={styles.description}>{page.description}</p>
         </header>
 
         {page.body && (

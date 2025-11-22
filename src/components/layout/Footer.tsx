@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { FiFacebook, FiInstagram, FiMail, FiMessageCircle } from 'react-icons/fi'
+import { FiFacebook, FiInstagram, FiMail, FiPhone } from 'react-icons/fi'
 import { Copy, Check } from 'lucide-react'
 
 import { CONTENT_ROUTES } from '@/data/navigation'
@@ -31,7 +31,7 @@ const SOCIAL_LINKS = [
     type: 'popup' as const,
   },
   {
-    icon: FiMessageCircle,
+    icon: FiPhone,
     label: 'WhatsApp',
     value: '+41 79 401 60 15',
     type: 'popup' as const,

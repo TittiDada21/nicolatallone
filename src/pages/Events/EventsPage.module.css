@@ -60,6 +60,12 @@
   gap: 3rem;
 }
 
+@media (max-width: 640px) {
+  .container {
+    padding-top: 7rem;
+  }
+}
+
 .headerRow {
   display: flex;
   justify-content: space-between;
