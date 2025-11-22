@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FiExternalLink, FiMenu, FiX } from 'react-icons/fi'
@@ -9,23 +9,11 @@ import styles from './Header.module.css'
 
 const NAME_LINES = ['Nicola Raffaello', 'Tallone']
 
-const flattenItems = (items: NavigationItem[]) =>
-  items
-    .flatMap((item) => {
-      if (!item.children) {
-        return item
-      }
-      return item.children
-    })
-    .filter((item): item is NavigationItem & { path: string } => Boolean(item.path))
-
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set())
   const location = useLocation()
   const navigate = useNavigate()
-
-  const allLeafItems = useMemo(() => flattenItems(NAV_ITEMS), [])
 
   const isActive = (path: string | undefined) => {
     if (!path) return false
