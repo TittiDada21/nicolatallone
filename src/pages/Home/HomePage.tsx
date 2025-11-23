@@ -11,8 +11,12 @@ export function HomePage() {
       if (!hasSupabase || !supabase) return
 
       const isMobile = window.innerWidth <= 768
+      const backgroundEl = document.querySelector('.background') as HTMLElement
+      
+      if (!backgroundEl) return
+
       if (!isMobile) {
-        document.documentElement.style.setProperty('--mobile-bg-image', '')
+        backgroundEl.style.backgroundImage = ''
         return
       }
 
@@ -25,9 +29,9 @@ export function HomePage() {
         .maybeSingle()
 
       if (data?.url) {
-        document.documentElement.style.setProperty('--mobile-bg-image', `url(${data.url})`)
+        backgroundEl.style.backgroundImage = `linear-gradient(120deg, rgba(12, 12, 16, 0.4), rgba(28, 28, 36, 0.3)), url(${data.url})`
       } else {
-        document.documentElement.style.setProperty('--mobile-bg-image', '')
+        backgroundEl.style.backgroundImage = ''
       }
     }
 
@@ -40,7 +44,6 @@ export function HomePage() {
     window.addEventListener('resize', handleResize)
     return () => {
       window.removeEventListener('resize', handleResize)
-      document.documentElement.style.setProperty('--mobile-bg-image', '')
     }
   }, [])
 
