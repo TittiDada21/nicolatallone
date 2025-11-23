@@ -35,12 +35,24 @@
   }
   
   .app[data-home] .main {
+    position: relative;
+    padding-top: 8rem;
+  }
+  
+  .app[data-home] .main::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background-image: 
       linear-gradient(120deg, rgba(12, 12, 16, 0.4), rgba(28, 28, 36, 0.3)),
       url('/media/mobile-hero-cover.jpg');
-    background-position: center center;
+    background-position: center 8rem;
     background-size: cover;
     background-repeat: no-repeat;
+    z-index: -1;
   }
 }
 
@@ -91,6 +103,7 @@
     align-items: center;
     justify-content: center;
   }
+  
 
   .main.albumMain {
     padding: 0;
