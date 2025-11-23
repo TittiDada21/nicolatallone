@@ -19,7 +19,11 @@ export function AppLayout() {
   const isContentPage = GENERIC_CONTENT_PATHS.includes(location.pathname)
 
   useEffect(() => {
+    const isMobile = window.innerWidth <= 768
     if (isGalleryPage || isContentPage) {
+      document.body.style.overflow = 'auto'
+      document.documentElement.style.overflow = 'auto'
+    } else if (isMobile) {
       document.body.style.overflow = 'auto'
       document.documentElement.style.overflow = 'auto'
     } else {
