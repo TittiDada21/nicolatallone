@@ -29,6 +29,15 @@
     position: absolute;
     height: 120vh;
   }
+  
+  .app[data-home] .background {
+    background-image: var(--mobile-bg-image, 
+      linear-gradient(120deg, rgba(12, 12, 16, 0.4), rgba(28, 28, 36, 0.3)),
+      url('/media/hero-image.jpg')
+    );
+    background-position: center center;
+    background-size: cover;
+  }
 }
 
 .overlay {

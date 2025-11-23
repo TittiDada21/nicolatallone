@@ -36,8 +36,10 @@ export function AppLayout() {
     }
   }, [isGalleryPage, isContentPage])
 
+  const isHomePage = location.pathname === '/'
+
   return (
-    <div className={styles.app}>
+    <div className={styles.app} data-home={isHomePage || undefined}>
       {!isAlbumPage && !isGalleryPage && !isEventsPage && !isContentPage && (
         <>
           <div className={styles.background} aria-hidden />
