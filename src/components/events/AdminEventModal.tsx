@@ -144,150 +144,159 @@ export function AdminEventModal({
           </button>
         </div>
 
-        {!isConfigured ? (
-          <div className={styles.message}>
-            <p>Configura Supabase per utilizzare la gestione eventi.</p>
-          </div>
-        ) : user ? (
-          <form className={styles.eventForm} onSubmit={handleSubmit}>
-            <div className={styles.formGrid}>
-              <label>
-                Titolo
-                <input
-                  type="text"
-                  value={form.title}
-                  onChange={(event) => setForm((prev) => ({ ...prev, title: event.target.value }))}
-                  required
-                />
-              </label>
-
-              <label>
-                Data e ora
-                <input
-                  type="datetime-local"
-                  value={form.startsAt}
-                  onChange={(event) => setForm((prev) => ({ ...prev, startsAt: event.target.value }))}
-                  required
-                />
-              </label>
-
-              <label className={styles.fullRow}>
-                Descrizione
-                <textarea
-                  rows={4}
-                  value={form.description}
-                  onChange={(event) => setForm((prev) => ({ ...prev, description: event.target.value }))}
-                />
-              </label>
-
-              <label className={styles.fullRow}>
-                Indirizzo
-                <input
-                  type="text"
-                  value={form.address}
-                  onChange={(event) => setForm((prev) => ({ ...prev, address: event.target.value }))}
-                />
-              </label>
-
-              <label className={styles.fullRow}>
-                Link Google Maps
-                <input
-                  type="url"
-                  value={form.locationUrl ?? ''}
-                  onChange={(event) => setForm((prev) => ({ ...prev, locationUrl: event.target.value }))}
-                />
-              </label>
-
-              <label>
-                Evento libero?
-                <div className={styles.toggleGroup}>
-                  <button
-                    type="button"
-                    className={`${styles.toggleButton} ${form.isFree ? styles.toggleActive : ''}`}
-                    onClick={() => setForm((prev) => ({ ...prev, isFree: true, price: undefined }))}
-                  >
-                    Sì
-                  </button>
-                  <button
-                    type="button"
-                    className={`${styles.toggleButton} ${!form.isFree ? styles.toggleActive : ''}`}
-                    onClick={() => setForm((prev) => ({ ...prev, isFree: false }))}
-                  >
-                    No
-                  </button>
-                </div>
-              </label>
-
-              {!form.isFree && (
+        <div className={styles.modalBody}>
+          {!isConfigured ? (
+            <div className={styles.message}>
+              <p>Configura Supabase per utilizzare la gestione eventi.</p>
+            </div>
+          ) : user ? (
+            <form className={styles.eventForm} onSubmit={handleSubmit}>
+              <div className={styles.formGrid}>
                 <label>
-                  Prezzo (€)
+                  Titolo
                   <input
-                    type="number"
-                    min="0"
-                    step="0.5"
-                    value={form.price ?? ''}
+                    type="text"
+                    value={form.title}
+                    onChange={(event) => setForm((prev) => ({ ...prev, title: event.target.value }))}
+                    required
+                    placeholder="Es. Concerto Jazz"
+                  />
+                </label>
+
+                <label>
+                  Data e ora
+                  <input
+                    type="datetime-local"
+                    value={form.startsAt}
+                    onChange={(event) => setForm((prev) => ({ ...prev, startsAt: event.target.value }))}
+                    required
+                  />
+                </label>
+
+                <label className={styles.fullRow}>
+                  Descrizione
+                  <textarea
+                    rows={4}
+                    value={form.description}
+                    onChange={(event) => setForm((prev) => ({ ...prev, description: event.target.value }))}
+                    placeholder="Dettagli dell'evento..."
+                  />
+                </label>
+
+                <label className={styles.fullRow}>
+                  Indirizzo
+                  <input
+                    type="text"
+                    value={form.address}
+                    onChange={(event) => setForm((prev) => ({ ...prev, address: event.target.value }))}
+                    placeholder="Via Roma 1, Torino"
+                  />
+                </label>
+
+                <label className={styles.fullRow}>
+                  Link Google Maps
+                  <input
+                    type="url"
+                    value={form.locationUrl ?? ''}
+                    onChange={(event) => setForm((prev) => ({ ...prev, locationUrl: event.target.value }))}
+                    placeholder="https://maps.google.com/..."
+                  />
+                </label>
+
+                <label>
+                  Evento libero?
+                  <div className={styles.toggleGroup}>
+                    <button
+                      type="button"
+                      className={`${styles.toggleButton} ${form.isFree ? styles.toggleActive : ''}`}
+                      onClick={() => setForm((prev) => ({ ...prev, isFree: true, price: undefined }))}
+                    >
+                      Sì
+                    </button>
+                    <button
+                      type="button"
+                      className={`${styles.toggleButton} ${!form.isFree ? styles.toggleActive : ''}`}
+                      onClick={() => setForm((prev) => ({ ...prev, isFree: false }))}
+                    >
+                      No
+                    </button>
+                  </div>
+                </label>
+
+                {!form.isFree && (
+                  <label>
+                    Prezzo (€)
+                    <input
+                      type="number"
+                      min="0"
+                      step="0.5"
+                      value={form.price ?? ''}
+                      onChange={(event) =>
+                        setForm((prev) => ({
+                          ...prev,
+                          price: event.target.value ? Number(event.target.value) : undefined,
+                        }))
+                      }
+                      placeholder="0.00"
+                    />
+                  </label>
+                )}
+
+                <label className={styles.fullRow}>
+                  Link esterno
+                  <input
+                    type="url"
+                    value={form.externalUrl ?? ''}
                     onChange={(event) =>
                       setForm((prev) => ({
                         ...prev,
-                        price: event.target.value ? Number(event.target.value) : undefined,
+                        externalUrl: event.target.value,
                       }))
                     }
+                    placeholder="https://..."
                   />
                 </label>
-              )}
+              </div>
 
-              <label className={styles.fullRow}>
-                Link esterno
+              {error && <p className={styles.error}>{error}</p>}
+
+              <div className={styles.actions}>
+                {onDelete && (
+                  <button type="button" className={styles.deleteButton} onClick={handleDelete}>
+                    <FiTrash2 aria-hidden />
+                    Elimina
+                  </button>
+                )}
+                <button type="submit" className={styles.primaryButton} disabled={saving}>
+                  {saving ? 'Salvo…' : 'Salva'}
+                </button>
+              </div>
+            </form>
+          ) : authLoading ? (
+            <div className={styles.message}>
+              <FiLoader className={styles.spinner} aria-hidden />
+              <p>Verifico la sessione…</p>
+            </div>
+          ) : (
+            <form className={styles.loginForm} onSubmit={handleLogin}>
+              <label>
+                Password admin
                 <input
-                  type="url"
-                  value={form.externalUrl ?? ''}
-                  onChange={(event) =>
-                    setForm((prev) => ({
-                      ...prev,
-                      externalUrl: event.target.value,
-                    }))
-                  }
+                  type="password"
+                  value={loginState.password}
+                  onChange={(event) => setLoginState((prev) => ({ ...prev, password: event.target.value }))}
+                  required
+                  autoFocus
+                  placeholder="Inserisci password"
                 />
               </label>
-            </div>
-
-            {error && <p className={styles.error}>{error}</p>}
-
-            <div className={styles.actions}>
-              {onDelete && (
-                <button type="button" className={styles.deleteButton} onClick={handleDelete}>
-                  <FiTrash2 aria-hidden />
-                  Elimina
-                </button>
-              )}
-              <button type="submit" className={styles.primaryButton} disabled={saving}>
-                {saving ? 'Salvo…' : 'Salva'}
+              {error && <p className={styles.error}>{error}</p>}
+              <button type="submit" className={styles.primaryButton}>
+                Accedi
               </button>
-            </div>
-          </form>
-        ) : authLoading ? (
-          <div className={styles.message}>
-            <FiLoader className={styles.spinner} aria-hidden />
-            <p>Verifico la sessione…</p>
-          </div>
-        ) : (
-          <form className={styles.loginForm} onSubmit={handleLogin}>
-            <label>
-              Password admin
-              <input
-                type="password"
-                value={loginState.password}
-                onChange={(event) => setLoginState((prev) => ({ ...prev, password: event.target.value }))}
-                required
-                autoFocus
-              />
-            </label>
-            {error && <p className={styles.error}>{error}</p>}
-            <button type="submit" className={styles.primaryButton}>
-              Accedi
-            </button>
-          </form>
-        )}
+            </form>
+          )}
+        </div>
       </div>
     </div>
   )

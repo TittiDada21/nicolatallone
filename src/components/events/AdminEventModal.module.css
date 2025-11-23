@@ -1,23 +1,33 @@
 .backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(6, 6, 12, 0.75);
-  backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 50;
-  padding: 1.5rem;
+  z-index: 100;
+  padding: 1rem;
+  animation: fadeIn 0.2s ease-out;
 }
 
 .modal {
-  width: min(640px, 100%);
-  background: rgba(14, 14, 20, 0.92);
+  width: min(600px, 100%);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  background: rgba(18, 18, 24, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border-radius: 24px;
-  padding: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 24px 48px rgba(6, 6, 12, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
   color: #f5f7fa;
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
 }
 
 .modalHeader {
@@ -25,26 +35,49 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(18, 18, 24, 0.5);
+  z-index: 10;
 }
 
 .modalHeader h2 {
   margin: 0;
-  font-size: 2rem;
-  letter-spacing: 0.04em;
-  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #fff;
 }
 
 .closeButton {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 50%;
+  right: 1.25rem;
+  transform: translateY(-50%);
   border: none;
-  background: transparent;
-  color: inherit;
-  font-size: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.6);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
   cursor: pointer;
+  transition: all 0.2s;
   line-height: 1;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.modalBody {
+  padding: 1.5rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .message {
@@ -53,11 +86,13 @@
   gap: 1rem;
   align-items: center;
   text-align: center;
-  font-size: 1rem;
+  padding: 2rem 0;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .spinner {
   font-size: 2rem;
+  color: var(--color-violet-flare);
   animation: spin 1s linear infinite;
 }
 
@@ -65,116 +100,153 @@
 .eventForm {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-}
-
-.loginForm label,
-.eventForm label {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  font-size: 0.95rem;
-  letter-spacing: 0.02em;
-}
-
-.modal input,
-.modal textarea {
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.06);
-  padding: 0.75rem 1rem;
-  color: inherit;
-  font: inherit;
-  resize: vertical;
-}
-
-.modal textarea {
-  min-height: 120px;
+  gap: 1.5rem;
 }
 
 .formGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
 }
 
 .fullRow {
   grid-column: 1 / -1;
 }
 
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.2s;
+}
+
+label:focus-within {
+  color: var(--color-violet-flare);
+}
+
+.modal input,
+.modal textarea {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.875rem 1rem;
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.modal input:focus,
+.modal textarea:focus {
+  border-color: var(--color-violet-flare);
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 0 4px rgba(184, 142, 255, 0.1);
+}
+
+.modal input::placeholder,
+.modal textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.modal textarea {
+  min-height: 100px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
 .toggleGroup {
   display: inline-flex;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 999px;
-  overflow: hidden;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 4px;
+  gap: 4px;
 }
 
 .toggleButton {
-  padding: 0.45rem 1.25rem;
+  flex: 1;
+  padding: 0.5rem 1.5rem;
   border: none;
+  border-radius: 8px;
   background: transparent;
-  color: inherit;
-  font: inherit;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  font-weight: 500;
   cursor: pointer;
+  transition: all 0.2s;
 }
 
 .toggleActive {
-  background: rgba(245, 214, 123, 0.2);
-  color: #f5d67b;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .error {
   margin: 0;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  background: rgba(255, 100, 100, 0.1);
+  border: 1px solid rgba(255, 100, 100, 0.2);
   color: #ff9b9b;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
+  text-align: center;
 }
 
 .actions {
   display: flex;
-  justify-content: center;
-  gap: 0.75rem;
-  margin-top: 0.5rem;
-  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .primaryButton,
-.secondaryButton,
 .deleteButton {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  padding: 0.65rem 1.5rem;
-  border-radius: 999px;
-  border: 1px solid transparent;
-  background: rgba(255, 255, 255, 0.1);
-  color: inherit;
-  font: inherit;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  font-size: 0.95rem;
   cursor: pointer;
+  transition: all 0.2s;
 }
 
 .primaryButton {
-  background: rgba(245, 214, 123, 0.75);
-  color: #1b1b23;
-  border-color: rgba(245, 214, 123, 0.95);
+  background: var(--color-violet-flare);
+  color: #0b0b10;
 }
 
-.secondaryButton {
-  border-color: rgba(255, 255, 255, 0.18);
+.primaryButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.1);
+  box-shadow: 0 4px 12px rgba(184, 142, 255, 0.3);
+}
+
+.primaryButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .deleteButton {
-  border-color: rgba(255, 120, 120, 0.45);
+  background: transparent;
   color: #ff9b9b;
+  border: 1px solid rgba(255, 100, 100, 0.2);
 }
 
-.signOut {
-  align-self: flex-start;
-  background: none;
-  border: none;
-  color: rgba(255, 255, 255, 0.6);
-  font: inherit;
-  cursor: pointer;
-  text-decoration: underline;
+.deleteButton:hover {
+  background: rgba(255, 100, 100, 0.1);
+  border-color: rgba(255, 100, 100, 0.4);
 }
 
 @keyframes spin {
@@ -187,9 +259,77 @@
   }
 }
 
-@media (max-width: 640px) {
-  .modal {
-    padding: 1.5rem;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }
 
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 640px) {
+  .backdrop {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .modal {
+    width: 100%;
+    height: 92vh;
+    /* Bottom sheet style */
+    max-height: 92vh;
+    border-radius: 24px 24px 0 0;
+    border-bottom: none;
+    animation: slideUpMobile 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .modalHeader {
+    padding: 1.25rem;
+  }
+
+  .modalBody {
+    padding: 1.25rem;
+    padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .actions {
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+  }
+
+  .primaryButton,
+  .deleteButton {
+    width: 100%;
+    padding: 1rem;
+  }
+}
+
+@keyframes slideUpMobile {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
