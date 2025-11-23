@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import { HeroEventCard } from '@/components/events/HeroEventCard'
 import { hasSupabase, supabase } from '@/lib/supabaseClient'
@@ -6,8 +6,6 @@ import { hasSupabase, supabase } from '@/lib/supabaseClient'
 import styles from './HomePage.module.css'
 
 export function HomePage() {
-  const [mobileBgImage, setMobileBgImage] = useState<string | null>(null)
-
   useEffect(() => {
     const loadMobileBackground = async () => {
       if (!hasSupabase || !supabase) return
@@ -15,7 +13,6 @@ export function HomePage() {
       const isMobile = window.innerWidth <= 768
       if (!isMobile) {
         document.documentElement.style.setProperty('--mobile-bg-image', '')
-        setMobileBgImage(null)
         return
       }
 
@@ -28,7 +25,6 @@ export function HomePage() {
         .maybeSingle()
 
       if (data?.url) {
-        setMobileBgImage(data.url)
         document.documentElement.style.setProperty('--mobile-bg-image', `url(${data.url})`)
       } else {
         document.documentElement.style.setProperty('--mobile-bg-image', '')
