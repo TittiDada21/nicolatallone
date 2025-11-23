@@ -54,7 +54,9 @@
 
 @media (max-width: 768px) {
   .main {
-    padding: 5rem 1.5rem 6rem;
+    padding: 5rem 1.5rem 10rem;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .main.albumMain {
