@@ -42,7 +42,7 @@ export function AppLayout() {
     <div className={styles.app} data-home={isHomePage || undefined}>
       {!isAlbumPage && !isGalleryPage && !isEventsPage && !isContentPage && (
         <>
-          <div className={styles.background} aria-hidden />
+          <div className={styles.background} data-background-element aria-hidden />
           <div className={styles.overlay} aria-hidden />
         </>
       )}
