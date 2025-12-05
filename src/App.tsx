@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 
 import { ExternalRedirect } from '@/components/common/ExternalRedirect'
 import { CONTENT_ROUTES } from '@/data/navigation'
@@ -14,14 +15,18 @@ import { EventProvider } from '@/providers/EventProvider'
 function AppRoutes() {
   const location = useLocation()
   
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [location.pathname])
+  
   return (
-    <Routes key={location.pathname}>
+    <Routes>
       <Route element={<AppLayout />}>
         <Route index element={<HomePage />} />
         <Route path="/eventi/:type" element={<EventsPage />} />
         <Route path="/progetti/album" element={<AlbumPage />} />
         {CONTENT_ROUTES.filter(({ key }) => !key.startsWith('eventi/') && key !== 'progetti/album').map(({ key, path }) => (
-          <Route key={path} path={path} element={<ContentPage pageKey={key} />} />
+          <Route key={path} path={path} element={<ContentPage key={key} pageKey={key} />} />
         ))}
         <Route path="/galleria" element={<GalleryPage />} />
         <Route path="/silarte" element={<ExternalRedirect href="https://associazionesilarte.ch" />} />

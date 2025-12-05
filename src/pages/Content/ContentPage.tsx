@@ -42,6 +42,11 @@ export function ContentPage({ pageKey }: ContentPageProps) {
   const [editing, setEditing] = useState(false)
   const [loginModalOpen, setLoginModalOpen] = useState(false)
 
+  useEffect(() => {
+    setEditing(false)
+    setLoginModalOpen(false)
+  }, [pageKey])
+
   const isProjectPage = useMemo(
     () => pageKey.startsWith('progetti/') && pageKey !== 'progetti/album',
     [pageKey],
