@@ -151,6 +151,37 @@
   margin: 0;
 }
 
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.coverImage {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  object-fit: cover;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: clamp(1.8rem, 3vw, 2.2rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: inherit;
+  margin-bottom: 0.5rem;
+}
+
+.cachetText {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: inherit;
+  opacity: 0.9;
+}
+
 @media (max-width: 768px) {
   .inner {
     padding: 7rem 1.5rem 3rem;
@@ -165,6 +196,14 @@
 
   .pageHeader h1 {
     margin-bottom: 0.25rem;
+  }
+
+  .coverImage {
+    border-radius: 10px;
+  }
+
+  .sectionTitle {
+    font-size: clamp(1.6rem, 3vw, 2rem);
   }
 }
 
@@ -190,5 +229,17 @@
     line-height: 1.65;
     margin-top: 0.3rem;
   }
-}
 
+  .coverImage {
+    border-radius: 8px;
+  }
+
+  .sectionTitle {
+    font-size: clamp(1.5rem, 4vw, 1.8rem);
+  }
+
+  .cachetText {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+}

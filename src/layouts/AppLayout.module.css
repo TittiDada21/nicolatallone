@@ -20,7 +20,7 @@
   inset: 0;
   background:
     linear-gradient(120deg, rgba(12, 12, 16, 0.4), rgba(28, 28, 36, 0.3)),
-    url('/media/hero-image.jpg') center 30% / cover no-repeat;
+    url('/media/hero-image.png') center 30% / cover no-repeat;
   z-index: -2;
 }
 
@@ -29,17 +29,17 @@
     position: absolute;
     height: 120vh;
   }
-  
+
   .app[data-home] .background {
     display: none;
   }
-  
+
   .app[data-home] .main {
     position: relative;
     padding-top: 8.5rem;
     align-items: flex-start;
   }
-  
+
   .app[data-home] .main::before {
     content: '';
     position: absolute;
@@ -47,7 +47,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: 
+    background-image:
       linear-gradient(120deg, rgba(12, 12, 16, 0.4), rgba(28, 28, 36, 0.3)),
       url('/media/mobile-hero-cover.jpg');
     background-position: center 5.75rem;
@@ -104,7 +104,7 @@
     align-items: center;
     justify-content: center;
   }
-  
+
 
   .main.albumMain {
     padding: 0;
@@ -118,4 +118,3 @@
     min-height: 100vh;
   }
 }
-

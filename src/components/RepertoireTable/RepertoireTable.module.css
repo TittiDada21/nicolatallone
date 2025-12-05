@@ -1,0 +1,134 @@
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.table thead {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: inherit;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.table td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: inherit;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+  .table {
+    font-size: 0.85rem;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.75rem 0.6rem;
+  }
+
+  .table th {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .tableWrapper {
+    border-radius: 6px;
+  }
+
+  .table {
+    font-size: 0.8rem;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.6rem 0.5rem;
+  }
+
+  .table th {
+    font-size: 0.75rem;
+  }
+
+  /* Stack table on very small screens */
+  .table thead {
+    display: none;
+  }
+
+  .table,
+  .table tbody,
+  .table tr,
+  .table td {
+    display: block;
+    width: 100%;
+  }
+
+  .table tr {
+    margin-bottom: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    padding: 0.5rem;
+  }
+
+  .table td {
+    padding: 0.5rem;
+    border: none;
+    position: relative;
+    padding-left: 40%;
+    text-align: right;
+  }
+
+  .table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0.5rem;
+    width: 35%;
+    padding-right: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .table td:nth-child(1)::before {
+    content: 'Compositore';
+  }
+
+  .table td:nth-child(2)::before {
+    content: 'Titolo';
+  }
+
+  .table td:nth-child(3)::before {
+    content: 'Data';
+  }
+}

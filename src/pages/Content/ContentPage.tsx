@@ -1,4 +1,5 @@
 import { PAGE_CONFIG } from '@/data/pageConfig'
+import { RepertoireTable } from '@/components/RepertoireTable/RepertoireTable'
 
 import styles from './ContentPage.module.css'
 
@@ -53,6 +54,12 @@ export function ContentPage({ pageKey }: ContentPageProps) {
           <p className={styles.description}>{page.description}</p>
         </header>
 
+        {page.coverImage && (
+          <section className={styles.section}>
+            <img src={page.coverImage} alt={page.title} className={styles.coverImage} />
+          </section>
+        )}
+
         {page.body && (
           <section className={styles.body}>
             {page.body.map((paragraph, index) => (
@@ -60,8 +67,21 @@ export function ContentPage({ pageKey }: ContentPageProps) {
             ))}
           </section>
         )}
+
+        {page.repertoire && page.repertoire.length > 0 && (
+          <section className={styles.section}>
+            <h2 className={styles.sectionTitle}>Repertorio</h2>
+            <RepertoireTable repertoire={page.repertoire} />
+          </section>
+        )}
+
+        {page.cachet && (
+          <section className={styles.section}>
+            <h2 className={styles.sectionTitle}>Cachet</h2>
+            <p className={styles.cachetText}>{page.cachet}</p>
+          </section>
+        )}
       </div>
     </div>
   )
 }
-
