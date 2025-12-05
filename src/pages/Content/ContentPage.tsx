@@ -42,6 +42,8 @@ export function ContentPage({ pageKey }: ContentPageProps) {
   const [editing, setEditing] = useState(false)
   const [loginModalOpen, setLoginModalOpen] = useState(false)
 
+  const repertoireFallback = useMemo(() => page?.repertoire ?? [], [page])
+
   useEffect(() => {
     setEditing(false)
     setLoginModalOpen(false)
@@ -62,7 +64,7 @@ export function ContentPage({ pageKey }: ContentPageProps) {
     deleteRow,
   } = useProjectRepertoire({
     pageKey,
-    fallback: page?.repertoire ?? [],
+    fallback: repertoireFallback,
     enabled: isProjectPage,
   })
 

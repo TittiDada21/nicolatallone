@@ -67,9 +67,11 @@ const normalizeFallback = (fallback?: RepertoireItem[]): RepertoireEntry[] =>
     sortOrder: index,
   }))
 
+const EMPTY_FALLBACK: RepertoireItem[] = []
+
 export function useProjectRepertoire({
   pageKey,
-  fallback = [],
+  fallback = EMPTY_FALLBACK,
   enabled = true,
 }: UseProjectRepertoireArgs): UseProjectRepertoireResult {
   const [repertoire, setRepertoire] = useState<RepertoireEntry[]>(normalizeFallback(fallback))
