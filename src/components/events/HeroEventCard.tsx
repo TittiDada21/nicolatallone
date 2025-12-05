@@ -94,14 +94,15 @@ export function HeroEventCard() {
               <h1 className={styles.cardTitle}>Nessun evento in programma</h1>
             )}
           </div>
-          <button
-            className={styles.minimizeButton}
-            onClick={() => formatted && setIsMinimized(true)}
-            aria-label="Minimizza card evento"
-            disabled={!formatted}
-          >
-            <FiMinimize2 />
-          </button>
+          {formatted && (
+            <button
+              className={styles.minimizeButton}
+              onClick={() => setIsMinimized(true)}
+              aria-label="Minimizza card evento"
+            >
+              <FiMinimize2 />
+            </button>
+          )}
         </header>
 
         <div className={styles.cardBody}>
