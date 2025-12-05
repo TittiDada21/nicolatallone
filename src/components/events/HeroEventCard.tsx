@@ -18,12 +18,30 @@ const formatDateTime = (isoString: string) => {
 
 const formatDateTimeCompact = (isoString: string) => {
   const date = new Date(isoString)
-  return new Intl.DateTimeFormat('it-IT', {
-    day: '2-digit',
-    month: 'short',
+  const now = new Date()
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  const eventDate = new Date(date.getFullYear(), date.getMonth(), date.getDate())
+  
+  const diffDays = Math.floor((eventDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
+  
+  const time = new Intl.DateTimeFormat('it-IT', {
     hour: '2-digit',
     minute: '2-digit',
   }).format(date)
+  
+  if (diffDays === 0) {
+    return `Oggi ${time}`
+  } else if (diffDays === 1) {
+    return `Domani ${time}`
+  } else if (diffDays > 1 && diffDays <= 7) {
+    const weekday = new Intl.DateTimeFormat('it-IT', { weekday: 'short' }).format(date)
+    return `${weekday} ${time}`
+  } else {
+    return new Intl.DateTimeFormat('it-IT', {
+      day: '2-digit',
+      month: 'short',
+    }).format(date) + ` ${time}`
+  }
 }
 
 export function HeroEventCard() {
@@ -63,13 +81,19 @@ export function HeroEventCard() {
     }
   }, [upcomingEvent])
 
-  if (isMinimized && formatted) {
+  if (isMinimized) {
     return (
       <section className={styles.minimizedBar}>
         <div className={styles.minimizedContent}>
           <div>
-            <span className={styles.minimizedTime}>{formatted.formattedDateCompact}</span>
-            <span className={styles.minimizedTitle}>{formatted.title}</span>
+            {formatted ? (
+              <>
+                <span className={styles.minimizedTime}>{formatted.formattedDateCompact}</span>
+                <span className={styles.minimizedTitle}>{formatted.title}</span>
+              </>
+            ) : (
+              <span className={styles.minimizedTitle}>Nessun evento in programma</span>
+            )}
           </div>
           <button
             className={styles.expandButton}
@@ -99,12 +123,9 @@ export function HeroEventCard() {
             onClick={(e) => {
               e.preventDefault()
               e.stopPropagation()
-              if (formatted) {
-                setIsMinimized(true)
-              }
+              setIsMinimized(true)
             }}
             aria-label="Minimizza card evento"
-            disabled={!formatted}
             type="button"
           >
             <FiMinimize2 />

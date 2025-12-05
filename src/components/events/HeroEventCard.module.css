@@ -208,13 +208,8 @@
   padding: 0;
 }
 
-.minimizeButton:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-.minimizeButton:hover:not(:disabled),
-.minimizeButton:focus-visible:not(:disabled) {
+.minimizeButton:hover,
+.minimizeButton:focus-visible {
   border-color: rgba(245, 214, 123, 0.8);
   background: rgba(255, 255, 255, 0.12);
 }
