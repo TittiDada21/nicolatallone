@@ -1,0 +1,11 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <path
+    d="M160 448 L160 224 Q160 132 256 132 Q352 132 352 224 L352 448 Z"
+    fill="#0F3D58"
+    stroke="#0C3044"
+    stroke-width="32"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <rect x="232" y="228" width="48" height="48" rx="7" ry="7" fill="#F5A623" transform="rotate(45 256 252)" />
+</svg>

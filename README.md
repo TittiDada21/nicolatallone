@@ -89,8 +89,9 @@ src/
 
 ## Asset
 
-- `public/media/hero.jpg` → immagine full screen (1920x1080 o superiore).
-- `public/media/logo.svg` → logo/favico usato nell’header e come favicon.
+- `public/media/hero-image.png` → immagine full screen (1920x1080 o superiore).
+- `public/media/logo-portal/` → set completo logo (SVG + PNG, chiaro/scuro/trasparente) e fonti favicon generate.
+- Favicons in `public/media/favicon-formats/` sono rigenerate da `scripts/generate-portal-icons.sh`.
 - Galleria: carica foto/video su Supabase Storage e registra il link in `gallery_items`.
 
 ## Styling

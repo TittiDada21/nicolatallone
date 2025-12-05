@@ -21,5 +21,6 @@ export type EventFormValues = {
   price?: number
   externalUrl?: string
   locationUrl?: string
+  iconUrl?: string
 }
 

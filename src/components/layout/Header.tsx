@@ -49,7 +49,11 @@ export function Header() {
   return (
     <header className={styles.header}>
       <Link to="/" className={styles.logo}>
-        <img src="/media/official-logo-icon.png" alt="Nicola Raffaello Tallone logo" className={styles.logoMark} />
+        <img
+          src="/media/logo-portal/portal-transparent-128.png"
+          alt="Nicola Raffaello Tallone logo"
+          className={styles.logoMark}
+        />
         <div className={styles.logoText}>
           {NAME_LINES.map((line, index) => (
             <span key={line} className={index === 1 ? styles.logoTextWide : ''}>{line}</span>
@@ -184,4 +188,3 @@ export function Header() {
     </header>
   )
 }
-
