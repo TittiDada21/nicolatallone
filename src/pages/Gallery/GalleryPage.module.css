@@ -199,7 +199,7 @@
     width: 56px;
     height: 56px;
     font-size: 1.35rem;
-    bottom: 1.5rem;
+    top: 5.5rem;
     right: 1.5rem;
     box-shadow: 0 6px 20px rgba(245, 214, 123, 0.45);
   }
@@ -254,7 +254,7 @@
 
 .fabButton {
   position: fixed;
-  bottom: 2rem;
+  top: 6.5rem;
   right: 2rem;
   width: 64px;
   height: 64px;

@@ -156,6 +156,7 @@ export function EventProvider({ children }: PropsWithChildren) {
         price: values.isFree ? null : values.price ?? null,
         external_url: values.externalUrl ?? null,
         location_url: values.locationUrl ?? null,
+        icon_url: values.iconUrl ?? null,
       }
 
       const { error: updateError } = await supabase
