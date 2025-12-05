@@ -96,9 +96,16 @@ export function HeroEventCard() {
           </div>
           <button
             className={styles.minimizeButton}
-            onClick={() => formatted && setIsMinimized(true)}
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              if (formatted) {
+                setIsMinimized(true)
+              }
+            }}
             aria-label="Minimizza card evento"
             disabled={!formatted}
+            type="button"
           >
             <FiMinimize2 />
           </button>
