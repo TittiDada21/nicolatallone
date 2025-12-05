@@ -204,6 +204,12 @@
   transition: border-color 0.15s ease, background 0.15s ease;
 }
 
+.minimizeButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
 .minimizeButton:hover,
 .minimizeButton:focus-visible {
   border-color: rgba(245, 214, 123, 0.8);
@@ -295,4 +301,3 @@
     justify-content: flex-end;
   }
 }
-
