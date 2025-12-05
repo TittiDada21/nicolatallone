@@ -113,38 +113,24 @@
   transform: translateY(-2px) scale(1.02);
 }
 
-.adminButton {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
-  background: linear-gradient(90deg, rgba(12, 12, 18, 0.85), rgba(12, 12, 18, 0.75));
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 14px;
-  color: inherit;
-  font-size: 0.95rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.adminIcon {
+  width: 24px;
+  height: 24px;
+  color: #000000;
+  fill: #000000;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 4px;
+  padding: 4px;
   cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 8px 20px rgba(6, 6, 12, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
   flex-shrink: 0;
 }
 
-.adminButton:hover,
-.adminButton:focus-visible {
-  background: linear-gradient(90deg, rgba(12, 12, 18, 0.95), rgba(12, 12, 18, 0.85));
-  border-color: rgba(255, 255, 255, 0.2);
+.adminIcon:hover,
+.adminIcon:focus-visible {
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(6, 6, 12, 0.5);
-}
-
-.adminButtonActive {
-  background: linear-gradient(90deg, rgba(184, 142, 255, 0.25), rgba(184, 142, 255, 0.15));
-  border-color: rgba(184, 142, 255, 0.4);
-  color: var(--color-violet-flare);
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 .placeholder {
@@ -282,9 +268,15 @@
     align-items: center;
   }
 
-  .adminButton {
-    padding: 0.6rem 1rem;
-    font-size: 0.85rem;
+  .adminIcon {
+    width: 32px;
+    height: 32px;
+    padding: 6px;
+    border-radius: 8px;
+    border-width: 2.5px;
+    border-color: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
   }
 
   .fabButton {

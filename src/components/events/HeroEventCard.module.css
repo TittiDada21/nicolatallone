@@ -16,6 +16,7 @@
   justify-content: space-between;
   gap: 0.75rem;
   position: relative;
+  padding-right: 44px;
 }
 
 .cardLabel {
@@ -202,6 +203,8 @@
   align-items: center;
   justify-content: center;
   transition: border-color 0.15s ease, background 0.15s ease;
+  z-index: 10;
+  pointer-events: auto;
 }
 
 .minimizeButton:disabled {

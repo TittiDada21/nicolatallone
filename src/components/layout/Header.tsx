@@ -50,8 +50,8 @@ export function Header() {
     <header className={styles.header}>
       <Link to="/" className={styles.logo}>
         <img
-          src="/media/logo-portal/portal-light-bg-128.png"
-          alt="Nicola Raffaello Tallone logo"
+          src="/media/logo-formats/icon.svg"
+          alt="Logo di Nicola Raffaello Tallone"
           className={styles.logoMark}
         />
         <div className={styles.logoText}>

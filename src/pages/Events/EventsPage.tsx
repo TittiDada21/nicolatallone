@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { FiEdit2, FiExternalLink, FiMapPin, FiPlus } from 'react-icons/fi'
+import { FaLock } from 'react-icons/fa'
 import { useParams } from 'react-router-dom'
 
 import { useAuth } from '@/providers/AuthProvider'
@@ -87,14 +88,19 @@ export function EventsPage() {
         <div className={styles.headerRow}>
           <h1 className={styles.title}>{title}</h1>
           {isConfigured && !user && (
-            <button
-              type="button"
-              className={styles.adminButton}
+            <FaLock
+              className={styles.adminIcon}
               onClick={handleOpenAdminLogin}
-              aria-label="Area admin"
-            >
-              <span>Admin</span>
-            </button>
+              aria-label="Accesso admin"
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault()
+                  handleOpenAdminLogin()
+                }
+              }}
+            />
           )}
         </div>
 

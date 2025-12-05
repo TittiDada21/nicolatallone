@@ -10,7 +10,7 @@ npm run dev
 ```
 
 1. Duplica `.env.example` in `.env.local` e inserisci `VITE_SUPABASE_URL` + `VITE_SUPABASE_ANON_KEY`.
-2. Aggiungi sfondo hero in `public/media/hero.jpg` (foto alta risoluzione) e logo/favico in `public/media/logo.svg`.
+2. Aggiungi sfondo hero in `public/media/hero-image.png` (foto alta risoluzione) e logo/favico nella cartella `public/media/logo-formats/`.
 3. Sostituisci i link social nei componenti `Footer` e i contenuti statici in `src/data/pageConfig.ts`.
 
 ## Struttura cartelle
@@ -90,8 +90,7 @@ src/
 ## Asset
 
 - `public/media/hero-image.png` → immagine full screen (1920x1080 o superiore).
-- `public/media/logo-portal/` → set completo logo (SVG + PNG, chiaro/scuro/trasparente) e fonti favicon generate.
-- Favicons in `public/media/favicon-formats/` sono rigenerate da `scripts/generate-portal-icons.sh`.
+- `public/media/logo-formats/` → logo principale (`icon.svg`/`icon.png`) e pacchetto favicons in `icon-favicons/`.
 - Galleria: carica foto/video su Supabase Storage e registra il link in `gallery_items`.
 
 ## Styling
