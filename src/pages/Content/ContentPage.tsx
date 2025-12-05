@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useState } from 'react'
+import { FaLock } from 'react-icons/fa'
 
 import { PAGE_CONFIG } from '@/data/pageConfig'
 import { RepertoireTable } from '@/components/RepertoireTable/RepertoireTable'
 import { useProjectRepertoire } from '@/hooks/useProjectRepertoire'
 import { useAuth } from '@/providers/AuthProvider'
+import { AdminLoginModal } from '@/components/common/AdminLoginModal'
 
 import styles from './ContentPage.module.css'
 
@@ -36,10 +38,9 @@ const getPageTheme = (pageKey: string): string => {
 export function ContentPage({ pageKey }: ContentPageProps) {
   const page = PAGE_CONFIG[pageKey]
   const themeClass = getPageTheme(pageKey)
-  const { user, signIn, signOut, loading: authLoading, isConfigured: supabaseConfigured } = useAuth()
-  const [password, setPassword] = useState('')
-  const [authError, setAuthError] = useState<string | null>(null)
+  const { user, signOut, isConfigured: supabaseConfigured } = useAuth()
   const [editing, setEditing] = useState(false)
+  const [loginModalOpen, setLoginModalOpen] = useState(false)
 
   const isProjectPage = useMemo(
     () => pageKey.startsWith('progetti/') && pageKey !== 'progetti/album',
@@ -109,7 +110,24 @@ export function ContentPage({ pageKey }: ContentPageProps) {
         {showRepertoire && (
           <section className={styles.section}>
             <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Repertorio</h2>
+              <div className={styles.sectionTitleRow}>
+                <h2 className={styles.sectionTitle}>Repertorio</h2>
+                {isProjectPage && !user && supabaseConfigured && (
+                  <FaLock
+                    className={styles.adminIcon}
+                    onClick={() => setLoginModalOpen(true)}
+                    aria-label="Accesso admin"
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault()
+                        setLoginModalOpen(true)
+                      }
+                    }}
+                  />
+                )}
+              </div>
               {canEdit && (
                 <div className={styles.sectionActions}>
                   {repertoireSaving && <span className={styles.statusBadge}>Salvataggio…</span>}
@@ -134,65 +152,6 @@ export function ContentPage({ pageKey }: ContentPageProps) {
               )}
             </div>
 
-            {isProjectPage && (
-              <div className={styles.adminBar}>
-                {supabaseConfigured ? (
-                  user ? (
-                    <div className={styles.adminInfo}>
-                      <p className={styles.adminTitle}>Area admin</p>
-                      <p className={styles.adminSubtitle}>
-                        {editing
-                          ? 'Modifica inline attiva: ogni cambio viene salvato.'
-                          : 'Clicca su “Modifica repertorio” per aggiornare i campi.'}
-                      </p>
-                    </div>
-                  ) : (
-                    <form
-                      className={styles.adminForm}
-                      onSubmit={async (event) => {
-                        event.preventDefault()
-                        setAuthError(null)
-                        try {
-                          await signIn({ password })
-                          setPassword('')
-                          setEditing(true)
-                        } catch (error) {
-                          const message = error instanceof Error ? error.message : 'Accesso non riuscito'
-                          setAuthError(message)
-                        }
-                      }}
-                    >
-                      <label className={styles.adminLabel}>
-                        Area admin
-                        <input
-                          type="password"
-                          value={password}
-                          onChange={(event) => setPassword(event.target.value)}
-                          className={styles.adminInput}
-                          placeholder="Inserisci password"
-                          disabled={authLoading}
-                        />
-                      </label>
-                      <div className={styles.adminButtons}>
-                        <button
-                          type="submit"
-                          className={styles.primaryButton}
-                          disabled={authLoading || !password}
-                        >
-                          Accedi
-                        </button>
-                        {authError && <span className={styles.errorText}>{authError}</span>}
-                      </div>
-                    </form>
-                  )
-                ) : (
-                  <p className={styles.adminSubtitle}>
-                    Configura Supabase per abilitare la modifica del repertorio.
-                  </p>
-                )}
-              </div>
-            )}
-
             <RepertoireTable
               repertoire={repertoireItems}
               editable={canEdit && editing}
@@ -213,6 +172,14 @@ export function ContentPage({ pageKey }: ContentPageProps) {
           </section>
         )}
       </div>
+
+      {isProjectPage && (
+        <AdminLoginModal
+          open={loginModalOpen}
+          onClose={() => setLoginModalOpen(false)}
+          onSuccess={() => setEditing(true)}
+        />
+      )}
     </div>
   )
 }

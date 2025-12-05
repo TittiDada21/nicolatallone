@@ -20,7 +20,7 @@ export function AppLayout() {
 
   useEffect(() => {
     const isMobile = window.innerWidth <= 768
-    if (isGalleryPage || isContentPage) {
+    if (isGalleryPage || isContentPage || isEventsPage) {
       document.body.style.overflow = 'auto'
       document.documentElement.style.overflow = 'auto'
     } else if (isMobile) {
@@ -34,7 +34,7 @@ export function AppLayout() {
       document.body.style.overflow = ''
       document.documentElement.style.overflow = ''
     }
-  }, [isGalleryPage, isContentPage])
+  }, [isGalleryPage, isContentPage, isEventsPage])
 
   const isHomePage = location.pathname === '/'
 
@@ -50,7 +50,7 @@ export function AppLayout() {
       <main
         className={`${styles.main} ${isAlbumPage ? styles.albumMain : ''} ${isGalleryPage ? styles.galleryMain : ''} ${
           isContentPage ? styles.contentMain : ''
-        }`}
+        } ${isEventsPage ? styles.eventsMain : ''}`}
       >
         <Outlet />
       </main>
