@@ -276,16 +276,7 @@ export function GalleryPage() {
         <div className={styles.header}>
           <div className={styles.headerRow}>
             <h1>Galleria</h1>
-            {user ? (
-              <button
-                type="button"
-                className={styles.addButton}
-                onClick={handleCreate}
-                aria-label="Aggiungi elemento"
-              >
-                <FiPlus aria-hidden />
-              </button>
-            ) : (
+            {!user && (
               <FaLock
                 className={styles.adminIcon}
                 onClick={() => {
@@ -370,6 +361,18 @@ export function GalleryPage() {
           </>
         )}
       </div>
+
+      {user && (
+        <button
+          type="button"
+          className={styles.fabButton}
+          onClick={handleCreate}
+          aria-label="Aggiungi elemento"
+        >
+          <FiPlus aria-hidden />
+        </button>
+      )}
+
       <AdminGalleryModal
         open={modalOpen}
         mode={editing ? 'edit' : 'create'}

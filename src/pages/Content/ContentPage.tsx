@@ -1,5 +1,9 @@
+import { useEffect, useMemo, useState } from 'react'
+
 import { PAGE_CONFIG } from '@/data/pageConfig'
 import { RepertoireTable } from '@/components/RepertoireTable/RepertoireTable'
+import { useProjectRepertoire } from '@/hooks/useProjectRepertoire'
+import { useAuth } from '@/providers/AuthProvider'
 
 import styles from './ContentPage.module.css'
 
@@ -32,6 +36,40 @@ const getPageTheme = (pageKey: string): string => {
 export function ContentPage({ pageKey }: ContentPageProps) {
   const page = PAGE_CONFIG[pageKey]
   const themeClass = getPageTheme(pageKey)
+  const { user, signIn, signOut, loading: authLoading, isConfigured: supabaseConfigured } = useAuth()
+  const [password, setPassword] = useState('')
+  const [authError, setAuthError] = useState<string | null>(null)
+  const [editing, setEditing] = useState(false)
+
+  const isProjectPage = useMemo(
+    () => pageKey.startsWith('progetti/') && pageKey !== 'progetti/album',
+    [pageKey],
+  )
+
+  const {
+    repertoire,
+    loading: repertoireLoading,
+    saving: repertoireSaving,
+    error: repertoireError,
+    updateField,
+    addRow,
+    deleteRow,
+  } = useProjectRepertoire({
+    pageKey,
+    fallback: page?.repertoire ?? [],
+    enabled: isProjectPage,
+  })
+
+  const canEdit = Boolean(user) && supabaseConfigured && isProjectPage
+
+  useEffect(() => {
+    if (!canEdit) {
+      setEditing(false)
+    }
+  }, [canEdit])
+
+  const repertoireItems = isProjectPage ? repertoire : page?.repertoire ?? []
+  const showRepertoire = isProjectPage || repertoireItems.length > 0
 
   if (!page) {
     return (
@@ -68,10 +106,103 @@ export function ContentPage({ pageKey }: ContentPageProps) {
           </section>
         )}
 
-        {page.repertoire && page.repertoire.length > 0 && (
+        {showRepertoire && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>Repertorio</h2>
-            <RepertoireTable repertoire={page.repertoire} />
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Repertorio</h2>
+              {canEdit && (
+                <div className={styles.sectionActions}>
+                  {repertoireSaving && <span className={styles.statusBadge}>Salvataggio…</span>}
+                  <button
+                    type="button"
+                    className={editing ? styles.secondaryButton : styles.primaryButton}
+                    onClick={() => setEditing((prev) => !prev)}
+                  >
+                    {editing ? 'Blocca modifiche' : 'Modifica repertorio'}
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.secondaryButton}
+                    onClick={() => {
+                      void signOut()
+                      setEditing(false)
+                    }}
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {isProjectPage && (
+              <div className={styles.adminBar}>
+                {supabaseConfigured ? (
+                  user ? (
+                    <div className={styles.adminInfo}>
+                      <p className={styles.adminTitle}>Area admin</p>
+                      <p className={styles.adminSubtitle}>
+                        {editing
+                          ? 'Modifica inline attiva: ogni cambio viene salvato.'
+                          : 'Clicca su “Modifica repertorio” per aggiornare i campi.'}
+                      </p>
+                    </div>
+                  ) : (
+                    <form
+                      className={styles.adminForm}
+                      onSubmit={async (event) => {
+                        event.preventDefault()
+                        setAuthError(null)
+                        try {
+                          await signIn({ password })
+                          setPassword('')
+                          setEditing(true)
+                        } catch (error) {
+                          const message = error instanceof Error ? error.message : 'Accesso non riuscito'
+                          setAuthError(message)
+                        }
+                      }}
+                    >
+                      <label className={styles.adminLabel}>
+                        Area admin
+                        <input
+                          type="password"
+                          value={password}
+                          onChange={(event) => setPassword(event.target.value)}
+                          className={styles.adminInput}
+                          placeholder="Inserisci password"
+                          disabled={authLoading}
+                        />
+                      </label>
+                      <div className={styles.adminButtons}>
+                        <button
+                          type="submit"
+                          className={styles.primaryButton}
+                          disabled={authLoading || !password}
+                        >
+                          Accedi
+                        </button>
+                        {authError && <span className={styles.errorText}>{authError}</span>}
+                      </div>
+                    </form>
+                  )
+                ) : (
+                  <p className={styles.adminSubtitle}>
+                    Configura Supabase per abilitare la modifica del repertorio.
+                  </p>
+                )}
+              </div>
+            )}
+
+            <RepertoireTable
+              repertoire={repertoireItems}
+              editable={canEdit && editing}
+              loading={repertoireLoading}
+              saving={repertoireSaving}
+              error={repertoireError}
+              onChange={canEdit ? updateField : undefined}
+              onAddRow={canEdit ? addRow : undefined}
+              onDeleteRow={canEdit ? deleteRow : undefined}
+            />
           </section>
         )}
 

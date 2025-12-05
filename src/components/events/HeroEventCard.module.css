@@ -15,6 +15,7 @@
   display: flex;
   justify-content: space-between;
   gap: 0.75rem;
+  position: relative;
 }
 
 .cardLabel {
@@ -184,6 +185,99 @@
   color: rgba(255, 255, 255, 0.65);
   text-align: center;
   max-width: 320px;
+}
+
+.minimizeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.minimizeButton:hover,
+.minimizeButton:focus-visible {
+  border-color: rgba(245, 214, 123, 0.8);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.minimizedBar {
+  position: fixed;
+  bottom: 70px;
+  left: 0;
+  right: 0;
+  padding: 0.75rem 1.5rem;
+  background: rgba(12, 12, 18, 0.85);
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(18px);
+  display: none;
+  z-index: 50;
+}
+
+.minimizedContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.minimizedTime {
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.minimizedTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  display: block;
+}
+
+.expandButton {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s ease, background 0.15s ease;
+  flex-shrink: 0;
+}
+
+.expandButton:hover,
+.expandButton:focus-visible {
+  border-color: rgba(245, 214, 123, 0.8);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+@media (min-width: 769px) {
+  .minimizeButton {
+    display: flex;
+  }
+
+  .minimizedBar {
+    display: block;
+  }
 }
 
 @media (max-width: 640px) {

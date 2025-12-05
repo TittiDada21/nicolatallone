@@ -86,31 +86,16 @@ export function EventsPage() {
       <div className={styles.container}>
         <div className={styles.headerRow}>
           <h1 className={styles.title}>{title}</h1>
-          <div className={styles.headerActions}>
-            {isConfigured && (
-              <>
-                {user ? (
-                  <button
-                    type="button"
-                    className={styles.addButton}
-                    onClick={handleCreate}
-                    aria-label="Aggiungi evento"
-                  >
-                    <FiPlus aria-hidden />
-                  </button>
-                ) : (
-                  <button
-                    type="button"
-                    className={styles.adminButton}
-                    onClick={handleOpenAdminLogin}
-                    aria-label="Area admin"
-                  >
-                    <span>Admin</span>
-                  </button>
-                )}
-              </>
-            )}
-          </div>
+          {isConfigured && !user && (
+            <button
+              type="button"
+              className={styles.adminButton}
+              onClick={handleOpenAdminLogin}
+              aria-label="Area admin"
+            >
+              <span>Admin</span>
+            </button>
+          )}
         </div>
 
         {loading && <p className={styles.placeholder}>Carico gli eventi…</p>}
@@ -181,6 +166,17 @@ export function EventsPage() {
           </div>
         )}
       </div>
+
+      {isConfigured && user && (
+        <button
+          type="button"
+          className={styles.fabButton}
+          onClick={handleCreate}
+          aria-label="Aggiungi evento"
+        >
+          <FiPlus aria-hidden />
+        </button>
+      )}
 
       <AdminEventModal
         open={modalOpen}

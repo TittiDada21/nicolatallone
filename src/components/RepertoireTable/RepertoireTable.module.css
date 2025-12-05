@@ -4,16 +4,18 @@
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.95rem;
+  background: rgba(255, 255, 255, 0.35);
 }
 
 .table thead {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.08);
 }
 
 .table th {
@@ -31,6 +33,7 @@
   padding: 0.9rem 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   color: inherit;
+  vertical-align: top;
 }
 
 .table tbody tr:last-child td {
@@ -43,6 +46,132 @@
 
 .table tbody tr:hover {
   background: rgba(255, 255, 255, 0.05);
+}
+
+.placeholder {
+  margin: 0;
+  opacity: 0.8;
+}
+
+.placeholderCell {
+  text-align: center;
+  padding: 1.25rem 1rem;
+  opacity: 0.8;
+}
+
+.error {
+  color: #c0392b;
+  margin: 0 0 0.75rem;
+  font-weight: 600;
+}
+
+.actionsHeader {
+  width: 108px;
+  text-align: right;
+}
+
+.composerInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.nameRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.yearsRow {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.yearSeparator {
+  opacity: 0.6;
+  font-weight: 600;
+}
+
+.input {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.6);
+  color: inherit;
+  font: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+}
+
+.yearInput {
+  max-width: 120px;
+}
+
+.actionsCell {
+  text-align: right;
+}
+
+.iconButton {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: inherit;
+  padding: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease, border-color 0.2s ease;
+}
+
+.iconButton:hover {
+  background: rgba(0, 0, 0, 0.12);
+  border-color: rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
+}
+
+.iconButton:active {
+  transform: translateY(0);
+}
+
+.tableActions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0.25rem 0.5rem;
+}
+
+.addRowButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #161616;
+  color: #f5f7fa;
+  border: none;
+  padding: 0.65rem 0.9rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.addRowButton:hover {
+  background: #0f0f0f;
+}
+
+.addRowButton:active {
+  transform: translateY(1px);
+}
+
+.savingText {
+  font-size: 0.9rem;
+  opacity: 0.8;
 }
 
 /* Responsive design for mobile */
@@ -58,6 +187,14 @@
 
   .table th {
     font-size: 0.8rem;
+  }
+
+  .nameRow {
+    grid-template-columns: 1fr;
+  }
+
+  .yearsRow {
+    grid-template-columns: 1fr 0.3fr 1fr;
   }
 }
 
@@ -130,5 +267,24 @@
 
   .table td:nth-child(3)::before {
     content: 'Data';
+  }
+
+  .table td:nth-child(4)::before {
+    content: 'Azioni';
+  }
+
+  .actionsHeader {
+    text-align: left;
+  }
+
+  .actionsCell {
+    text-align: left;
+    padding-top: 0.4rem;
+  }
+
+  .tableActions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
   }
 }

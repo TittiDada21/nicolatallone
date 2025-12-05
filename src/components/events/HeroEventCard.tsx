@@ -1,5 +1,5 @@
-import { useEffect, useMemo } from 'react'
-import { FiExternalLink, FiMapPin } from 'react-icons/fi'
+import { useEffect, useMemo, useState } from 'react'
+import { FiExternalLink, FiMapPin, FiMinimize2, FiMaximize2 } from 'react-icons/fi'
 
 import { useEvents } from '@/providers/EventProvider'
 
@@ -16,8 +16,19 @@ const formatDateTime = (isoString: string) => {
   }).format(date)
 }
 
+const formatDateTimeCompact = (isoString: string) => {
+  const date = new Date(isoString)
+  return new Intl.DateTimeFormat('it-IT', {
+    day: '2-digit',
+    month: 'short',
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(date)
+}
+
 export function HeroEventCard() {
   const { upcomingEvent, loading, error, refresh, isConfigured } = useEvents()
+  const [isMinimized, setIsMinimized] = useState(false)
 
   useEffect(() => {
     const handleVisibilityChange = () => {
@@ -48,8 +59,29 @@ export function HeroEventCard() {
     return {
       ...upcomingEvent,
       formattedDate: formatDateTime(upcomingEvent.startsAt),
+      formattedDateCompact: formatDateTimeCompact(upcomingEvent.startsAt),
     }
   }, [upcomingEvent])
+
+  if (isMinimized && formatted) {
+    return (
+      <section className={styles.minimizedBar}>
+        <div className={styles.minimizedContent}>
+          <div>
+            <span className={styles.minimizedTime}>{formatted.formattedDateCompact}</span>
+            <span className={styles.minimizedTitle}>{formatted.title}</span>
+          </div>
+          <button
+            className={styles.expandButton}
+            onClick={() => setIsMinimized(false)}
+            aria-label="Espandi card evento"
+          >
+            <FiMaximize2 />
+          </button>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section className={styles.card}>
@@ -62,6 +94,15 @@ export function HeroEventCard() {
               <h1 className={styles.cardTitle}>Nessun evento in programma</h1>
             )}
           </div>
+          {formatted && (
+            <button
+              className={styles.minimizeButton}
+              onClick={() => setIsMinimized(true)}
+              aria-label="Minimizza card evento"
+            >
+              <FiMinimize2 />
+            </button>
+          )}
         </header>
 
         <div className={styles.cardBody}>
