@@ -36,7 +36,8 @@
   
   .app[data-home] .main {
     position: relative;
-    padding-top: 5.75rem;
+    padding-top: 8.5rem;
+    align-items: flex-start;
   }
   
   .app[data-home] .main::before {

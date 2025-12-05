@@ -97,6 +97,7 @@ export function AdminEventModal({
       await onSubmit({
         ...form,
         price: form.isFree ? undefined : form.price,
+        externalUrl: form.externalUrl || undefined,
       })
     } catch (submitError) {
       const message = submitError instanceof Error ? submitError.message : 'Errore imprevisto'
@@ -243,7 +244,7 @@ export function AdminEventModal({
                 )}
 
                 <label className={styles.fullRow}>
-                  Link esterno
+                  Link esterno (opzionale)
                   <input
                     type="url"
                     value={form.externalUrl ?? ''}
