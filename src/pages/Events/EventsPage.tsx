@@ -73,7 +73,6 @@ export function EventsPage() {
     } else {
       await createEvent(values)
     }
-    handleCloseModal()
   }
 
   const handleDelete = async () => {

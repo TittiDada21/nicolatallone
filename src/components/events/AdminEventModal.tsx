@@ -99,6 +99,8 @@ export function AdminEventModal({
         price: form.isFree ? undefined : form.price,
         externalUrl: form.externalUrl || undefined,
       })
+      // Close modal on successful save
+      onClose()
     } catch (submitError) {
       const message = submitError instanceof Error ? submitError.message : 'Errore imprevisto'
       setError(message)

@@ -138,7 +138,8 @@ export function EventProvider({ children }: PropsWithChildren) {
     if (insertError) {
       throw insertError
     }
-    await loadEvents()
+    // Reload events in background without blocking
+    void loadEvents()
   }, [loadEvents])
 
   const updateEvent = useCallback(
@@ -165,7 +166,8 @@ export function EventProvider({ children }: PropsWithChildren) {
       if (updateError) {
         throw updateError
       }
-      await loadEvents()
+      // Reload events in background without blocking
+      void loadEvents()
     },
     [loadEvents],
   )
@@ -179,7 +181,8 @@ export function EventProvider({ children }: PropsWithChildren) {
       if (deleteError) {
         throw deleteError
       }
-      await loadEvents()
+      // Reload events in background without blocking
+      void loadEvents()
     },
     [loadEvents],
   )
