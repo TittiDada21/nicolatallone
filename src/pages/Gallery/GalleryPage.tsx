@@ -333,13 +333,8 @@ export function GalleryPage() {
                       }}
                     />
                   )}
-                  <div className={styles.captionRow}>
-                    <EditableTitle
-                      title={item.title}
-                      onUpdate={(newTitle) => handleTitleUpdate(item, newTitle)}
-                      canEdit={!!user}
-                    />
-                    {user && (
+                  {user && (
+                    <div className={styles.captionRow}>
                       <button
                         type="button"
                         className={styles.deleteIconButton}
@@ -348,8 +343,8 @@ export function GalleryPage() {
                       >
                         <FiTrash2 aria-hidden />
                       </button>
-                    )}
-                  </div>
+                    </div>
+                  )}
                   {item.type === 'video' && (
                     <a href={item.url} target="_blank" rel="noreferrer" className={styles.videoLink}>
                       Guarda il video
