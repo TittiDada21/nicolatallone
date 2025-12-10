@@ -111,8 +111,8 @@ export function ContentPage({ pageKey }: ContentPageProps) {
         <header className={styles.pageHeader}>
           <div className={styles.headerRow}>
             <div>
-              <h1>{page.title}</h1>
-              <p className={styles.description}>{page.description}</p>
+          <h1>{page.title}</h1>
+          <p className={styles.description}>{page.description}</p>
             </div>
             {isProjectPage && !user && supabaseConfigured && (
               <FaLock
@@ -149,7 +149,7 @@ export function ContentPage({ pageKey }: ContentPageProps) {
         {showRepertoire && (
           <section className={styles.section}>
             <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Repertorio</h2>
+                <h2 className={styles.sectionTitle}>Repertorio</h2>
               {canEdit && (
                 <div className={styles.sectionActions}>
                   <button
@@ -182,7 +182,7 @@ export function ContentPage({ pageKey }: ContentPageProps) {
         {displayCachet && (
           <section className={styles.section}>
             <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Cachet</h2>
+            <h2 className={styles.sectionTitle}>Cachet</h2>
               {canEdit && (
                 <button
                   type="button"
