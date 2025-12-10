@@ -18,14 +18,6 @@ type UseProjectCachetResult = {
   updateCachet: (value: string) => Promise<void>
 }
 
-type ProjectCachetRow = {
-  id: string
-  page_key: string
-  cachet_text: string
-  created_at?: string | null
-  updated_at?: string | null
-}
-
 export function useProjectCachet({
   pageKey,
   fallback = '',
