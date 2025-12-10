@@ -4,7 +4,9 @@ import { FaLock } from 'react-icons/fa'
 import { PAGE_CONFIG } from '@/data/pageConfig'
 import { RepertoireTable } from '@/components/RepertoireTable/RepertoireTable'
 import { AdminRepertoireModal } from '@/components/RepertoireTable/AdminRepertoireModal'
+import { AdminCachetModal } from '@/components/Content/AdminCachetModal'
 import { useProjectRepertoire } from '@/hooks/useProjectRepertoire'
+import { useProjectCachet } from '@/hooks/useProjectCachet'
 import { useAuth } from '@/providers/AuthProvider'
 import { AdminLoginModal } from '@/components/common/AdminLoginModal'
 
@@ -41,12 +43,15 @@ export function ContentPage({ pageKey }: ContentPageProps) {
   const themeClass = getPageTheme(pageKey)
   const { user, signOut, isConfigured: supabaseConfigured } = useAuth()
   const [repertoireModalOpen, setRepertoireModalOpen] = useState(false)
+  const [cachetModalOpen, setCachetModalOpen] = useState(false)
   const [loginModalOpen, setLoginModalOpen] = useState(false)
 
   const repertoireFallback = useMemo(() => page?.repertoire ?? [], [page])
+  const cachetFallback = useMemo(() => page?.cachet ?? '', [page])
 
   useEffect(() => {
     setRepertoireModalOpen(false)
+    setCachetModalOpen(false)
     setLoginModalOpen(false)
   }, [pageKey])
 
@@ -69,10 +74,23 @@ export function ContentPage({ pageKey }: ContentPageProps) {
     enabled: isProjectPage,
   })
 
+  const {
+    cachet,
+    loading: cachetLoading,
+    saving: cachetSaving,
+    error: cachetError,
+    updateCachet,
+  } = useProjectCachet({
+    pageKey,
+    fallback: cachetFallback,
+    enabled: isProjectPage,
+  })
+
   const canEdit = Boolean(user) && supabaseConfigured && isProjectPage
 
   const repertoireItems = isProjectPage ? repertoire : page?.repertoire ?? []
   const showRepertoire = isProjectPage || repertoireItems.length > 0
+  const displayCachet = isProjectPage ? cachet : page?.cachet
 
   if (!page) {
     return (
@@ -91,8 +109,27 @@ export function ContentPage({ pageKey }: ContentPageProps) {
     <div className={`${styles.page} ${themeClass}`}>
       <div className={styles.inner}>
         <header className={styles.pageHeader}>
-          <h1>{page.title}</h1>
-          <p className={styles.description}>{page.description}</p>
+          <div className={styles.headerRow}>
+            <div>
+              <h1>{page.title}</h1>
+              <p className={styles.description}>{page.description}</p>
+            </div>
+            {isProjectPage && !user && supabaseConfigured && (
+              <FaLock
+                className={styles.adminIcon}
+                onClick={() => setLoginModalOpen(true)}
+                aria-label="Accesso admin"
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    setLoginModalOpen(true)
+                  }
+                }}
+              />
+            )}
+          </div>
         </header>
 
         {page.coverImage && (
@@ -112,24 +149,7 @@ export function ContentPage({ pageKey }: ContentPageProps) {
         {showRepertoire && (
           <section className={styles.section}>
             <div className={styles.sectionHeader}>
-              <div className={styles.sectionTitleRow}>
-                <h2 className={styles.sectionTitle}>Repertorio</h2>
-                {isProjectPage && !user && supabaseConfigured && (
-                  <FaLock
-                    className={styles.adminIcon}
-                    onClick={() => setLoginModalOpen(true)}
-                    aria-label="Accesso admin"
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault()
-                        setLoginModalOpen(true)
-                      }
-                    }}
-                  />
-                )}
-              </div>
+              <h2 className={styles.sectionTitle}>Repertorio</h2>
               {canEdit && (
                 <div className={styles.sectionActions}>
                   <button
@@ -159,10 +179,21 @@ export function ContentPage({ pageKey }: ContentPageProps) {
           </section>
         )}
 
-        {page.cachet && (
+        {displayCachet && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>Cachet</h2>
-            <p className={styles.cachetText}>{page.cachet}</p>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Cachet</h2>
+              {canEdit && (
+                <button
+                  type="button"
+                  className={styles.primaryButton}
+                  onClick={() => setCachetModalOpen(true)}
+                >
+                  Modifica cachet
+                </button>
+              )}
+            </div>
+            <p className={styles.cachetText}>{displayCachet}</p>
           </section>
         )}
       </div>
@@ -184,6 +215,15 @@ export function ContentPage({ pageKey }: ContentPageProps) {
             onUpdateField={updateField}
             onAddRow={addRow}
             onDeleteRow={deleteRow}
+          />
+          <AdminCachetModal
+            open={cachetModalOpen}
+            cachet={cachet}
+            loading={cachetLoading}
+            saving={cachetSaving}
+            error={cachetError}
+            onClose={() => setCachetModalOpen(false)}
+            onUpdateCachet={updateCachet}
           />
         </>
       )}

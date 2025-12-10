@@ -101,6 +101,13 @@
   padding-bottom: 2.5rem;
 }
 
+.headerRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
 .pageHeader h1 {
   margin: 0;
   font-size: clamp(2.4rem, 4vw, 3.5rem);
@@ -328,21 +335,35 @@
 .adminIcon {
   width: 24px;
   height: 24px;
-  color: inherit;
+  color: #000000;
+  fill: #000000;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 4px;
+  padding: 4px;
   cursor: pointer;
-  transition: transform 0.15s ease, opacity 0.15s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
   flex-shrink: 0;
-  opacity: 0.7;
 }
 
 .adminIcon:hover,
 .adminIcon:focus-visible {
   transform: translateY(-2px);
-  opacity: 1;
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 .adminIcon:active {
   transform: translateY(0);
+}
+
+@media (max-width: 640px) {
+  .adminIcon {
+    width: 32px;
+    height: 32px;
+    padding: 6px;
+    border-radius: 8px;
+    border-width: 2.5px;
+  }
 }
 
 @media (max-width: 768px) {
