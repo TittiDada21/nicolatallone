@@ -91,7 +91,6 @@ export function GallerySlideshow({ open, items, currentIndex, onClose, onNavigat
 
         <div className={styles.imageContainer}>
           <img src={currentItem.url} alt={currentItem.title} className={styles.image} />
-          <div className={styles.caption}>{currentItem.title}</div>
           {imageItems.length > 1 && (
             <div className={styles.counter}>
               {imageIndex + 1} / {imageItems.length}

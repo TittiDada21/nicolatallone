@@ -3,6 +3,7 @@ import { FaLock } from 'react-icons/fa'
 
 import { PAGE_CONFIG } from '@/data/pageConfig'
 import { RepertoireTable } from '@/components/RepertoireTable/RepertoireTable'
+import { AdminRepertoireModal } from '@/components/RepertoireTable/AdminRepertoireModal'
 import { useProjectRepertoire } from '@/hooks/useProjectRepertoire'
 import { useAuth } from '@/providers/AuthProvider'
 import { AdminLoginModal } from '@/components/common/AdminLoginModal'
@@ -39,13 +40,13 @@ export function ContentPage({ pageKey }: ContentPageProps) {
   const page = PAGE_CONFIG[pageKey]
   const themeClass = getPageTheme(pageKey)
   const { user, signOut, isConfigured: supabaseConfigured } = useAuth()
-  const [editing, setEditing] = useState(false)
+  const [repertoireModalOpen, setRepertoireModalOpen] = useState(false)
   const [loginModalOpen, setLoginModalOpen] = useState(false)
 
   const repertoireFallback = useMemo(() => page?.repertoire ?? [], [page])
 
   useEffect(() => {
-    setEditing(false)
+    setRepertoireModalOpen(false)
     setLoginModalOpen(false)
   }, [pageKey])
 
@@ -69,12 +70,6 @@ export function ContentPage({ pageKey }: ContentPageProps) {
   })
 
   const canEdit = Boolean(user) && supabaseConfigured && isProjectPage
-
-  useEffect(() => {
-    if (!canEdit) {
-      setEditing(false)
-    }
-  }, [canEdit])
 
   const repertoireItems = isProjectPage ? repertoire : page?.repertoire ?? []
   const showRepertoire = isProjectPage || repertoireItems.length > 0
@@ -137,20 +132,18 @@ export function ContentPage({ pageKey }: ContentPageProps) {
               </div>
               {canEdit && (
                 <div className={styles.sectionActions}>
-                  {repertoireSaving && <span className={styles.statusBadge}>Salvataggio…</span>}
                   <button
                     type="button"
-                    className={editing ? styles.secondaryButton : styles.primaryButton}
-                    onClick={() => setEditing((prev) => !prev)}
+                    className={styles.primaryButton}
+                    onClick={() => setRepertoireModalOpen(true)}
                   >
-                    {editing ? 'Blocca modifiche' : 'Modifica repertorio'}
+                    Modifica repertorio
                   </button>
                   <button
                     type="button"
                     className={styles.secondaryButton}
                     onClick={() => {
                       void signOut()
-                      setEditing(false)
                     }}
                   >
                     Logout
@@ -161,13 +154,7 @@ export function ContentPage({ pageKey }: ContentPageProps) {
 
             <RepertoireTable
               repertoire={repertoireItems}
-              editable={canEdit && editing}
               loading={repertoireLoading}
-              saving={repertoireSaving}
-              error={repertoireError}
-              onChange={canEdit ? updateField : undefined}
-              onAddRow={canEdit ? addRow : undefined}
-              onDeleteRow={canEdit ? deleteRow : undefined}
             />
           </section>
         )}
@@ -181,11 +168,24 @@ export function ContentPage({ pageKey }: ContentPageProps) {
       </div>
 
       {isProjectPage && (
-        <AdminLoginModal
-          open={loginModalOpen}
-          onClose={() => setLoginModalOpen(false)}
-          onSuccess={() => setEditing(true)}
-        />
+        <>
+          <AdminLoginModal
+            open={loginModalOpen}
+            onClose={() => setLoginModalOpen(false)}
+            onSuccess={() => setRepertoireModalOpen(true)}
+          />
+          <AdminRepertoireModal
+            open={repertoireModalOpen}
+            repertoire={repertoire}
+            loading={repertoireLoading}
+            saving={repertoireSaving}
+            error={repertoireError}
+            onClose={() => setRepertoireModalOpen(false)}
+            onUpdateField={updateField}
+            onAddRow={addRow}
+            onDeleteRow={deleteRow}
+          />
+        </>
       )}
     </div>
   )
