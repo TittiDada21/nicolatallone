@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "supabase-nicolatallone": {
+      "type": "http",
+      "url": "https://mcp.supabase.com/mcp?project_ref=prsgzfgkcfdvgeopzqln",
+      "headers": {
+        "Authorization": "Bearer sbp_4a0fd68a50453e7174a0e81b4316ff5a926cdcfc"
+      }
+    }
+  }
+}
