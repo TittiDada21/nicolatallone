@@ -77,73 +77,6 @@ function LazyImage({ src, alt, index, isMobile, className, onClick, onError }: L
   )
 }
 
-type EditableTitleProps = {
-  title: string
-  onUpdate: (newTitle: string) => void
-  canEdit: boolean
-}
-
-function EditableTitle({ title, onUpdate, canEdit }: EditableTitleProps) {
-  const [isEditing, setIsEditing] = useState(false)
-  const [value, setValue] = useState(title)
-  const inputRef = useRef<HTMLInputElement>(null)
-
-  useEffect(() => {
-    setValue(title)
-  }, [title])
-
-  useEffect(() => {
-    if (isEditing && inputRef.current) {
-      inputRef.current.focus()
-      inputRef.current.select()
-    }
-  }, [isEditing])
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      onUpdate(value)
-      setIsEditing(false)
-    } else if (e.key === 'Escape') {
-      setValue(title)
-      setIsEditing(false)
-    }
-  }
-
-  const handleBlur = () => {
-    if (value.trim() && value !== title) {
-      onUpdate(value)
-    } else {
-      setValue(title)
-    }
-    setIsEditing(false)
-  }
-
-  if (isEditing) {
-    return (
-      <input
-        ref={inputRef}
-        type="text"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        onKeyDown={handleKeyDown}
-        onBlur={handleBlur}
-        className={styles.editableTitleInput}
-      />
-    )
-  }
-
-  return (
-    <figcaption
-      className={canEdit ? styles.editableTitle : undefined}
-      onClick={canEdit ? () => setIsEditing(true) : undefined}
-      title={canEdit ? 'Clicca per modificare' : undefined}
-      style={canEdit ? undefined : { cursor: 'default' }}
-    >
-      {title}
-    </figcaption>
-  )
-}
-
 const FALLBACK_GALLERY: GalleryItem[] = [
   {
     id: 'preview-1',
@@ -241,19 +174,6 @@ export function GalleryPage() {
     const { error } = await supabase.from('gallery_items').delete().eq('id', item.id)
     if (error) {
       console.error('Errore eliminazione:', error)
-      return
-    }
-    void loadGallery()
-  }
-
-  const handleTitleUpdate = async (item: GalleryItem, newTitle: string) => {
-    if (!supabase || !newTitle.trim()) return
-    const { error } = await supabase
-      .from('gallery_items')
-      .update({ title: newTitle.trim() })
-      .eq('id', item.id)
-    if (error) {
-      console.error('Errore aggiornamento titolo:', error)
       return
     }
     void loadGallery()
