@@ -367,6 +367,68 @@
   }
 }
 
+.confirmBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 16, 0.7);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+  padding: 1.25rem;
+}
+
+.confirmModal {
+  background: #0f0f14;
+  color: #f5f7fa;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.4);
+  padding: 1.5rem;
+  width: min(420px, 100%);
+}
+
+.confirmHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.confirmHeader h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  letter-spacing: 0.01em;
+}
+
+.closeButton {
+  background: transparent;
+  color: inherit;
+  border: none;
+  font-size: 1.75rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.confirmText {
+  margin: 0 0 1.25rem;
+  opacity: 0.9;
+}
+
+.confirmActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.confirmActions .secondaryButton {
+  background: rgba(255, 255, 255, 0.14);
+  color: #f5f7fa;
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
 @media (max-width: 768px) {
   .inner {
     padding: 7rem 1.5rem 3rem;

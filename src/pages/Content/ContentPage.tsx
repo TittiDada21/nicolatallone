@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, type SVGProps } from 'react'
 
 import { PAGE_CONFIG } from '@/data/pageConfig'
 import { RepertoireTable } from '@/components/RepertoireTable/RepertoireTable'
@@ -15,7 +15,7 @@ type ContentPageProps = {
   pageKey: keyof typeof PAGE_CONFIG
 }
 
-const LockIcon = (props: React.SVGProps<SVGSVGElement>) => (
+const LockIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -29,6 +29,24 @@ const LockIcon = (props: React.SVGProps<SVGSVGElement>) => (
       strokeLinecap="round"
       strokeLinejoin="round"
       d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+    />
+  </svg>
+)
+
+const OpenLockIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke="currentColor"
+    aria-hidden="true"
+    {...props}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M13.5 10.5V6.75a4.5 4.5 0 1 1 9 0v3.75M3.75 21.75h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H3.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
     />
   </svg>
 )
@@ -62,6 +80,7 @@ export function ContentPage({ pageKey }: ContentPageProps) {
   const [repertoireModalOpen, setRepertoireModalOpen] = useState(false)
   const [cachetModalOpen, setCachetModalOpen] = useState(false)
   const [loginModalOpen, setLoginModalOpen] = useState(false)
+  const [logoutConfirmOpen, setLogoutConfirmOpen] = useState(false)
 
   const repertoireFallback = useMemo(() => page?.repertoire ?? [], [page])
   const cachetFallback = useMemo(() => page?.cachet ?? '', [page])
@@ -70,6 +89,7 @@ export function ContentPage({ pageKey }: ContentPageProps) {
     setRepertoireModalOpen(false)
     setCachetModalOpen(false)
     setLoginModalOpen(false)
+    setLogoutConfirmOpen(false)
   }, [pageKey])
 
   const isProjectPage = useMemo(
@@ -131,20 +151,38 @@ export function ContentPage({ pageKey }: ContentPageProps) {
               <h1>{page.title}</h1>
               <p className={styles.description}>{page.description}</p>
             </div>
-            {isProjectPage && !user && supabaseConfigured && (
-              <LockIcon
-                className={styles.adminIcon}
-                onClick={() => setLoginModalOpen(true)}
-                aria-label="Accesso admin"
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault()
-                    setLoginModalOpen(true)
-                  }
-                }}
-              />
+            {isProjectPage && supabaseConfigured && (
+              <>
+                {!user ? (
+                  <LockIcon
+                    className={styles.adminIcon}
+                    onClick={() => setLoginModalOpen(true)}
+                    aria-label="Accesso admin"
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault()
+                        setLoginModalOpen(true)
+                      }
+                    }}
+                  />
+                ) : (
+                  <OpenLockIcon
+                    className={styles.adminIcon}
+                    aria-label="Modalità admin attiva"
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => setLogoutConfirmOpen(true)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault()
+                        setLogoutConfirmOpen(true)
+                      }
+                    }}
+                  />
+                )}
+              </>
             )}
           </div>
         </header>
@@ -220,7 +258,7 @@ export function ContentPage({ pageKey }: ContentPageProps) {
           <AdminLoginModal
             open={loginModalOpen}
             onClose={() => setLoginModalOpen(false)}
-            onSuccess={() => setRepertoireModalOpen(true)}
+            onSuccess={() => setLoginModalOpen(false)}
           />
           <AdminRepertoireModal
             open={repertoireModalOpen}
@@ -242,6 +280,55 @@ export function ContentPage({ pageKey }: ContentPageProps) {
             onClose={() => setCachetModalOpen(false)}
             onUpdateCachet={updateCachet}
           />
+          {logoutConfirmOpen && (
+            <div
+              className={styles.confirmBackdrop}
+              role="presentation"
+              onClick={() => setLogoutConfirmOpen(false)}
+            >
+              <div
+                className={styles.confirmModal}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="logout-confirm-title"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className={styles.confirmHeader}>
+                  <h3 id="logout-confirm-title">Vuoi fare logout?</h3>
+                  <button
+                    type="button"
+                    className={styles.closeButton}
+                    aria-label="Chiudi avviso"
+                    onClick={() => setLogoutConfirmOpen(false)}
+                  >
+                    ×
+                  </button>
+                </div>
+                <p className={styles.confirmText}>Scegli se uscire dalla modalità admin.</p>
+                <div className={styles.confirmActions}>
+                  <button
+                    type="button"
+                    className={styles.primaryButton}
+                    onClick={() => {
+                      setRepertoireModalOpen(false)
+                      setCachetModalOpen(false)
+                      void signOut()
+                      setLogoutConfirmOpen(false)
+                    }}
+                  >
+                    SI, esci dalla modalità admin
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.secondaryButton}
+                    onClick={() => setLogoutConfirmOpen(false)}
+                  >
+                    NO, continua a modificare
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </>
       )}
     </div>
