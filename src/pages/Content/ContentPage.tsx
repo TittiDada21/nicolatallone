@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from 'react'
-import { FaLock } from 'react-icons/fa'
 
 import { PAGE_CONFIG } from '@/data/pageConfig'
 import { RepertoireTable } from '@/components/RepertoireTable/RepertoireTable'
@@ -15,6 +14,24 @@ import styles from './ContentPage.module.css'
 type ContentPageProps = {
   pageKey: keyof typeof PAGE_CONFIG
 }
+
+const LockIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke="currentColor"
+    aria-hidden="true"
+    {...props}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+    />
+  </svg>
+)
 
 const getPageTheme = (pageKey: string): string => {
   if (pageKey.startsWith('progetti/duo-')) {
@@ -111,11 +128,11 @@ export function ContentPage({ pageKey }: ContentPageProps) {
         <header className={styles.pageHeader}>
           <div className={styles.headerRow}>
             <div>
-          <h1>{page.title}</h1>
-          <p className={styles.description}>{page.description}</p>
+              <h1>{page.title}</h1>
+              <p className={styles.description}>{page.description}</p>
             </div>
             {isProjectPage && !user && supabaseConfigured && (
-              <FaLock
+              <LockIcon
                 className={styles.adminIcon}
                 onClick={() => setLoginModalOpen(true)}
                 aria-label="Accesso admin"
