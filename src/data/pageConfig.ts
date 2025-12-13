@@ -92,7 +92,7 @@ export const PAGE_CONFIG: Record<string, PageContent> = {
     title: 'Duo Clavicembalo',
     description:
       'Un viaggio nel repertorio barocco con l\'eleganza del clavicembalo e la profondità del violoncello, riscoprendo capolavori del periodo aureo della musica antica.',
-    coverImage: '/media/placeholder-progetti-subpages.png',
+    coverImage: '/media/placeholder-progetti-subpages2.jpg',
     repertoire: [
       {
         composer: { firstName: 'Georg Friedrich', lastName: 'Händel', birthYear: 1685, deathYear: 1759 },
@@ -141,7 +141,7 @@ export const PAGE_CONFIG: Record<string, PageContent> = {
     title: 'Duo Voce',
     description:
       'L\'incontro tra la voce umana e il violoncello genera emozioni profonde, attraverso lied romantici, canzoni d\'autore e composizioni contemporanee che esplorano la poetica del suono.',
-    coverImage: '/media/placeholder-progetti-subpages.png',
+    coverImage: '/media/placeholder-progetti-subpages2.jpg',
     repertoire: [
       {
         composer: { firstName: 'Franz', lastName: 'Schubert', birthYear: 1797, deathYear: 1828 },
@@ -191,7 +191,7 @@ export const PAGE_CONFIG: Record<string, PageContent> = {
     title: 'Solista',
     description:
       'Programmi solistici che esplorano la profondità espressiva del violoncello, dal repertorio barocco di Bach alle sperimentazioni contemporanee, in un viaggio musicale intimo e virtuosistico.',
-    coverImage: '/media/placeholder-progetti-subpages.png',
+    coverImage: '/media/placeholder-progetti-subpages2.jpg',
     repertoire: [
       {
         composer: { firstName: 'Johann Sebastian', lastName: 'Bach', birthYear: 1685, deathYear: 1750 },
