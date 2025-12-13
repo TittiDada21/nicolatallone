@@ -14,6 +14,16 @@ type GallerySlideshowProps = {
   onNavigate: (index: number) => void
 }
 
+// Helper per ottimizzare immagini slideshow
+const getSlideshowImageUrl = (url: string) => {
+  if (!url) return url
+  if (url.includes('storage.supabase.co') && !/\.(mp4|mov|webm|avi|mkv)$/i.test(url)) {
+    const separator = url.includes('?') ? '&' : '?'
+    return `${url}${separator}width=1600&format=webp&quality=90`
+  }
+  return url
+}
+
 export function GallerySlideshow({ open, items, currentIndex, onClose, onNavigate }: GallerySlideshowProps) {
   const currentItem = items[currentIndex]
   const imageItems = items.filter((item) => item.type === 'image')
@@ -90,7 +100,11 @@ export function GallerySlideshow({ open, items, currentIndex, onClose, onNavigat
         )}
 
         <div className={styles.imageContainer}>
-          <img src={currentItem.url} alt={currentItem.title} className={styles.image} />
+          <img
+            src={getSlideshowImageUrl(currentItem.url)}
+            alt={currentItem.title}
+            className={styles.image}
+          />
           {imageItems.length > 1 && (
             <div className={styles.counter}>
               {imageIndex + 1} / {imageItems.length}

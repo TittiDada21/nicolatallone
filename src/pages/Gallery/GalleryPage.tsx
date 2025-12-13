@@ -77,6 +77,18 @@ function LazyImage({ src, alt, index, isMobile, className, onClick, onError }: L
   )
 }
 
+const getOptimizedImageUrl = (url: string) => {
+  if (!url) return url
+  // Only optimize Supabase Storage URLs
+  if (url.includes('storage.supabase.co') && !/\.(mp4|mov|webm|avi|mkv)$/i.test(url)) {
+    // Check if the URL already has query parameters
+    const separator = url.includes('?') ? '&' : '?'
+    // Request a resized WebP image with width 800px (good balance for grid)
+    return `${url}${separator}width=800&format=webp&quality=80`
+  }
+  return url
+}
+
 const FALLBACK_GALLERY: GalleryItem[] = [
   {
     id: 'preview-1',
@@ -230,7 +242,7 @@ export function GalleryPage() {
                 <figure key={item.id} className={styles.card}>
                   {item.type === 'image' ? (
                     <LazyImage
-                      src={item.thumbnailUrl ?? item.url}
+                      src={getOptimizedImageUrl(item.thumbnailUrl ?? item.url)}
                       alt={item.title}
                       index={index}
                       isMobile={isMobile}
@@ -243,7 +255,7 @@ export function GalleryPage() {
                     />
                   ) : (
                     <LazyImage
-                      src={item.thumbnailUrl ?? item.url}
+                      src={getOptimizedImageUrl(item.thumbnailUrl ?? item.url)}
                       alt={item.title}
                       index={index}
                       isMobile={isMobile}
