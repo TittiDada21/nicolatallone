@@ -240,15 +240,17 @@ export const PAGE_CONFIG: Record<string, PageContent> = {
   'insegnamento/conservatorio-svizzera-italiana': {
     title: 'Conservatorio della Svizzera Italiana',
     description:
-      'Collaborazione didattica con il Conservatorio della Svizzera Italiana per la formazione di giovani talenti.',
+      'Un polo di eccellenza per la formazione musicale nel cuore dell\'Europa, dove tradizione e innovazione si incontrano.',
     body: [
-      'Il Conservatorio della Svizzera italiana è un’istituzione universitaria di alta formazione musicale che offre percorsi di studio Bachelor e Master, corsi di formazione continua e una scuola di musica per amatori di ogni età.',
-      'Come docente di violoncello, condivido la mia esperienza e passione con gli studenti, guidandoli nello sviluppo della tecnica e dell\'interpretazione musicale, con una particolare attenzione alla crescita artistica personale.',
+      'Il Conservatorio della Svizzera italiana (CSI) è molto più di una scuola di musica: è un centro culturale dinamico riconosciuto a livello internazionale. Parte della Scuola Universitaria Professionale della Svizzera Italiana (SUPSI), offre percorsi di alta formazione che spaziano dal Bachelor al Master, preparando le nuove generazioni di musicisti alle sfide del panorama artistico contemporaneo.',
+      'All\'interno di questo ambiente stimolante, il mio ruolo di docente si focalizza sullo sviluppo tecnico ed espressivo degli studenti di violoncello. Il percorso didattico che propongo mira a fornire solidi fondamenti strumentali, ma soprattutto a stimolare la ricerca di una propria voce artistica. Attraverso lezioni individuali, musica da camera e progetti orchestrali, accompagno gli allievi in un viaggio di scoperta musicale che va oltre la semplice esecuzione.',
+      'La struttura del Conservatorio, situata nella "Città della Musica" a Lugano, offre spazi acusticamente perfetti e tecnologie all\'avanguardia, creando l\'ecosistema ideale per lo studio e la performance. Qui, gli studenti hanno l\'opportunità di confrontarsi con maestri di fama mondiale e di partecipare a masterclass esclusive.',
+      'Collaborare con un\'istituzione di tale prestigio mi permette di trasmettere non solo la tecnica violoncellistica, ma anche i valori di disciplina, passione e integrità artistica che sono fondamentali per una carriera professionale nel mondo della musica classica.',
     ],
     layout: 'conservatorio',
-    sideImage: '/media/la-citta-della-musica.jpg', // Placeholder, user will provide
+    sideImage: '/media/la-citta-della-musica.jpg',
     externalLink: {
-      label: 'Visita il sito del Conservatorio',
+      label: 'Visita il sito ufficiale del CSI',
       url: 'https://www.conservatorio.ch',
     },
   },

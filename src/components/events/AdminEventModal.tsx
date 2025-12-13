@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom'
 import { FiLoader, FiTrash2 } from 'react-icons/fi'
 
 import { useAuth } from '@/providers/AuthProvider'
+import { supabase } from '@/lib/supabaseClient'
 import type { EventFormValues, EventRecord } from '@/types/event'
 
 import styles from './AdminEventModal.module.css'
@@ -209,13 +210,59 @@ export function AdminEventModal({
                 </label>
 
                 <label className={styles.fullRow}>
-                  URL Immagine (opzionale)
-                  <input
-                    type="url"
-                    value={form.iconUrl ?? ''}
-                    onChange={(event) => setForm((prev) => ({ ...prev, iconUrl: event.target.value }))}
-                    placeholder="https://..."
-                  />
+                  Immagine evento (opzionale)
+                  <div className={styles.imageUploadControl}>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={async (e) => {
+                        if (!e.target.files || e.target.files.length === 0) return
+                        if (!supabase) {
+                          setError('Supabase client non inizializzato')
+                          return
+                        }
+
+                        setSaving(true)
+                        try {
+                          const file = e.target.files[0]
+                          const fileExt = file.name.split('.').pop()
+                          const fileName = `${Math.random().toString(36).substring(2)}.${fileExt}`
+                          const filePath = `${fileName}`
+
+                          const { error: uploadError } = await supabase.storage
+                            .from('events-images')
+                            .upload(filePath, file)
+
+                          if (uploadError) throw uploadError
+
+                          const { data: { publicUrl } } = supabase.storage
+                            .from('events-images')
+                            .getPublicUrl(filePath)
+
+                          setForm((prev) => ({ ...prev, iconUrl: publicUrl }))
+                        } catch (err) {
+                          setError(err instanceof Error ? err.message : 'Errore upload immagine')
+                        } finally {
+                          setSaving(false)
+                        }
+                      }}
+                      disabled={saving}
+                      className={styles.fileInput}
+                    />
+                    {form.iconUrl && (
+                      <div className={styles.imagePreview}>
+                        <img src={form.iconUrl} alt="Anteprima" />
+                        <button
+                          type="button"
+                          onClick={() => setForm(prev => ({ ...prev, iconUrl: '' }))}
+                          className={styles.removeImageBtn}
+                          title="Rimuovi immagine"
+                        >
+                          <FiTrash2 />
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </label>
 
                 <label>

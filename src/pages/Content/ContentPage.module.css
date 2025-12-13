@@ -696,3 +696,108 @@
   min-width: 250px; /* Give more space to Title */
   width: 45%;
 }
+
+/* Improved Conservatorio Layout */
+.conservatorioLayout {
+  position: relative;
+  isolation: isolate;
+}
+
+.conservatorioLayout .headerRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .conservatorioLayout .headerRow {
+    grid-template-columns: 1.2fr 0.8fr;
+    padding-right: 0; /* Reset previous padding */
+    gap: 4rem;
+  }
+}
+
+.conservatorioLayout .pageHeader h1 {
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  max-width: 15ch;
+}
+
+.conservatorioLayout .description {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+  max-width: 50ch;
+}
+
+.conservatorioLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 2px solid currentColor;
+  padding-bottom: 2px;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.conservatorioLink:hover {
+  opacity: 0.8;
+  transform: translateX(4px);
+}
+
+.sideImage {
+  position: relative; /* Changed from absolute to flow naturally in grid */
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  transform: none; /* Reset rotation for cleaner look */
+  border: none;
+  display: block;
+}
+
+/* Add specialized body styling for this layout */
+.conservatorioLayout ~ .body {
+  margin-top: 4rem;
+  font-size: 1.15rem;
+  max-width: 65ch;
+  line-height: 1.9;
+}
+
+.conservatorioLayout ~ .body p {
+  margin-bottom: 2rem;
+}
+
+/* Adjustments for Conservatorio Image Alignment on Mobile */
+@media (max-width: 1023px) {
+  .conservatorioLayout .headerRow {
+    gap: 2rem;
+  }
+
+  .sideImage {
+    max-height: 300px;
+    margin-top: 1rem;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Ensure text readability and spacing */
+.conservatorioLayout .pageHeader p {
+    margin-bottom: 2rem;
+}
+
+/* Enhancements for side image container */
+.conservatorioLayout .headerRow > div:nth-child(2) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
