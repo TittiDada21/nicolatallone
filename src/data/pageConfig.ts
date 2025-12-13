@@ -1,9 +1,14 @@
 import type { RepertoireItem } from '@/types/repertoire'
 
+export type BodyItem = 
+  | string
+  | { type: 'heading'; content: string }
+  | { type: 'list'; items: string[] }
+
 export type PageContent = {
   title: string
   description: string
-  body?: string[]
+  body?: BodyItem[]
   coverImage?: string
   sideImage?: string
   externalLink?: {
@@ -33,19 +38,102 @@ export const PAGE_CONFIG: Record<string, PageContent> = {
     coverImage: '/media/cover-cv-musicista.png',
     body: [
       'Nicola Tallone, violoncellista svizzero, si diploma in Violoncello al Conservatorio Giuseppe Verdi di Milano con Christian Bellisario e ottiene il Master of Arts in Music Pedagogy al Conservatorio della Svizzera Italiana di Lugano con Enrico Dindo, dopo aver seguito il corso di alto perfezionamento all\'Accademia "Fondazione Walter Stauffer" di Cremona con Rocco Filippini.',
-      'Con il suo Quartetto d\'archi "Intime Voci" approfondisce le sue conoscenze della musica da camera alla Musikhochschule di Basilea con Rainer Schmidt (Quartetto Hagen). Dal 2014 è aggiunto presso l\'OSI (Orchestra della Svizzera italiana). Dal 2017 è Direttore Artistico della Primavera Musicale – festival musicale organizzato dall\'Associazione Silarte che riunisce artisti di generi diversi. Appassionato di cinema e in particolare di colonne sonore, Nicola inizia nel 2020 a comporre musica elettronica e pubblica l\'Album NiT SOLO (2023) su tutte le piattafrome musicali online.',
-      'È membro attivo delle seguenti orchestre: Orchestra da Camera di Lugano (Dir. Stefano Bazzi); Orchestra Opera Viva (Dir. Andrea Cupia); Orchestra Vivace della Riviera (Dir. Daniele Giovannini); The Unated Soloists Orchestra (Dir. Arseniy Shkaptsov).',
-      'Insegna con passione il violoncello alla Scuola di Musica del Conservatorio della Svizzera italiana (sezioni di Locarno e di Bellinzona) e presso la Scuola di Musica di Biasca e Alto Ticino.',
+      { type: 'heading', content: 'Generale' },
+      { type: 'list', items: [
+        'Data di nascita 29 novembre 1984',
+        'Luogo di nascita Zurigo, Svizzera',
+        'Nazionalità Svizzera',
+        'Indirizzo Via Cantonale 56, 6719 Aquila, Svizzera',
+        'Natel 0041 79 401 60 15',
+        'E-mail nitcellist@gmail.com',
+        'Strumento Violoncello',
+      ]},
+      { type: 'heading', content: 'Esperienza professionale' },
+      { type: 'list', items: [
+        'Dal 2023 Docente presso la Scuola di Musica del Conservatorio della Svizzera italiana',
+        'Dal 2023 Docente di teoria e solfeggio e di musica d\'insieme presso la Scuola di Musica Biaschese - Tre Valli',
+        'Dal 2020 Compositore di musica elettronica - Album NiT Solo (pubblicato su tutte le piattaforme online)',
+        'Dal 2017 - 2023 Docente presso l\'Accademia Vivaldi di Muralto',
+        '2016 - 2017 Supplente presso l\'Accademia Vivaldi di Muralto',
+        '2015 - 2016 Docente presso la SMaRT Academy di Balerna',
+        'Dal 2015 Docente presso la Scuola di Musica Biaschese - Tre Valli',
+        '2013 - 2021 Docente presso l\'Atelier della Musica di Taverne',
+        '2012 - 2016 Docente presso la Scuola di Musica di Capriasca dell\'Associazione Chopin',
+        'Dal 2008 Attività professionale concertistica nelle seguenti formazioni: solista, duo, quartetto, orchestra e altre',
+      ]},
+      { type: 'heading', content: 'Formazione' },
+      { type: 'list', items: [
+        '2015 - 2017 Accademia di Musica di Basilea - Post-formazione per quartetti d\'archi - Rainer Schmidt, Maestro',
+        '2012 - 2014 Conservatorio della Svizzera italiana - Scuola universitaria professionale di Musica, Via Soldino 9, 6900 Lugano, Svizzera - Master of Arts in Music Pedagogy, violoncello - Enrico Dindo, Maestro / Cristina Bellu, Didattica',
+        '2008 – 2011 Conservatorio Giuseppe Verdi di Milano - Scuola universitaria di Musica, Via Conservatorio 12, 20122 Milano, Italia - Diploma di Primo livello (Bachelor), violoncello - Christian Bellisario, Maestro',
+      ]},
+      { type: 'heading', content: 'Educazione musicale' },
+      { type: 'list', items: [
+        '2011 – 2013 Accademia Walter Stauffer - Cremona, Italia - Corso di Alto Perfezionamento, violoncello - Rocco Filippini, Maestro',
+        '2000 – 2008 Conservatorio della Svizzera italiana - Via Soldino 9, 6900 Lugano, Svizzera - Pre-professionale e Professionale studio del violoncello - Taisuke Yamashita, Maestro',
+        '1996 – 2000 Lezioni private di violoncello - Taisuke Yamashita, Maestro',
+        '1989 – 1996 Accademia Vivaldi - Locarno, Svizzera - Scuola di Musica, violoncello - Daniele Bogni, Maestro',
+      ]},
+      { type: 'heading', content: 'Masterclass di violoncello e di musica da camera effettuate' },
+      { type: 'list', items: [
+        'Agosto 2015 Rainer Schmidt - International Summer Academy del Mozarteum, Salisburgo, Austria',
+        'Agosto 2013 Enrico Dindo - 51. Academy of Music, Sion, Svizzera',
+        'Luglio 2013 Rocco Filippini - Campus internazionale di musica, Castello Caetani di Sermoneta, Italia',
+        'Agosto 2011 Elizabeth Wilson - Masterclass internazionale Clara Wieck Schumann, Cerreto D\'Asti, Italia',
+        'Luglio 2011 Christine Walevska - Masterclass di violoncello, Lugano, Svizzera',
+        'Luglio 2011 Enrico Dindo - Ticino Musica, Lugano, Svizzera',
+        'Agosto 2010 Christian Bellisario - The Art of Cello, Lugano, Svizzera',
+        'Luglio 2009 Robert Cohen - Euro Music Festival 2009, Lipsia, Germania',
+        'Novembre 2008 Mattia Zappa - Musica nel Mendrisiotto, Mendrisio, Svizzera',
+        'Agosto 2008 Christian Bellisario - The Art of Cello, Lugano, Svizzera',
+        'Luglio 2008 Johannes Goritzki - Ticino Musica, Lugano, Svizzera',
+        'Luglio 2001 Johannes Goritzki - Ticino Musica, Lugano, Svizzera',
+      ]},
+      { type: 'heading', content: 'Educazione ed esperienze orchestrali' },
+      { type: 'list', items: [
+        'Dal 2025 UNATED SOLOISTS ORCHESTRA - Direttore: Arseniy Shkaptsov',
+        'Dal 2024 Orchestra Vivace della Riviera - Direttore: Daniele Giovannini',
+        'Agosto 2024 Amman Opera Festival International Orchestra - Sotto il Patrocinio della Principessa HRH Muna AL-HUSSEIN di Giordania; Raccolta Fondi per GAZA ORPHANED CHILDREN. AIDA (prima) di G. VERDI (primo violoncello) - Solista: Zeina Barhoum, Direttore: Claudio Morbo, Direttore esecutivo: Fabio Buonocore',
+        'Aprile 2024 Aggiunto OSI (Orchestra della Svizzera italiana) per Tournée in Germania + LAC 09 - Direttore: Markus Poschner, Solista: Anna Vinnitskaya, dal 03.04.2024 - 20-04.2024',
+        'Dal 2021 Orchestra Opera Viva - Direttore: Andrea Cupia',
+        'Febbraio 2017 Camerata dei Castelli e Quintetto Bislacco - Teatro Sociale di Bellinzona, Direttore: Andreas Laake',
+        'Gennaio 2017 Camerata dei Castelli - Teatro Sociale di Bellinzona, Direttore: Andreas Laake',
+        'Dal 2016 Orchestra da Camera di Lugano - Direttore: Stefano Bazzi',
+        'Luglio 2016 Orchestra da Camera di Lugano per "LongLake Festival" - Direttore: Stefano Bazzi, Solisti: Lugano Quartet (Zhen Xu, Maria Grazia Corino, Martino Laffranchini, Nicola Tallone)',
+        'Maggio 2016 Camerata dei Castelli - Teatro Sociale di Bellinzona, Direttore: Andreas Laake',
+        'Dal 2014 Aggiunto presso Orchestra della Svizzera italiana (OSI) per « Lugano Estival Jazz » - Mendrisio, Svizzera, Direttore: Gast Waltzing',
+        'Luglio 2014 Orchestra da Camera del LongLake Festival - Lugano, Svizzera, Direttore: Christian Bellisario',
+        '2005 – 2008 Orchestra sinfonica della Scuola universitaria del Conservatorio della Svizzera italiana - Lugano, Svizzera, Direttori: Lü Ja, Robert Cohen, Johannes Goritzky',
+        'Settembre 2004 « 4. Internationalen Orchester-akademie mannheimer Schule des Nationaltheaters Mannheim » - Mannheim, Germania, Adam Fischer, Enrico Dovico, Christoph Spering, Direttori ospiti',
+        'Estate 2002 Orchestra professionale del Conservatorio della Svizzera italiana per il concerto d\'apertura del Festival musicale in Val Gardena/Gröden - Italia, Norbert Brainin, Robert Cohen, Direttori, Robert Cohen, Solista',
+        '1999 – 2002 Orchestra sinfonica giovanile - Lugano, Svizzera, Anna Modesti, Direttore',
+      ]},
+      { type: 'heading', content: 'Educazione generale' },
+      { type: 'list', items: [
+        'Giugno 2004 Maturità linguistica - Istituto Santa Caterina, 6600 Locarno, Svizzera',
+      ]},
+      { type: 'heading', content: 'Lingue parlate' },
+      { type: 'list', items: [
+        'Italiano Madrelingua',
+        'Francese e Inglese Conoscenza molto buona',
+        'Tedesco Conoscenza buona',
+      ]},
     ],
   },
   'cv/organizzatore': {
     title: 'Curriculum da organizzatore',
     description:
-      'Esperienze legate all’organizzazione di rassegne musicali, festival e progetti culturali.',
+      'Esperienze legate all\'organizzazione di rassegne musicali, festival e progetti culturali.',
     coverImage: '/media/cover-cv-organizzatore.png',
     body: [
-      'Descrivi il ruolo di Nicola nei progetti organizzativi più rilevanti.',
-      'Inserisci link esterni per approfondimenti se disponibili.',
+      { type: 'heading', content: 'Esperienza in Direzione Artistica, Organizzazione Eventi, Raccolta Fondi, Hostess' },
+      { type: 'list', items: [
+        'Da Marzo 2025 Presidente Associazione Silarte',
+        'Luglio 2023 Co-Organizzatore, Direttore Artistico e Docente della The Locarno Masterclass - Masterclass Internazionale presso l\'Istituto Sant\'Eugenio di Locarno con la partecipazione attiva di 22 studenti provenienti da Shanghai (Cina)',
+        'Dal 2021 Responsabile Raccolta Fondi presso Associazione Silarte di Cevio',
+        'Estate 2018 Hostess per Locarno Film Festival 2018 - Accoglienza degli Artisti e varie mansioni organizzative',
+        'Dal 2017 Direttore Artistico presso Associazione Silarte di Cevio - Primavera Musicale - Edizioni: 2018/2019/2020/2021/2022/2023/2024',
+      ]},
     ],
   },
   'eventi/futuri': {

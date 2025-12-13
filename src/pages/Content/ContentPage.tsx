@@ -227,9 +227,26 @@ export function ContentPage({ pageKey }: ContentPageProps) {
 
         {page.body && (
           <section className={styles.body}>
-            {page.body.map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
-            ))}
+            {page.body.map((item, index) => {
+              if (typeof item === 'string') {
+                return <p key={index}>{item}</p>
+              }
+              if (typeof item === 'object' && 'type' in item) {
+                if (item.type === 'heading') {
+                  return <h3 key={index} className={styles.subsectionTitle}>{item.content}</h3>
+                }
+                if (item.type === 'list') {
+                  return (
+                    <ul key={index} className={styles.cvList}>
+                      {item.items?.map((listItem, liIndex) => (
+                        <li key={liIndex}>{listItem}</li>
+                      ))}
+                    </ul>
+                  )
+                }
+              }
+              return null
+            })}
           </section>
         )}
 
