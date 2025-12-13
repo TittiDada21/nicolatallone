@@ -13,26 +13,19 @@ const buildPath = (key: keyof typeof PAGE_CONFIG) => `/${key}`
 export const NAV_ITEMS: NavigationItem[] = [
   {
     label: 'CV',
-    children: [
       {
-        label: 'Generale',
-        path: buildPath('cv/generale'),
-        pageKey: 'cv/generale',
-      },
-      {
-        label: 'Esecutore',
-        path: buildPath('cv/esecutore'),
-        pageKey: 'cv/esecutore',
-      },
-      {
-        label: 'Organizzatore',
-        path: buildPath('cv/organizzatore'),
-        pageKey: 'cv/organizzatore',
-      },
-    ],
+    label: 'Musicista',
+    path: buildPath('cv/musicista'),
+    pageKey: 'cv/musicista',
   },
   {
-    label: 'Eventi',
+    label: 'Organizzatore',
+    path: buildPath('cv/organizzatore'),
+    pageKey: 'cv/organizzatore',
+  },
+  },
+{
+  label: 'Eventi',
     children: [
       {
         label: 'Futuri',
@@ -46,8 +39,8 @@ export const NAV_ITEMS: NavigationItem[] = [
       },
     ],
   },
-  {
-    label: 'Progetti',
+{
+  label: 'Progetti',
     children: [
       {
         label: 'Album',
@@ -91,8 +84,8 @@ export const NAV_ITEMS: NavigationItem[] = [
       },
     ],
   },
-  {
-    label: 'Insegnamento',
+{
+  label: 'Insegnamento',
     children: [
       {
         label: 'Conservatorio Svizzera Italiana',
@@ -105,21 +98,16 @@ export const NAV_ITEMS: NavigationItem[] = [
         pageKey: 'insegnamento/lezioni-private',
       },
       {
-        label: 'Iscrizioni e costi',
-        path: buildPath('insegnamento/iscrizioni-e-costi'),
-        pageKey: 'insegnamento/iscrizioni-e-costi',
-      },
-      {
         label: 'Metodo',
         path: buildPath('insegnamento/metodo'),
         pageKey: 'insegnamento/metodo',
       },
     ],
   },
-  {
-    label: 'Silarte',
+{
+  label: 'Silarte',
     path: '/silarte',
-    externalHref: 'https://associazionesilarte.ch',
+      externalHref: 'https://associazionesilarte.ch',
   },
 ]
 

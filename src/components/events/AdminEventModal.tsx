@@ -32,6 +32,7 @@ const createEmptyForm = (): EventFormValues => ({
   price: undefined,
   externalUrl: '',
   locationUrl: '',
+  iconUrl: '',
 })
 
 export function AdminEventModal({
@@ -65,6 +66,7 @@ export function AdminEventModal({
         price: initialEvent.price ?? undefined,
         externalUrl: initialEvent.externalUrl ?? '',
         locationUrl: initialEvent.locationUrl ?? '',
+        iconUrl: initialEvent.iconUrl ?? '',
       })
     } else {
       setForm(createEmptyForm())
@@ -203,6 +205,16 @@ export function AdminEventModal({
                     value={form.locationUrl ?? ''}
                     onChange={(event) => setForm((prev) => ({ ...prev, locationUrl: event.target.value }))}
                     placeholder="https://maps.google.com/..."
+                  />
+                </label>
+
+                <label className={styles.fullRow}>
+                  URL Immagine (opzionale)
+                  <input
+                    type="url"
+                    value={form.iconUrl ?? ''}
+                    onChange={(event) => setForm((prev) => ({ ...prev, iconUrl: event.target.value }))}
+                    placeholder="https://..."
                   />
                 </label>
 

@@ -145,12 +145,26 @@ export function ContentPage({ pageKey }: ContentPageProps) {
   return (
     <div className={`${styles.page} ${themeClass}`}>
       <div className={styles.inner}>
-        <header className={styles.pageHeader}>
+        <header className={`${styles.pageHeader} ${page.layout === 'conservatorio' ? styles.conservatorioLayout : ''}`}>
           <div className={styles.headerRow}>
             <div>
               <h1>{page.title}</h1>
               <p className={styles.description}>{page.description}</p>
+              {page.externalLink && (
+                <a
+                  href={page.externalLink.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.conservatorioLink}
+                >
+                  {page.externalLink.label}
+                </a>
+              )}
             </div>
+            {page.sideImage && (
+              <img src={page.sideImage} alt="" className={styles.sideImage} aria-hidden />
+            )}
+
             {isProjectPage && supabaseConfigured && (
               <>
                 {!user ? (
@@ -193,6 +207,24 @@ export function ContentPage({ pageKey }: ContentPageProps) {
           </section>
         )}
 
+        {page.packages && (
+          <section className={styles.section}>
+            <div className={styles.packagesGrid}>
+              {page.packages.map((pkg, idx) => (
+                <div key={idx} className={styles.packageCard}>
+                  <h3 className={styles.packageTitle}>{pkg.title}</h3>
+                  {pkg.price && <div className={styles.packagePrice}>{pkg.price}</div>}
+                  <ul className={styles.packageFeatures}>
+                    {pkg.features.map((feature, fIdx) => (
+                      <li key={fIdx}>{feature}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         {page.body && (
           <section className={styles.body}>
             {page.body.map((paragraph, index) => (
@@ -201,10 +233,32 @@ export function ContentPage({ pageKey }: ContentPageProps) {
           </section>
         )}
 
+        {(page.termsWarning || page.pdfPreview) && (
+          <div className={styles.termsSection}>
+            {page.termsWarning && (
+              <p className={styles.termsWarning}>{page.termsWarning}</p>
+            )}
+            {page.pdfPreview && (
+              <a
+                href={page.pdfPreview.url}
+                target="_blank"
+                rel="noreferrer"
+                className={styles.pdfPreview}
+              >
+                <img src={page.pdfPreview.thumbnail} alt="" className={styles.pdfIcon} />
+                <div className={styles.pdfInfo}>
+                  <span className={styles.pdfTitle}>{page.pdfPreview.title}</span>
+                  <span className={styles.pdfLabel}>Scarica PDF</span>
+                </div>
+              </a>
+            )}
+          </div>
+        )}
+
         {showRepertoire && (
           <section className={styles.section}>
             <div className={styles.sectionHeader}>
-                <h2 className={styles.sectionTitle}>Repertorio</h2>
+              <h2 className={styles.sectionTitle}>Repertorio</h2>
               {canEdit && (
                 <div className={styles.sectionActions}>
                   <button
@@ -237,7 +291,7 @@ export function ContentPage({ pageKey }: ContentPageProps) {
         {displayCachet && (
           <section className={styles.section}>
             <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Cachet</h2>
+              <h2 className={styles.sectionTitle}>Cachet</h2>
               {canEdit && (
                 <button
                   type="button"

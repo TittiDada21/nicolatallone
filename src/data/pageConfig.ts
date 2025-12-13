@@ -1,18 +1,35 @@
 import type { RepertoireItem } from '@/types/repertoire'
 
-export type PageContent = {
+title: string
+description: string
+body ?: string[]
+coverImage ?: string
+sideImage ?: string
+externalLink ?: {
+  label: string
+    url: string
+}
+repertoire ?: RepertoireItem[]
+cachet ?: string
+packages ?: Array<{
   title: string
-  description: string
-  body?: string[]
-  coverImage?: string
-  repertoire?: RepertoireItem[]
-  cachet?: string
+  features: string[]
+  price?: string
+}>
+termsWarning ?: string
+pdfPreview ?: {
+  thumbnail: string
+    title: string
+    url: string
+}
+layout ?: 'standard' | 'conservatorio' | 'private-lessons'
 }
 
 export const PAGE_CONFIG: Record<string, PageContent> = {
-  'cv/generale': {
-    title: 'BIO Nicola Raffaello Tallone',
-    description: '',
+  'cv/musicista': {
+    title: 'Curriculum Musicista',
+    description: 'Violoncellista, esecutore e docente.',
+    coverImage: '/media/cover-cv-musicista.png',
     body: [
       'Nicola Tallone, violoncellista svizzero, si diploma in Violoncello al Conservatorio Giuseppe Verdi di Milano con Christian Bellisario e ottiene il Master of Arts in Music Pedagogy al Conservatorio della Svizzera Italiana di Lugano con Enrico Dindo, dopo aver seguito il corso di alto perfezionamento all\'Accademia "Fondazione Walter Stauffer" di Cremona con Rocco Filippini.',
       'Con il suo Quartetto d\'archi "Intime Voci" approfondisce le sue conoscenze della musica da camera alla Musikhochschule di Basilea con Rainer Schmidt (Quartetto Hagen). Dal 2014 è aggiunto presso l\'OSI (Orchestra della Svizzera italiana). Dal 2017 è Direttore Artistico della Primavera Musicale – festival musicale organizzato dall\'Associazione Silarte che riunisce artisti di generi diversi. Appassionato di cinema e in particolare di colonne sonore, Nicola inizia nel 2020 a comporre musica elettronica e pubblica l\'Album NiT SOLO (2023) su tutte le piattafrome musicali online.',
@@ -20,19 +37,11 @@ export const PAGE_CONFIG: Record<string, PageContent> = {
       'Insegna con passione il violoncello alla Scuola di Musica del Conservatorio della Svizzera italiana (sezioni di Locarno e di Bellinzona) e presso la Scuola di Musica di Biasca e Alto Ticino.',
     ],
   },
-  'cv/esecutore': {
-    title: 'Curriculum da esecutore',
-    description:
-      'Repertorio, sale da concerto e festival in cui Nicola si è esibito come violoncellista.',
-    body: [
-      'Elenca gli highlight delle performance più importanti.',
-      'Ricorda di citare eventuali registrazioni o streaming disponibili.',
-    ],
-  },
   'cv/organizzatore': {
     title: 'Curriculum da organizzatore',
     description:
       'Esperienze legate all’organizzazione di rassegne musicali, festival e progetti culturali.',
+    coverImage: '/media/cover-cv-organizzatore.png',
     body: [
       'Descrivi il ruolo di Nicola nei progetti organizzativi più rilevanti.',
       'Inserisci link esterni per approfondimenti se disponibili.',
@@ -230,17 +239,48 @@ export const PAGE_CONFIG: Record<string, PageContent> = {
   'insegnamento/conservatorio-svizzera-italiana': {
     title: 'Conservatorio della Svizzera Italiana',
     description:
-      'Dettagli sulla collaborazione didattica con il Conservatorio.',
+      'Collaborazione didattica con il Conservatorio della Svizzera Italiana per la formazione di giovani talenti.',
+    body: [
+      'Il Conservatorio della Svizzera italiana è un’istituzione universitaria di alta formazione musicale che offre percorsi di studio Bachelor e Master, corsi di formazione continua e una scuola di musica per amatori di ogni età.',
+      'Come docente di violoncello, condivido la mia esperienza e passione con gli studenti, guidandoli nello sviluppo della tecnica e dell\'interpretazione musicale, con una particolare attenzione alla crescita artistica personale.',
+    ],
+    layout: 'conservatorio',
+    sideImage: '/media/la-citta-della-musica.jpg', // Placeholder, user will provide
+    externalLink: {
+      label: 'Visita il sito del Conservatorio',
+      url: 'https://www.conservatorio.ch',
+    },
   },
   'insegnamento/lezioni-private': {
     title: 'Lezioni private',
     description:
-      'Informazioni pratiche sulle lezioni private (durata, disponibilità, requisiti).',
-  },
-  'insegnamento/iscrizioni-e-costi': {
-    title: 'Iscrizioni e costi',
-    description:
-      'Tariffe, modalità di iscrizione e policy di disdetta.',
+      'Percorsi personalizzati per imparare il violoncello o perfezionare la tecnica, adatti a ogni livello.',
+    coverImage: '/media/mobile-hero-cover.jpg', // Placeholder for now
+    layout: 'private-lessons',
+    packages: [
+      {
+        title: 'Pacchetto Base',
+        features: ['5 lezioni', 'Validità 2 mesi', 'Orari flessibili'],
+        price: '300 CHF',
+      },
+      {
+        title: 'Pacchetto Intermedio',
+        features: ['10 lezioni', 'Validità 4 mesi', '1 lezione di musica d\'insieme'],
+        price: '550 CHF',
+      },
+      {
+        title: 'Pacchetto Avanzato',
+        features: ['20 lezioni', 'Validità 9 mesi', 'Masterclass annuale riservata', 'Sconto su acquisto strumenti parter'],
+        price: '1000 CHF',
+      },
+    ],
+    termsWarning:
+      'Attenzione: per garantire la continuità didattica, le lezioni annullate con meno di 24 ore di preavviso verranno addebitate interamente.',
+    pdfPreview: {
+      title: 'Termini e Condizioni',
+      url: '/testi/termini-e-condizioni.pdf',
+      thumbnail: '/media/official-logo-icon.png', // Fallback thumbnail
+    },
   },
   'insegnamento/metodo': {
     title: 'Metodo',
