@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { FaSpotify, FaYoutube, FaAmazon } from 'react-icons/fa'
 
 import styles from './AlbumPage.module.css'
@@ -31,10 +32,34 @@ const LINKS: LinkItem[] = [
 ]
 
 export function AlbumPage() {
+  const [isFlipped, setIsFlipped] = useState(false)
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <h1 className={styles.title}>Album</h1>
+        <div className={styles.albumCardWrapper}>
+          <div
+            className={`${styles.albumCard} ${isFlipped ? styles.flipped : ''}`}
+            onClick={() => setIsFlipped(!isFlipped)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                setIsFlipped(!isFlipped)
+              }
+            }}
+            aria-label={isFlipped ? 'Mostra fronte album' : 'Mostra retro album'}
+          >
+            <div className={styles.albumCardFront}>
+              <img src="/media/album-nit-solo.jpg" alt="NiT SOLO - Fronte" />
+            </div>
+            <div className={styles.albumCardBack}>
+              <img src="/media/album-nit-solo-retro.jpg" alt="NiT SOLO - Retro" />
+            </div>
+          </div>
+        </div>
         <p className={styles.description}>Discografia di Nicola, con link allo streaming o all'acquisto.</p>
         <div className={styles.linktree}>
           {LINKS.map((link) => (
