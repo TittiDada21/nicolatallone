@@ -258,7 +258,7 @@ export const PAGE_CONFIG: Record<string, PageContent> = {
     title: 'Lezioni private',
     description:
       'Percorsi personalizzati per imparare il violoncello o perfezionare la tecnica, adatti a ogni livello.',
-    coverImage: '/media/mobile-hero-cover.jpg', // Placeholder for now
+    coverImage: '/media/cover-lezioni-private.png',
     layout: 'private-lessons',
     packages: [
       {

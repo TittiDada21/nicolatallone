@@ -235,6 +235,7 @@ export function ContentPage({ pageKey }: ContentPageProps) {
 
         {(page.termsWarning || page.pdfPreview) && (
           <div className={styles.termsSection}>
+            <h2 className={styles.sectionTitle}>Iscrizioni e Costi</h2>
             {page.termsWarning && (
               <p className={styles.termsWarning}>{page.termsWarning}</p>
             )}
