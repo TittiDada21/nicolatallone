@@ -228,7 +228,7 @@ export function GalleryPage() {
               />
             )}
           </div>
-          <p className={styles.subtitle}>L'angolo visuale si allargherà, l'attimo si dilaterà: la sua galleria fotografica divenne una galleria artistica.</p>
+          <h2 className={styles.subtitle}>L'angolo visuale si allargherà, l'attimo si dilaterà: la sua galleria fotografica divenne una galleria artistica.</h2>
           {!hasSupabase && <p className={styles.hint}>Collega Supabase per sostituire questo contenuto di esempio.</p>}
         </div>
         {loading ? (
