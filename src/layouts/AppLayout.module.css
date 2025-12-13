@@ -37,7 +37,7 @@
   .app[data-home] .main {
     position: relative;
     padding-top: 8.5rem;
-    align-items: flex-start;
+    align-items: center;
   }
 
   .app[data-home] .main::before {
