@@ -1,28 +1,29 @@
 import type { RepertoireItem } from '@/types/repertoire'
 
-title: string
-description: string
-body ?: string[]
-coverImage ?: string
-sideImage ?: string
-externalLink ?: {
-  label: string
-    url: string
-}
-repertoire ?: RepertoireItem[]
-cachet ?: string
-packages ?: Array<{
+export type PageContent = {
   title: string
-  features: string[]
-  price?: string
-}>
-termsWarning ?: string
-pdfPreview ?: {
-  thumbnail: string
+  description: string
+  body?: string[]
+  coverImage?: string
+  sideImage?: string
+  externalLink?: {
+    label: string
+    url: string
+  }
+  repertoire?: RepertoireItem[]
+  cachet?: string
+  packages?: Array<{
+    title: string
+    features: string[]
+    price?: string
+  }>
+  termsWarning?: string
+  pdfPreview?: {
+    thumbnail: string
     title: string
     url: string
-}
-layout ?: 'standard' | 'conservatorio' | 'private-lessons'
+  }
+  layout?: 'standard' | 'conservatorio' | 'private-lessons'
 }
 
 export const PAGE_CONFIG: Record<string, PageContent> = {

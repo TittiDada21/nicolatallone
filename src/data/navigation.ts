@@ -13,19 +13,21 @@ const buildPath = (key: keyof typeof PAGE_CONFIG) => `/${key}`
 export const NAV_ITEMS: NavigationItem[] = [
   {
     label: 'CV',
+    children: [
       {
-    label: 'Musicista',
-    path: buildPath('cv/musicista'),
-    pageKey: 'cv/musicista',
+        label: 'Musicista',
+        path: buildPath('cv/musicista'),
+        pageKey: 'cv/musicista',
+      },
+      {
+        label: 'Organizzatore',
+        path: buildPath('cv/organizzatore'),
+        pageKey: 'cv/organizzatore',
+      },
+    ],
   },
   {
-    label: 'Organizzatore',
-    path: buildPath('cv/organizzatore'),
-    pageKey: 'cv/organizzatore',
-  },
-  },
-{
-  label: 'Eventi',
+    label: 'Eventi',
     children: [
       {
         label: 'Futuri',
@@ -39,8 +41,8 @@ export const NAV_ITEMS: NavigationItem[] = [
       },
     ],
   },
-{
-  label: 'Progetti',
+  {
+    label: 'Progetti',
     children: [
       {
         label: 'Album',
@@ -84,8 +86,8 @@ export const NAV_ITEMS: NavigationItem[] = [
       },
     ],
   },
-{
-  label: 'Insegnamento',
+  {
+    label: 'Insegnamento',
     children: [
       {
         label: 'Conservatorio Svizzera Italiana',
@@ -104,10 +106,10 @@ export const NAV_ITEMS: NavigationItem[] = [
       },
     ],
   },
-{
-  label: 'Silarte',
+  {
+    label: 'Silarte',
     path: '/silarte',
-      externalHref: 'https://associazionesilarte.ch',
+    externalHref: 'https://associazionesilarte.ch',
   },
 ]
 
