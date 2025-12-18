@@ -85,7 +85,7 @@ export function HeroEventCard() {
     return (
       <section className={styles.minimizedBar}>
         <div className={styles.minimizedContent}>
-          <div>
+          <div className={styles.minimizedInfo}>
             {formatted ? (
               <>
                 <span className={styles.minimizedTime}>{formatted.formattedDateCompact}</span>
@@ -111,79 +111,79 @@ export function HeroEventCard() {
   }
 
   return (
-    <section className={styles.card}>
-      <header className={styles.cardHeader}>
-        <div>
-          <span className={styles.cardLabel}>Prossimo evento</span>
-          {formatted ? (
-            <h1 className={styles.cardTitle}>{formatted.title}</h1>
-          ) : (
-            <h1 className={styles.cardTitle}>Nessun evento in programma</h1>
+    <section
+      className={`${styles.card} ${formatted?.imageUrl ? styles.hasImage : ''}`}
+      style={formatted?.imageUrl ? { '--event-bg': `url(${formatted.imageUrl})` } as React.CSSProperties : {}}
+    >
+      <div className={styles.cardContent}>
+        <header className={styles.cardHeader}>
+          <div>
+            <span className={styles.cardLabel}>Prossimo evento</span>
+            {formatted ? (
+              <h2 className={styles.cardTitle}>{formatted.title}</h2>
+            ) : (
+              <h2 className={styles.cardTitle}>Nessun evento in programma</h2>
+            )}
+          </div>
+          <button
+            className={styles.minimizeButton}
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              setIsMinimized(true)
+            }}
+            aria-label="Minimizza card evento"
+            type="button"
+          >
+            <FiMinimize2 />
+          </button>
+        </header>
+
+        <div className={styles.cardBody}>
+          {loading && <p className={styles.placeholder}>Carico gli eventi…</p>}
+          {!loading && error && <p className={styles.placeholder}>Errore: {error}</p>}
+          {!loading && !formatted && !error && (
+            <p className={styles.placeholder}>Aggiungi un evento per mostrare qui i dettagli.</p>
+          )}
+          {formatted && !loading && (
+            <>
+              <p className={styles.datetime}>{formatted.formattedDate}</p>
+
+              {formatted.address && (
+                <p className={styles.metaRow}>
+                  <FiMapPin aria-hidden />
+                  {formatted.locationUrl ? (
+                    <a href={formatted.locationUrl} target="_blank" rel="noreferrer">
+                      {formatted.address}
+                    </a>
+                  ) : (
+                    formatted.address
+                  )}
+                </p>
+              )}
+
+              {formatted.externalUrl && (
+                <a
+                  href={formatted.externalUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.externalLink}
+                >
+                  Dettagli evento
+                  <FiExternalLink aria-hidden />
+                </a>
+              )}
+            </>
           )}
         </div>
-        <button
-          className={styles.minimizeButton}
-          onClick={(e) => {
-            e.preventDefault()
-            e.stopPropagation()
-            setIsMinimized(true)
-          }}
-          aria-label="Minimizza card evento"
-          type="button"
-        >
-          <FiMinimize2 />
-        </button>
-      </header>
 
-      <div className={styles.cardBody}>
-        {loading && <p className={styles.placeholder}>Carico gli eventi…</p>}
-        {!loading && error && <p className={styles.placeholder}>Errore: {error}</p>}
-        {!loading && !formatted && !error && (
-          <p className={styles.placeholder}>Aggiungi un evento per mostrare qui i dettagli.</p>
-        )}
-        {formatted && !loading && (
-          <>
-            {formatted.imageUrl && (
-              <div className={styles.eventImageWrapper}>
-                <img src={formatted.imageUrl} alt={formatted.title} className={styles.eventImage} />
-              </div>
-            )}
-            <p className={styles.datetime}>{formatted.formattedDate}</p>
-
-            {formatted.address && (
-              <p className={styles.metaRow}>
-                <FiMapPin aria-hidden />
-                {formatted.locationUrl ? (
-                  <a href={formatted.locationUrl} target="_blank" rel="noreferrer">
-                    {formatted.address}
-                  </a>
-                ) : (
-                  formatted.address
-                )}
-              </p>
-            )}
-
-            {formatted.externalUrl && (
-              <a
-                href={formatted.externalUrl}
-                target="_blank"
-                rel="noreferrer"
-                className={styles.externalLink}
-              >
-                Dettagli evento
-                <FiExternalLink aria-hidden />
-              </a>
-            )}
-          </>
-        )}
-      </div>
-
-      <div className={styles.cardFooter}>
-        {!isConfigured && (
-          <p className={styles.configHint}>
-            Collega Supabase per attivare la gestione eventi in tempo reale.
-          </p>
-        )}
+        <div className={styles.cardFooter}>
+          {!isConfigured && (
+            <p className={styles.configHint}>
+              Collega Supabase per attivare la gestione eventi in tempo reale.
+            </p>
+          )}
+        </div>
       </div>
     </section>
   )
