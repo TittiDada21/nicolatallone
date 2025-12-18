@@ -2,11 +2,13 @@
 
 Sito single-page per Nicola Raffaello Tallone. React + Vite + React Router, grafica full-screen con glassmorphism. Supabase gestisce eventi, galleria e login admin collegati tramite MCP in Cursor.
 
+**⚠️ Questo progetto richiede Bun come package manager.** Non utilizzare npm, yarn o pnpm.
+
 ## Avvio rapido
 
 ```bash
-npm install
-npm run dev
+bun install
+bun run dev
 ```
 
 1. Duplica `.env.example` in `.env.local` e inserisci `VITE_SUPABASE_URL` + `VITE_SUPABASE_ANON_KEY`.
@@ -110,11 +112,11 @@ git push
 
 ## Script utili
 
-| Comando        | Descrizione                    |
-| -------------- | ------------------------------ |
-| `npm run dev`  | Dev server Vite                |
-| `npm run build`| Build produzione               |
-| `npm run lint` | Lint ESLint + TypeScript       |
+| Comando          | Descrizione                    |
+| ---------------- | ------------------------------ |
+| `bun run dev`    | Dev server Vite                |
+| `bun run build`  | Build produzione               |
+| `bun run lint`   | Lint ESLint + TypeScript       |
 
 ## Prossimi step
 
