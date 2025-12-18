@@ -8,7 +8,7 @@ export type EventRecord = {
   price?: number | null
   externalUrl?: string | null
   locationUrl?: string | null
-  iconUrl?: string | null
+  imageUrl?: string | null
   createdAt?: string
   updatedAt?: string
 }
@@ -22,6 +22,6 @@ export type EventFormValues = {
   price?: number
   externalUrl?: string
   locationUrl?: string
-  iconUrl?: string
+  imageUrl?: string
 }
 

@@ -99,7 +99,7 @@ const FALLBACK_GALLERY: GalleryItem[] = [
 ]
 
 export function GalleryPage() {
-  const { user, signOut } = useAuth()
+  const { user } = useAuth()
   const [items, setItems] = useState<GalleryItem[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)

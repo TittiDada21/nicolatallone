@@ -29,7 +29,7 @@ const FALLBACK_EVENTS: EventRecord[] = [
     address: 'Milano, Teatro Demo',
     isFree: true,
     externalUrl: null,
-    iconUrl: 'https://cdn-icons-png.flaticon.com/512/3075/3075848.png', // Demo icon
+    imageUrl: 'https://cdn-icons-png.flaticon.com/512/3075/3075848.png', // Demo icon
   },
 ]
 
@@ -47,6 +47,8 @@ type EventRow = {
   externalUrl?: string | null
   location_url?: string | null
   locationUrl?: string | null
+  image_url?: string | null
+  imageUrl?: string | null
   created_at?: string | null
   updated_at?: string | null
 }
@@ -61,7 +63,7 @@ const mapEvent = (raw: EventRow): EventRecord => ({
   price: raw.price,
   externalUrl: raw.external_url ?? raw.externalUrl,
   locationUrl: raw.location_url ?? raw.locationUrl,
-  iconUrl: raw.icon_url ?? raw.iconUrl,
+  imageUrl: raw.image_url ?? raw.imageUrl,
   createdAt: raw.created_at ?? undefined,
   updatedAt: raw.updated_at ?? undefined,
 })
@@ -134,6 +136,7 @@ export function EventProvider({ children }: PropsWithChildren) {
       price: values.isFree ? null : values.price ?? null,
       external_url: values.externalUrl ?? null,
       location_url: values.locationUrl ?? null,
+      image_url: values.imageUrl ?? null,
     }
 
     const { error: insertError } = await supabase.from('events').insert(payload)
@@ -158,7 +161,7 @@ export function EventProvider({ children }: PropsWithChildren) {
         price: values.isFree ? null : values.price ?? null,
         external_url: values.externalUrl ?? null,
         location_url: values.locationUrl ?? null,
-        icon_url: values.iconUrl ?? null,
+        image_url: values.imageUrl ?? null,
       }
 
       const { error: updateError } = await supabase

@@ -33,7 +33,7 @@ const createEmptyForm = (): EventFormValues => ({
   price: undefined,
   externalUrl: '',
   locationUrl: '',
-  iconUrl: '',
+  imageUrl: '',
 })
 
 export function AdminEventModal({
@@ -67,7 +67,7 @@ export function AdminEventModal({
         price: initialEvent.price ?? undefined,
         externalUrl: initialEvent.externalUrl ?? '',
         locationUrl: initialEvent.locationUrl ?? '',
-        iconUrl: initialEvent.iconUrl ?? '',
+        imageUrl: initialEvent.imageUrl ?? '',
       })
     } else {
       setForm(createEmptyForm())
@@ -239,7 +239,7 @@ export function AdminEventModal({
                             .from('events-images')
                             .getPublicUrl(filePath)
 
-                          setForm((prev) => ({ ...prev, iconUrl: publicUrl }))
+                          setForm((prev) => ({ ...prev, imageUrl: publicUrl }))
                         } catch (err) {
                           setError(err instanceof Error ? err.message : 'Errore upload immagine')
                         } finally {
@@ -249,12 +249,12 @@ export function AdminEventModal({
                       disabled={saving}
                       className={styles.fileInput}
                     />
-                    {form.iconUrl && (
+                    {form.imageUrl && (
                       <div className={styles.imagePreview}>
-                        <img src={form.iconUrl} alt="Anteprima" />
+                        <img src={form.imageUrl} alt="Anteprima" />
                         <button
                           type="button"
-                          onClick={() => setForm(prev => ({ ...prev, iconUrl: '' }))}
+                          onClick={() => setForm(prev => ({ ...prev, imageUrl: '' }))}
                           className={styles.removeImageBtn}
                           title="Rimuovi immagine"
                         >

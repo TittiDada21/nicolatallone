@@ -89,8 +89,8 @@ export function HeroEventCard() {
             {formatted ? (
               <>
                 <span className={styles.minimizedTime}>{formatted.formattedDateCompact}</span>
-                {formatted.iconUrl && (
-                  <img src={formatted.iconUrl} alt="" className={styles.minimizedIcon} />
+                {formatted.imageUrl && (
+                  <img src={formatted.imageUrl} alt="" className={styles.minimizedIcon} />
                 )}
                 <span className={styles.minimizedTitle}>{formatted.title}</span>
               </>
@@ -143,9 +143,9 @@ export function HeroEventCard() {
         )}
         {formatted && !loading && (
           <>
-            {formatted.iconUrl && (
+            {formatted.imageUrl && (
               <div className={styles.eventImageWrapper}>
-                <img src={formatted.iconUrl} alt={formatted.title} className={styles.eventImage} />
+                <img src={formatted.imageUrl} alt={formatted.title} className={styles.eventImage} />
               </div>
             )}
             <p className={styles.datetime}>{formatted.formattedDate}</p>

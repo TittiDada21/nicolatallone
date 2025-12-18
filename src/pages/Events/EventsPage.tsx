@@ -25,7 +25,7 @@ const formatDateTime = (isoString: string) => {
 
 export function EventsPage() {
   const { type } = useParams<{ type: 'futuri' | 'passati' }>()
-  const { user, signOut } = useAuth()
+  const { user } = useAuth()
   const { futureEvents, pastEvents, loading, error, isConfigured, createEvent, updateEvent, deleteEvent } = useEvents()
   const [modalOpen, setModalOpen] = useState(false)
   const [editing, setEditing] = useState<EventRecord | null>(null)
