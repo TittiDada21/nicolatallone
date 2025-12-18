@@ -36,6 +36,7 @@
   letter-spacing: 0.02em;
   color: #f5f7fa;
   text-transform: uppercase;
+  font-family: var(--font-display);
 }
 
 .header p {
@@ -55,6 +56,7 @@
   margin-top: 0.5rem;
   margin-bottom: 11px;
   text-align: left;
+  font-family: var(--font-display);
 }
 
 .hint {
@@ -119,9 +121,12 @@
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.4;
   }
+
   50% {
     opacity: 0.6;
   }
@@ -387,4 +392,3 @@
   border-color: rgba(255, 100, 100, 0.5);
   transform: scale(1.05);
 }
-

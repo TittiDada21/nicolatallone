@@ -118,15 +118,8 @@ export function GalleryPage() {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  useEffect(() => {
-    const adminMode = sessionStorage.getItem('gallery_admin_mode')
-    if (adminMode === 'true') {
-      sessionStorage.removeItem('gallery_admin_mode')
-      void signOut()
-    } else if (user) {
-      void signOut()
-    }
-  }, [])
+  // Admin state is handled by the modal and user state from provider
+
 
   const loadGallery = async () => {
     if (!supabase) {

@@ -5,9 +5,9 @@
 }
 
 :root {
-  --font-primary: 'Helvetica Neue', Arial, sans-serif;
-  --font-display: 'Helvetica Neue', Arial, sans-serif;
-  --font-accent: 'Helvetica Neue', Arial, sans-serif;
+  --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Outfit', sans-serif;
+  --font-accent: 'Outfit', sans-serif;
   --color-neo-green: #00ad01;
   --color-deep-fern: #023601;
   --color-slate-haze: #5f605f;

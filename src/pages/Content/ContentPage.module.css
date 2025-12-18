@@ -114,6 +114,7 @@
   font-weight: 600;
   letter-spacing: -0.01em;
   margin-bottom: 0.5rem;
+  font-family: var(--font-display);
 }
 
 .pageHeader p {
@@ -209,6 +210,7 @@
   letter-spacing: -0.01em;
   color: inherit;
   margin-bottom: 0.5rem;
+  font-family: var(--font-display);
 }
 
 .sectionHeader {
@@ -538,6 +540,7 @@
     flex-direction: column;
   }
 }
+
 /* Add these to ContentPage.module.css */
 
 /* Conservatorio Layout adjustments */
@@ -581,6 +584,7 @@
   .sideImage {
     display: block;
   }
+
   .conservatorioLayout .headerRow {
     padding-right: 340px;
   }
@@ -596,7 +600,8 @@
 
 .packageCard {
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.08); /* Dark mode aware? Check theme */
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  /* Dark mode aware? Check theme */
   border-radius: 16px;
   padding: 2rem;
   display: flex;
@@ -723,7 +728,8 @@
 /* Add to global or specific override */
 .table th:nth-child(2),
 .table td:nth-child(2) {
-  min-width: 250px; /* Give more space to Title */
+  min-width: 250px;
+  /* Give more space to Title */
   width: 45%;
 }
 
@@ -743,7 +749,8 @@
 @media (min-width: 1024px) {
   .conservatorioLayout .headerRow {
     grid-template-columns: 1.2fr 0.8fr;
-    padding-right: 0; /* Reset previous padding */
+    padding-right: 0;
+    /* Reset previous padding */
     gap: 4rem;
   }
 }
@@ -782,27 +789,29 @@
 }
 
 .sideImage {
-  position: relative; /* Changed from absolute to flow naturally in grid */
+  position: relative;
+  /* Changed from absolute to flow naturally in grid */
   width: 100%;
   height: auto;
   max-height: 500px;
   object-fit: cover;
   border-radius: 16px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-  transform: none; /* Reset rotation for cleaner look */
+  transform: none;
+  /* Reset rotation for cleaner look */
   border: none;
   display: block;
 }
 
 /* Add specialized body styling for this layout */
-.conservatorioLayout ~ .body {
+.conservatorioLayout~.body {
   margin-top: 4rem;
   font-size: 1.15rem;
   max-width: 65ch;
   line-height: 1.9;
 }
 
-.conservatorioLayout ~ .body p {
+.conservatorioLayout~.body p {
   margin-bottom: 2rem;
 }
 
@@ -821,13 +830,13 @@
 
 /* Ensure text readability and spacing */
 .conservatorioLayout .pageHeader p {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 /* Enhancements for side image container */
-.conservatorioLayout .headerRow > div:nth-child(2) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+.conservatorioLayout .headerRow>div:nth-child(2) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }

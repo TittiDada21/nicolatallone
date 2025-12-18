@@ -1,6 +1,6 @@
 import type { RepertoireItem } from '@/types/repertoire'
 
-export type BodyItem = 
+export type BodyItem =
   | string
   | { type: 'heading'; content: string }
   | { type: 'list'; items: string[] }
@@ -39,85 +39,101 @@ export const PAGE_CONFIG: Record<string, PageContent> = {
     body: [
       'Nicola Tallone, violoncellista svizzero, si diploma in Violoncello al Conservatorio Giuseppe Verdi di Milano con Christian Bellisario e ottiene il Master of Arts in Music Pedagogy al Conservatorio della Svizzera Italiana di Lugano con Enrico Dindo, dopo aver seguito il corso di alto perfezionamento all\'Accademia "Fondazione Walter Stauffer" di Cremona con Rocco Filippini.',
       { type: 'heading', content: 'Generale' },
-      { type: 'list', items: [
-        'Data di nascita 29 novembre 1984',
-        'Luogo di nascita Zurigo, Svizzera',
-        'Nazionalità Svizzera',
-        'Indirizzo Via Cantonale 56, 6719 Aquila, Svizzera',
-        'Natel 0041 79 401 60 15',
-        'E-mail nitcellist@gmail.com',
-        'Strumento Violoncello',
-      ]},
+      {
+        type: 'list', items: [
+          'Data di nascita 29 novembre 1984',
+          'Luogo di nascita Zurigo, Svizzera',
+          'Nazionalità Svizzera',
+          'Indirizzo Via Cantonale 56, 6719 Aquila, Svizzera',
+          'Natel 0041 79 401 60 15',
+          'E-mail nitcellist@gmail.com',
+          'Strumento Violoncello',
+        ]
+      },
       { type: 'heading', content: 'Esperienza professionale' },
-      { type: 'list', items: [
-        'Dal 2023 Docente presso la Scuola di Musica del Conservatorio della Svizzera italiana',
-        'Dal 2023 Docente di teoria e solfeggio e di musica d\'insieme presso la Scuola di Musica Biaschese - Tre Valli',
-        'Dal 2020 Compositore di musica elettronica - Album NiT Solo (pubblicato su tutte le piattaforme online)',
-        'Dal 2017 - 2023 Docente presso l\'Accademia Vivaldi di Muralto',
-        '2016 - 2017 Supplente presso l\'Accademia Vivaldi di Muralto',
-        '2015 - 2016 Docente presso la SMaRT Academy di Balerna',
-        'Dal 2015 Docente presso la Scuola di Musica Biaschese - Tre Valli',
-        '2013 - 2021 Docente presso l\'Atelier della Musica di Taverne',
-        '2012 - 2016 Docente presso la Scuola di Musica di Capriasca dell\'Associazione Chopin',
-        'Dal 2008 Attività professionale concertistica nelle seguenti formazioni: solista, duo, quartetto, orchestra e altre',
-      ]},
+      {
+        type: 'list', items: [
+          'Dal 2023 Docente presso la Scuola di Musica del Conservatorio della Svizzera italiana',
+          'Dal 2023 Docente di teoria e solfeggio e di musica d\'insieme presso la Scuola di Musica Biaschese - Tre Valli',
+          'Dal 2020 Compositore di musica elettronica - Album NiT Solo (pubblicato su tutte le piattaforme online)',
+          'Dal 2017 - 2023 Docente presso l\'Accademia Vivaldi di Muralto',
+          '2016 - 2017 Supplente presso l\'Accademia Vivaldi di Muralto',
+          '2015 - 2016 Docente presso la SMaRT Academy di Balerna',
+          'Dal 2015 Docente presso la Scuola di Musica Biaschese - Tre Valli',
+          '2013 - 2021 Docente presso l\'Atelier della Musica di Taverne',
+          '2012 - 2016 Docente presso la Scuola di Musica di Capriasca dell\'Associazione Chopin',
+          'Dal 2008 Attività professionale concertistica nelle seguenti formazioni: solista, duo, quartetto, orchestra e altre',
+        ]
+      },
       { type: 'heading', content: 'Formazione' },
-      { type: 'list', items: [
-        '2015 - 2017 Accademia di Musica di Basilea - Post-formazione per quartetti d\'archi - Rainer Schmidt, Maestro',
-        '2012 - 2014 Conservatorio della Svizzera italiana - Scuola universitaria professionale di Musica, Via Soldino 9, 6900 Lugano, Svizzera - Master of Arts in Music Pedagogy, violoncello - Enrico Dindo, Maestro / Cristina Bellu, Didattica',
-        '2008 – 2011 Conservatorio Giuseppe Verdi di Milano - Scuola universitaria di Musica, Via Conservatorio 12, 20122 Milano, Italia - Diploma di Primo livello (Bachelor), violoncello - Christian Bellisario, Maestro',
-      ]},
+      {
+        type: 'list', items: [
+          '2015 - 2017 Accademia di Musica di Basilea - Post-formazione per quartetti d\'archi - Rainer Schmidt, Maestro',
+          '2012 - 2014 Conservatorio della Svizzera italiana - Scuola universitaria professionale di Musica, Via Soldino 9, 6900 Lugano, Svizzera - Master of Arts in Music Pedagogy, violoncello - Enrico Dindo, Maestro / Cristina Bellu, Didattica',
+          '2008 – 2011 Conservatorio Giuseppe Verdi di Milano - Scuola universitaria di Musica, Via Conservatorio 12, 20122 Milano, Italia - Diploma di Primo livello (Bachelor), violoncello - Christian Bellisario, Maestro',
+        ]
+      },
       { type: 'heading', content: 'Educazione musicale' },
-      { type: 'list', items: [
-        '2011 – 2013 Accademia Walter Stauffer - Cremona, Italia - Corso di Alto Perfezionamento, violoncello - Rocco Filippini, Maestro',
-        '2000 – 2008 Conservatorio della Svizzera italiana - Via Soldino 9, 6900 Lugano, Svizzera - Pre-professionale e Professionale studio del violoncello - Taisuke Yamashita, Maestro',
-        '1996 – 2000 Lezioni private di violoncello - Taisuke Yamashita, Maestro',
-        '1989 – 1996 Accademia Vivaldi - Locarno, Svizzera - Scuola di Musica, violoncello - Daniele Bogni, Maestro',
-      ]},
+      {
+        type: 'list', items: [
+          '2011 – 2013 Accademia Walter Stauffer - Cremona, Italia - Corso di Alto Perfezionamento, violoncello - Rocco Filippini, Maestro',
+          '2000 – 2008 Conservatorio della Svizzera italiana - Via Soldino 9, 6900 Lugano, Svizzera - Pre-professionale e Professionale studio del violoncello - Taisuke Yamashita, Maestro',
+          '1996 – 2000 Lezioni private di violoncello - Taisuke Yamashita, Maestro',
+          '1989 – 1996 Accademia Vivaldi - Locarno, Svizzera - Scuola di Musica, violoncello - Daniele Bogni, Maestro',
+        ]
+      },
       { type: 'heading', content: 'Masterclass di violoncello e di musica da camera effettuate' },
-      { type: 'list', items: [
-        'Agosto 2015 Rainer Schmidt - International Summer Academy del Mozarteum, Salisburgo, Austria',
-        'Agosto 2013 Enrico Dindo - 51. Academy of Music, Sion, Svizzera',
-        'Luglio 2013 Rocco Filippini - Campus internazionale di musica, Castello Caetani di Sermoneta, Italia',
-        'Agosto 2011 Elizabeth Wilson - Masterclass internazionale Clara Wieck Schumann, Cerreto D\'Asti, Italia',
-        'Luglio 2011 Christine Walevska - Masterclass di violoncello, Lugano, Svizzera',
-        'Luglio 2011 Enrico Dindo - Ticino Musica, Lugano, Svizzera',
-        'Agosto 2010 Christian Bellisario - The Art of Cello, Lugano, Svizzera',
-        'Luglio 2009 Robert Cohen - Euro Music Festival 2009, Lipsia, Germania',
-        'Novembre 2008 Mattia Zappa - Musica nel Mendrisiotto, Mendrisio, Svizzera',
-        'Agosto 2008 Christian Bellisario - The Art of Cello, Lugano, Svizzera',
-        'Luglio 2008 Johannes Goritzki - Ticino Musica, Lugano, Svizzera',
-        'Luglio 2001 Johannes Goritzki - Ticino Musica, Lugano, Svizzera',
-      ]},
+      {
+        type: 'list', items: [
+          'Agosto 2015 Rainer Schmidt - International Summer Academy del Mozarteum, Salisburgo, Austria',
+          'Agosto 2013 Enrico Dindo - 51. Academy of Music, Sion, Svizzera',
+          'Luglio 2013 Rocco Filippini - Campus internazionale di musica, Castello Caetani di Sermoneta, Italia',
+          'Agosto 2011 Elizabeth Wilson - Masterclass internazionale Clara Wieck Schumann, Cerreto D\'Asti, Italia',
+          'Luglio 2011 Christine Walevska - Masterclass di violoncello, Lugano, Svizzera',
+          'Luglio 2011 Enrico Dindo - Ticino Musica, Lugano, Svizzera',
+          'Agosto 2010 Christian Bellisario - The Art of Cello, Lugano, Svizzera',
+          'Luglio 2009 Robert Cohen - Euro Music Festival 2009, Lipsia, Germania',
+          'Novembre 2008 Mattia Zappa - Musica nel Mendrisiotto, Mendrisio, Svizzera',
+          'Agosto 2008 Christian Bellisario - The Art of Cello, Lugano, Svizzera',
+          'Luglio 2008 Johannes Goritzki - Ticino Musica, Lugano, Svizzera',
+          'Luglio 2001 Johannes Goritzki - Ticino Musica, Lugano, Svizzera',
+        ]
+      },
       { type: 'heading', content: 'Educazione ed esperienze orchestrali' },
-      { type: 'list', items: [
-        'Dal 2025 UNATED SOLOISTS ORCHESTRA - Direttore: Arseniy Shkaptsov',
-        'Dal 2024 Orchestra Vivace della Riviera - Direttore: Daniele Giovannini',
-        'Agosto 2024 Amman Opera Festival International Orchestra - Sotto il Patrocinio della Principessa HRH Muna AL-HUSSEIN di Giordania; Raccolta Fondi per GAZA ORPHANED CHILDREN. AIDA (prima) di G. VERDI (primo violoncello) - Solista: Zeina Barhoum, Direttore: Claudio Morbo, Direttore esecutivo: Fabio Buonocore',
-        'Aprile 2024 Aggiunto OSI (Orchestra della Svizzera italiana) per Tournée in Germania + LAC 09 - Direttore: Markus Poschner, Solista: Anna Vinnitskaya, dal 03.04.2024 - 20-04.2024',
-        'Dal 2021 Orchestra Opera Viva - Direttore: Andrea Cupia',
-        'Febbraio 2017 Camerata dei Castelli e Quintetto Bislacco - Teatro Sociale di Bellinzona, Direttore: Andreas Laake',
-        'Gennaio 2017 Camerata dei Castelli - Teatro Sociale di Bellinzona, Direttore: Andreas Laake',
-        'Dal 2016 Orchestra da Camera di Lugano - Direttore: Stefano Bazzi',
-        'Luglio 2016 Orchestra da Camera di Lugano per "LongLake Festival" - Direttore: Stefano Bazzi, Solisti: Lugano Quartet (Zhen Xu, Maria Grazia Corino, Martino Laffranchini, Nicola Tallone)',
-        'Maggio 2016 Camerata dei Castelli - Teatro Sociale di Bellinzona, Direttore: Andreas Laake',
-        'Dal 2014 Aggiunto presso Orchestra della Svizzera italiana (OSI) per « Lugano Estival Jazz » - Mendrisio, Svizzera, Direttore: Gast Waltzing',
-        'Luglio 2014 Orchestra da Camera del LongLake Festival - Lugano, Svizzera, Direttore: Christian Bellisario',
-        '2005 – 2008 Orchestra sinfonica della Scuola universitaria del Conservatorio della Svizzera italiana - Lugano, Svizzera, Direttori: Lü Ja, Robert Cohen, Johannes Goritzky',
-        'Settembre 2004 « 4. Internationalen Orchester-akademie mannheimer Schule des Nationaltheaters Mannheim » - Mannheim, Germania, Adam Fischer, Enrico Dovico, Christoph Spering, Direttori ospiti',
-        'Estate 2002 Orchestra professionale del Conservatorio della Svizzera italiana per il concerto d\'apertura del Festival musicale in Val Gardena/Gröden - Italia, Norbert Brainin, Robert Cohen, Direttori, Robert Cohen, Solista',
-        '1999 – 2002 Orchestra sinfonica giovanile - Lugano, Svizzera, Anna Modesti, Direttore',
-      ]},
+      {
+        type: 'list', items: [
+          'Dal 2025 UNATED SOLOISTS ORCHESTRA - Direttore: Arseniy Shkaptsov',
+          'Dal 2024 Orchestra Vivace della Riviera - Direttore: Daniele Giovannini',
+          'Agosto 2024 Amman Opera Festival International Orchestra - Sotto il Patrocinio della Principessa HRH Muna AL-HUSSEIN di Giordania; Raccolta Fondi per GAZA ORPHANED CHILDREN. AIDA (prima) di G. VERDI (primo violoncello) - Solista: Zeina Barhoum, Direttore: Claudio Morbo, Direttore esecutivo: Fabio Buonocore',
+          'Aprile 2024 Aggiunto OSI (Orchestra della Svizzera italiana) per Tournée in Germania + LAC 09 - Direttore: Markus Poschner, Solista: Anna Vinnitskaya, dal 03.04.2024 - 20-04.2024',
+          'Dal 2021 Orchestra Opera Viva - Direttore: Andrea Cupia',
+          'Febbraio 2017 Camerata dei Castelli e Quintetto Bislacco - Teatro Sociale di Bellinzona, Direttore: Andreas Laake',
+          'Gennaio 2017 Camerata dei Castelli - Teatro Sociale di Bellinzona, Direttore: Andreas Laake',
+          'Dal 2016 Orchestra da Camera di Lugano - Direttore: Stefano Bazzi',
+          'Luglio 2016 Orchestra da Camera di Lugano per "LongLake Festival" - Direttore: Stefano Bazzi, Solisti: Lugano Quartet (Zhen Xu, Maria Grazia Corino, Martino Laffranchini, Nicola Tallone)',
+          'Maggio 2016 Camerata dei Castelli - Teatro Sociale di Bellinzona, Direttore: Andreas Laake',
+          'Dal 2014 Aggiunto presso Orchestra della Svizzera italiana (OSI) per « Lugano Estival Jazz » - Mendrisio, Svizzera, Direttore: Gast Waltzing',
+          'Luglio 2014 Orchestra da Camera del LongLake Festival - Lugano, Svizzera, Direttore: Christian Bellisario',
+          '2005 – 2008 Orchestra sinfonica della Scuola universitaria del Conservatorio della Svizzera italiana - Lugano, Svizzera, Direttori: Lü Ja, Robert Cohen, Johannes Goritzky',
+          'Settembre 2004 « 4. Internationalen Orchester-akademie mannheimer Schule des Nationaltheaters Mannheim » - Mannheim, Germania, Adam Fischer, Enrico Dovico, Christoph Spering, Direttori ospiti',
+          'Estate 2002 Orchestra professionale del Conservatorio della Svizzera italiana per il concerto d\'apertura del Festival musicale in Val Gardena/Gröden - Italia, Norbert Brainin, Robert Cohen, Direttori, Robert Cohen, Solista',
+          '1999 – 2002 Orchestra sinfonica giovanile - Lugano, Svizzera, Anna Modesti, Direttore',
+        ]
+      },
       { type: 'heading', content: 'Educazione generale' },
-      { type: 'list', items: [
-        'Giugno 2004 Maturità linguistica - Istituto Santa Caterina, 6600 Locarno, Svizzera',
-      ]},
+      {
+        type: 'list', items: [
+          'Giugno 2004 Maturità linguistica - Istituto Santa Caterina, 6600 Locarno, Svizzera',
+        ]
+      },
       { type: 'heading', content: 'Lingue parlate' },
-      { type: 'list', items: [
-        'Italiano Madrelingua',
-        'Francese e Inglese Conoscenza molto buona',
-        'Tedesco Conoscenza buona',
-      ]},
+      {
+        type: 'list', items: [
+          'Italiano Madrelingua',
+          'Francese e Inglese Conoscenza molto buona',
+          'Tedesco Conoscenza buona',
+        ]
+      },
     ],
   },
   'cv/organizzatore': {
@@ -127,13 +143,15 @@ export const PAGE_CONFIG: Record<string, PageContent> = {
     coverImage: '/media/cover-cv-organizzatore.png',
     body: [
       { type: 'heading', content: 'Esperienza in Direzione Artistica, Organizzazione Eventi, Raccolta Fondi, Hostess' },
-      { type: 'list', items: [
-        'Da Marzo 2025 Presidente Associazione Silarte',
-        'Luglio 2023 Co-Organizzatore, Direttore Artistico e Docente della The Locarno Masterclass - Masterclass Internazionale presso l\'Istituto Sant\'Eugenio di Locarno con la partecipazione attiva di 22 studenti provenienti da Shanghai (Cina)',
-        'Dal 2021 Responsabile Raccolta Fondi presso Associazione Silarte di Cevio',
-        'Estate 2018 Hostess per Locarno Film Festival 2018 - Accoglienza degli Artisti e varie mansioni organizzative',
-        'Dal 2017 Direttore Artistico presso Associazione Silarte di Cevio - Primavera Musicale - Edizioni: 2018/2019/2020/2021/2022/2023/2024',
-      ]},
+      {
+        type: 'list', items: [
+          'Da Marzo 2025 Presidente Associazione Silarte',
+          'Luglio 2023 Co-Organizzatore, Direttore Artistico e Docente della The Locarno Masterclass - Masterclass Internazionale presso l\'Istituto Sant\'Eugenio di Locarno con la partecipazione attiva di 22 studenti provenienti da Shanghai (Cina)',
+          'Dal 2021 Responsabile Raccolta Fondi presso Associazione Silarte di Cevio',
+          'Estate 2018 Hostess per Locarno Film Festival 2018 - Accoglienza degli Artisti e varie mansioni organizzative',
+          'Dal 2017 Direttore Artistico presso Associazione Silarte di Cevio - Primavera Musicale - Edizioni: 2018/2019/2020/2021/2022/2023/2024',
+        ]
+      },
     ],
   },
   'eventi/futuri': {
@@ -172,6 +190,13 @@ export const PAGE_CONFIG: Record<string, PageContent> = {
         pieceTitle: 'Suite Populaire Espagnole',
         compositionYear: 1914,
       },
+    ],
+    body: [
+      'Il duo formato da violoncello e chitarra rappresenta una delle combinazioni più affascinanti e versatili del panorama cameristico. La profondità e il lirismo del violoncello si fondono con la ricchezza armonica e la trasparenza della chitarra, creando un amalgama sonoro unico, capace di spaziare dal vigore ritmico alla più delicata introspezione.',
+      { type: 'heading', content: 'Un Viaggio tra i Generi' },
+      'Il nostro programma esplora secoli di storia musicale, partendo dalle trascrizioni barocche dove il violoncello canta su un tappeto armonico finemente intrecciato, passando per il romanticismo europeo, fino ad approdare alle calde atmosfere del Sud America. Autori come Astor Piazzolla e Manuel de Falla trovano in questa formazione una dimensione ideale, dove la danza e il canto si fondono in un unico respiro.',
+      { type: 'heading', content: 'Eleganza e Versatilità' },
+      'Ogni concerto è concepito come un racconto. Amiamo instaurare un contatto diretto con il pubblico, introducendo i brani e condividendo curiosità storiche o aneddoti personali legati alle composizioni. La nostra proposta è adatta sia a stagioni concertistiche formali che a eventi privati d\'élite, dove la musica diviene cornice di rara eleganza.',
     ],
     cachet:
       'Il cachet per concerti con il duo chitarra varia in base alla location e alla durata dell\'evento. Per informazioni dettagliate e preventivi personalizzati, si prega di contattare direttamente l\'artista.',
@@ -221,6 +246,13 @@ export const PAGE_CONFIG: Record<string, PageContent> = {
         pieceTitle: 'Sonata per violoncello e pianoforte in Sol minore, Op. 19',
         compositionYear: 1901,
       },
+    ],
+    body: [
+      'Il duo violoncello e pianoforte è una delle formazioni classiche per eccellenza, capace di esprimere la massima gamma dinamica e timbrica. In questa collaborazione, i due strumenti non sono semplicemente solista e accompagnatore, ma partner paritetici in un dialogo serrato, virtuostico e profondamente emozionante.',
+      { type: 'heading', content: 'Il Grande Repertorio' },
+      'Il nucleo della nostra proposta si concentra sui capolavori del XIX e XX secolo. Dalla solarità della Terza Sonata di Beethoven, opera di perfetto equilibrio classico-romantico, alle profonde tensioni della musica di Brahms e Rachmaninoff, esploriamo la ricchezza del repertorio dove il pianoforte stende ampie campiture armoniche su cui il violoncello può dispiegare tutto il suo potenziale espressivo.',
+      { type: 'heading', content: 'Passione e Rigore' },
+      'La nostra ricerca si focalizza sulla fedeltà al testo unita a una visione interpretativa moderna e vibrante. Ogni esecuzione mira a restituire all\'ascoltatore l\'intensità del pensiero compositivo, trasformando il concerto in un\'esperienza immersiva e indimenticabile.',
     ],
     cachet:
       'Il duo piano e violoncello è disponibile per concerti, eventi privati e rassegne musicali. I costi variano in base alla durata e alla complessità del programma. Contattateci per maggiori informazioni.',
@@ -296,6 +328,13 @@ export const PAGE_CONFIG: Record<string, PageContent> = {
         pieceTitle: 'Suite per violoncello solo n. 1, Op. 72',
         compositionYear: 1964,
       },
+    ],
+    body: [
+      'Il recital per violoncello solo è una sfida artistica e umana, un momento di assoluta vicinanza tra l\'interprete, lo strumento e l\'ascoltatore. Senza il sostegno di altri strumenti, il violoncello si rivela nella sua interezza: polifonico, melodico, percussivo, in un monologo che diventa dialogo interiore.',
+      { type: 'heading', content: 'Dalle Suite di Bach alla Modernità' },
+      'Il programma solistico propone un arco temporale che parte dalle fondamenta della letteratura violoncellistica: le Suite di J.S. Bach, microcosmi di perfezione formale e spirituale. Il viaggio prosegue verso il Novecento di Kodály, che esplora le radici popolari e le possibilità virtuosistiche estreme, e Britten, che con le sue Suite rende omaggio alla tradizione russa infondendovi un linguaggio colto e innovativo.',
+      { type: 'heading', content: 'Solitudine Creativa' },
+      'In questi programmi, il silenzio tra le note acquista la stessa importanza del suono. La performance solistica è ideale per contesti che richiedono un\'atmosfera di raccoglimento e concentrazione, dove ogni sfumatura timbrica può essere apprezzata nella sua purezza.',
     ],
     cachet:
       'Recital solistici disponibili per stagioni concertistiche, festival e eventi culturali. Programmi tematici su richiesta. Per informazioni su disponibilità e tariffe, si prega di contattare l\'artista.',
@@ -376,6 +415,18 @@ export const PAGE_CONFIG: Record<string, PageContent> = {
   'insegnamento/metodo': {
     title: 'Metodo',
     description:
-      'Approccio didattico e metodologia di insegnamento.',
+      'L\'insegnamento del violoncello come percorso di scoperta sonora, equilibrio tecnico e consapevolezza espressiva.',
+    coverImage: '/media/placeholder-progetti-subpages.png',
+    body: [
+      'La mia metodologia didattica affonda le radici nella grande tradizione violoncellistica italiana, perfezionata attraverso gli insegnamenti di maestri come Enrico Dindo e Rocco Filippini, e si arricchisce delle competenze acquisite nel Master of Arts in Music Pedagogy presso il Conservatorio della Svizzera italiana.',
+      { type: 'heading', content: 'Filosofia Didattica' },
+      'Credo che ogni allievo sia un universo unico. Il mio obiettivo non è imporre un modello predefinito, ma aiutare ogni studente a trovare la propria "voce" attraverso lo strumento. L\'insegnamento è per me un dialogo costante tra tecnica e intuizione, dove la disciplina diventa il mezzo per liberare l\'espressività.',
+      { type: 'heading', content: 'Tecnica e Consapevolezza Corporea' },
+      'Il violoncello deve essere un\'estensione naturale del corpo. Dedico particolare attenzione alla postura e all\'uso consapevole del peso del braccio, ispirandomi ai principi della fisiologia del movimento applicata alla musica. Una tecnica sana è la base imprescindibile per una longevità artistica e per la prevenzione di tensioni muscolari.',
+      { type: 'heading', content: 'Interpretazione e Linguaggio Musicale' },
+      'Lo studio di un brano non si ferma alla corretta esecuzione delle note. Approfondiamo insieme l\'analisi formale, il contesto storico e le scelte retoriche per dare vita a un\'interpretazione consapevole. Dalla musica barocca (studiata anche attraverso la collaborazione con specialisti) fino alla musica contemporanea ed elettronica, ogni genere richiede un vocabolario sonoro specifico.',
+      { type: 'heading', content: 'Personalizzazione del Percorso' },
+      'Che si tratti di un bambino che si accosta per la prima volta allo strumento, di un amatore adulto o di uno studente universitario in cerca di perfezionamento, il percorso viene cucito su misura. Utilizzo metodi consolidati del repertorio didattico classico integrati da esercizi personalizzati, incoraggiando fin da subito la pratica della musica d\'insieme.',
+    ],
   },
 }

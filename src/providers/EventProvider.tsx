@@ -29,6 +29,7 @@ const FALLBACK_EVENTS: EventRecord[] = [
     address: 'Milano, Teatro Demo',
     isFree: true,
     externalUrl: null,
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/3075/3075848.png', // Demo icon
   },
 ]
 
@@ -60,6 +61,7 @@ const mapEvent = (raw: EventRow): EventRecord => ({
   price: raw.price,
   externalUrl: raw.external_url ?? raw.externalUrl,
   locationUrl: raw.location_url ?? raw.locationUrl,
+  iconUrl: raw.icon_url ?? raw.iconUrl,
   createdAt: raw.created_at ?? undefined,
   updatedAt: raw.updated_at ?? undefined,
 })
