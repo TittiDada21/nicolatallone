@@ -657,6 +657,13 @@
 .packageCard:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, rgba(217, 119, 6, 0.15) 0%, rgba(245, 158, 11, 0.2) 100%);
+  backdrop-filter: blur(10px);
+}
+
+.themeGreen .packageCard:hover {
+  background: linear-gradient(135deg, rgba(217, 119, 6, 0.2) 0%, rgba(245, 158, 11, 0.25) 100%);
+  border-color: rgba(245, 158, 11, 0.3);
 }
 
 .packageTitle {
