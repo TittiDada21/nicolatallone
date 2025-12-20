@@ -191,7 +191,7 @@
 
 .minimizedBar {
   position: fixed !important;
-  bottom: 24px;
+  bottom: 80px;
   left: 50%;
   transform: translateX(-50%);
   width: min(420px, 92%);
@@ -200,15 +200,14 @@
   border: 2px solid rgba(245, 214, 123, 0.5);
   border-radius: 24px;
   padding: 1rem 1.4rem;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   z-index: 100;
   animation: slideUp 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
-    glowBreathingStrong 2s ease-in-out infinite,
-    gentleBounce 3s ease-in-out infinite;
+    structuralPulse 1.5s ease-in-out infinite;
   overflow: hidden;
 }
 
-/* Shimmer effect sul bordo - PIÙ EVIDENTE */
+/* Shimmer effect sul bordo */
 .minimizedBar::before {
   content: '';
   position: absolute;
@@ -230,39 +229,16 @@
   pointer-events: none;
 }
 
-/* Glow pulsante FORTE */
-@keyframes glowBreathingStrong {
+/* Pulsazione STRUTTURALE forte - la card cresce e si riduce */
+@keyframes structuralPulse {
 
   0%,
   100% {
-    box-shadow:
-      0 15px 40px rgba(0, 0, 0, 0.5),
-      0 0 30px rgba(245, 214, 123, 0.4),
-      0 0 60px rgba(245, 214, 123, 0.3),
-      0 0 90px rgba(245, 214, 123, 0.2);
     transform: translateX(-50%) scale(1);
   }
 
   50% {
-    box-shadow:
-      0 20px 60px rgba(0, 0, 0, 0.7),
-      0 0 50px rgba(245, 214, 123, 0.7),
-      0 0 100px rgba(245, 214, 123, 0.5),
-      0 0 150px rgba(245, 214, 123, 0.3);
-    transform: translateX(-50%) scale(1.02);
-  }
-}
-
-/* Bounce leggero per attirare l'attenzione */
-@keyframes gentleBounce {
-
-  0%,
-  100% {
-    transform: translateX(-50%) translateY(0);
-  }
-
-  50% {
-    transform: translateX(-50%) translateY(-8px);
+    transform: translateX(-50%) scale(1.05);
   }
 }
 
