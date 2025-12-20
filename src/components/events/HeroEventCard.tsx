@@ -149,36 +149,39 @@ export function HeroEventCard() {
           )}
           {formatted && !loading && (
             <>
+              <div className={styles.cardBodyContent}>
+                <p className={styles.datetime}>{formatted.formattedDate}</p>
+
+                {formatted.address && (
+                  <p className={styles.metaRow}>
+                    <FiMapPin aria-hidden />
+                    {formatted.locationUrl ? (
+                      <a href={formatted.locationUrl} target="_blank" rel="noreferrer">
+                        {formatted.address}
+                      </a>
+                    ) : (
+                      formatted.address
+                    )}
+                  </p>
+                )}
+
+                {formatted.externalUrl && (
+                  <a
+                    href={formatted.externalUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.externalLink}
+                  >
+                    Dettagli evento
+                    <FiExternalLink aria-hidden />
+                  </a>
+                )}
+              </div>
+
               {formatted.imageUrl && (
                 <div className={styles.imagePreviewContainer}>
                   <img src={formatted.imageUrl} alt="" className={styles.cardPreviewImage} />
                 </div>
-              )}
-              <p className={styles.datetime}>{formatted.formattedDate}</p>
-
-              {formatted.address && (
-                <p className={styles.metaRow}>
-                  <FiMapPin aria-hidden />
-                  {formatted.locationUrl ? (
-                    <a href={formatted.locationUrl} target="_blank" rel="noreferrer">
-                      {formatted.address}
-                    </a>
-                  ) : (
-                    formatted.address
-                  )}
-                </p>
-              )}
-
-              {formatted.externalUrl && (
-                <a
-                  href={formatted.externalUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={styles.externalLink}
-                >
-                  Dettagli evento
-                  <FiExternalLink aria-hidden />
-                </a>
               )}
             </>
           )}
