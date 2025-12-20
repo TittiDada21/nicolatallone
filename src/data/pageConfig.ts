@@ -401,7 +401,7 @@ export const PAGE_CONFIG: Record<string, PageContent> = {
     packages: [
       {
         title: 'Hobby',
-        features: ['♬ 1 lezione al mese: 150 CHF', '♬ Se fai più di una al mese: solo 100 CHF a lezione'],
+        features: ['♩ 1 lezione al mese: 150 CHF', '♩ Se fai più di una al mese: solo 100 CHF a lezione'],
       },
       {
         title: 'Passione',
