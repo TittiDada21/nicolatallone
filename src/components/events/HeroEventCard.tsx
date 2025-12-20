@@ -85,14 +85,16 @@ export function HeroEventCard() {
     return (
       <section className={styles.minimizedBar}>
         <div className={styles.minimizedContent}>
+          {formatted?.imageUrl && (
+            <img src={formatted.imageUrl} alt="" className={styles.minimizedIcon} />
+          )}
           <div className={styles.minimizedInfo}>
             {formatted ? (
               <>
-                <span className={styles.minimizedTime}>{formatted.formattedDateCompact}</span>
-                {formatted.imageUrl && (
-                  <img src={formatted.imageUrl} alt="" className={styles.minimizedIcon} />
-                )}
-                <span className={styles.minimizedTitle}>{formatted.title}</span>
+                <div className={styles.minimizedTextWrapper}>
+                  <span className={styles.minimizedTitle}>{formatted.title}</span>
+                  <span className={styles.minimizedTime}>{formatted.formattedDateCompact}</span>
+                </div>
               </>
             ) : (
               <span className={styles.minimizedTitle}>Nessun evento in programma</span>
@@ -147,6 +149,11 @@ export function HeroEventCard() {
           )}
           {formatted && !loading && (
             <>
+              {formatted.imageUrl && (
+                <div className={styles.imagePreviewContainer}>
+                  <img src={formatted.imageUrl} alt="" className={styles.cardPreviewImage} />
+                </div>
+              )}
               <p className={styles.datetime}>{formatted.formattedDate}</p>
 
               {formatted.address && (

@@ -124,6 +124,12 @@ export function EventsPage() {
                   )}
                 </div>
 
+                {event.imageUrl && (
+                  <div className={styles.eventImageContainer}>
+                    <img src={event.imageUrl} alt="" className={styles.eventImage} />
+                  </div>
+                )}
+
                 {event.description && (
                   <p className={styles.eventDescription}>{event.description}</p>
                 )}

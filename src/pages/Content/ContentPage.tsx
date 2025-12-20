@@ -8,6 +8,7 @@ import { useProjectRepertoire } from '@/hooks/useProjectRepertoire'
 import { useProjectCachet } from '@/hooks/useProjectCachet'
 import { useAuth } from '@/providers/AuthProvider'
 import { AdminLoginModal } from '@/components/common/AdminLoginModal'
+import { CvAccordion } from '@/components/Content/CvAccordion'
 
 import styles from './ContentPage.module.css'
 
@@ -160,6 +161,7 @@ export function ContentPage({ pageKey }: ContentPageProps) {
                   {page.externalLink.label}
                 </a>
               )}
+              {page.subtitle && <p className={styles.subtitle}>{page.subtitle}</p>}
             </div>
             {page.sideImage && (
               <img src={page.sideImage} alt="" className={styles.sideImage} aria-hidden />
@@ -227,26 +229,30 @@ export function ContentPage({ pageKey }: ContentPageProps) {
 
         {page.body && (
           <section className={styles.body}>
-            {page.body.map((item, index) => {
-              if (typeof item === 'string') {
-                return <p key={index}>{item}</p>
-              }
-              if (typeof item === 'object' && 'type' in item) {
-                if (item.type === 'heading') {
-                  return <h3 key={index} className={styles.subsectionTitle}>{item.content}</h3>
+            {pageKey === 'cv/musicista' ? (
+              <CvAccordion body={page.body} />
+            ) : (
+              page.body.map((item, index) => {
+                if (typeof item === 'string') {
+                  return <p key={index}>{item}</p>
                 }
-                if (item.type === 'list') {
-                  return (
-                    <ul key={index} className={styles.cvList}>
-                      {item.items?.map((listItem, liIndex) => (
-                        <li key={liIndex}>{listItem}</li>
-                      ))}
-                    </ul>
-                  )
+                if (typeof item === 'object' && 'type' in item) {
+                  if (item.type === 'heading') {
+                    return <h3 key={index} className={styles.subsectionTitle}>{item.content}</h3>
+                  }
+                  if (item.type === 'list') {
+                    return (
+                      <ul key={index} className={styles.cvList}>
+                        {item.items?.map((listItem, liIndex) => (
+                          <li key={liIndex}>{listItem}</li>
+                        ))}
+                      </ul>
+                    )
+                  }
                 }
-              }
-              return null
-            })}
+                return null
+              })
+            )}
           </section>
         )}
 

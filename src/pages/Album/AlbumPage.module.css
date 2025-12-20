@@ -6,6 +6,7 @@
   justify-content: center;
   background: linear-gradient(135deg, #023601 0%, #00ad01 100%);
   padding: 5rem 2rem 3rem;
+  overflow-y: auto;
 }
 
 .container {

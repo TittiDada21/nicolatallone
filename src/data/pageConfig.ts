@@ -29,6 +29,7 @@ export type PageContent = {
     url: string
   }
   layout?: 'standard' | 'conservatorio' | 'private-lessons'
+  subtitle?: string
 }
 
 export const PAGE_CONFIG: Record<string, PageContent> = {
@@ -373,6 +374,14 @@ export const PAGE_CONFIG: Record<string, PageContent> = {
       'All\'interno di questo ambiente stimolante, il mio ruolo di docente si focalizza sullo sviluppo tecnico ed espressivo degli studenti di violoncello. Il percorso didattico che propongo mira a fornire solidi fondamenti strumentali, ma soprattutto a stimolare la ricerca di una propria voce artistica. Attraverso lezioni individuali, musica da camera e progetti orchestrali, accompagno gli allievi in un viaggio di scoperta musicale che va oltre la semplice esecuzione.',
       'La struttura del Conservatorio, situata nella "Città della Musica" a Lugano, offre spazi acusticamente perfetti e tecnologie all\'avanguardia, creando l\'ecosistema ideale per lo studio e la performance. Qui, gli studenti hanno l\'opportunità di confrontarsi con maestri di fama mondiale e di partecipare a masterclass esclusive.',
       'Collaborare con un\'istituzione di tale prestigio mi permette di trasmettere non solo la tecnica violoncellistica, ma anche i valori di disciplina, passione e integrità artistica che sono fondamentali per una carriera professionale nel mondo della musica classica.',
+      { type: 'heading', content: 'Perché la SMUS' },
+      'Eccellenza musicale. Dal 1985 offriamo una formazione musicale eccellente sia sotto il profilo tecnico-individuale sia sotto quello collettivo. Da 40 anni proponiamo un progetto pedagogico globale di educazione musicale che mette al centro la crescita artistica e culturale, personale e sociale dei nostri allievi. Ogni anno elaboriamo un progetto educativo che risponda, in modo costruttivo e tempestivo, ai cambiamenti culturali e sociali.',
+      'Eccellenza pedagogica. Scegliamo con cura i nostri docenti. Ognuno di loro dispone di diplomi artistici e pedagogici riconosciuti e collabora per redigere e aggiornare costantemente i programmi didattici della Scuola, riservando particolare attenzione al corretto sviluppo creativo e umano degli allievi.',
+      'Garanzia di qualità. Grazie all’ampia offerta di elevata qualità didattica, rappresentiamo da sempre l’istituzione di riferimento dell’educazione musicale per le famiglie ticinesi. Offriamo una formazione musicale a 360°, in tutti i repertori e generi musicali, accessibile a chiunque desideri avvicinarsi alla musica, indipendentemente dall’età e dalle proprie abilità.',
+      'Didattica progressiva. Accompagniamo il nostro allievo nel suo percorso di crescita. Dai primi passi di esplorazione della musica, all’apprendimento e perfezionamento strumentale e vocale, offrendo la possibilità di condividere il piacere di fare musica insieme, negli ensemble, in coro o in orchestra. Arricchiamo la nostra offerta con corsi di composizione, corsi teorici e molteplici attività formative complementari.',
+      'I nostri numeri. Siamo presenti in tutto il Cantone. Con le sedi di Mendrisio, Lugano, Bellinzona e Locarno, e le succursali di Breganzona, Pura e Alta Leventina, raggiungiamo oltre 1’000 allievi che frequentano 2’000 corsi musicali: circa 700 ore di lezione a settimana e più di 100 appuntamenti l’anno tra saggi, piccoli e grandi concerti, co-produzioni sul territorio cantonale, nazionale e internazionale, che valorizzano l’impegno, la dedizione e la passione di ogni allievo.',
+      'Le nostre collaborazioni. Contiamo su una collaborazione sistematica con il Pre-College e la Scuola universitaria di Musica del Conservatorio e con diversi enti tra cui: l’Associazione Svizzera delle Scuole di Musica ASSM, la Federazione delle scuole di musica ticinesi FeSMuT, la Federazione Bandistica Ticinese FeBaTi, il Concorso Svizzero di musica per la gioventù SJMW, LAC Edu, Musica nel Mendrisiotto, MusicalinsiEME, l’lstituto Von Mentlen Bellinzona, La Filanda Mendrisio, la Parrocchia Sant\'Antonio Locarno, il Salone Olimpia Airolo, il Teatro Casvegno Mendrisio, il Teatro del Gatto Ascona, il Teatro Paravento Locarno, il Teatro Sociale Arogno, e il Teatro Sociale Bellinzona.',
+      'La SMUS è riconosciuta dal Cantone.',
     ],
     layout: 'conservatorio',
     sideImage: '/media/la-citta-della-musica.jpg',
@@ -380,6 +389,7 @@ export const PAGE_CONFIG: Record<string, PageContent> = {
       label: 'Visita il sito ufficiale del CSI',
       url: 'https://www.conservatorio.ch',
     },
+    subtitle: 'Il docente Nicola Tallone insegna presso la scuola di musica del Conservatorio della Svizzera Italiana, nelle sedi di Locarno e Bellinzona. Il mercoledì pomeriggio dirige gli Archi di Bellinzona, corso imprescindibile per sviluppare le competenze della musica d’insieme.',
   },
   'insegnamento/lezioni-private': {
     title: 'Lezioni private',
@@ -387,21 +397,19 @@ export const PAGE_CONFIG: Record<string, PageContent> = {
       'Percorsi personalizzati per imparare il violoncello o perfezionare la tecnica, adatti a ogni livello.',
     coverImage: '/media/cover-lezioni-private.png',
     layout: 'private-lessons',
+    subtitle: 'percorsi personalizzati in particolare per quegli adulti che non riescono a seguire un ritmo accademico o per quei giovani talenti che hanno bisogno di approfondire oltre le lezioni regolari di conservatorio.',
     packages: [
       {
-        title: 'Pacchetto Base',
-        features: ['5 lezioni', 'Validità 2 mesi', 'Orari flessibili'],
-        price: '300 CHF',
+        title: 'Pacchetto 1 ("Hobby")',
+        features: ['per un’ora al mese 150chf', 'se piu di una (al mese) 100chf a lezione'],
       },
       {
-        title: 'Pacchetto Intermedio',
-        features: ['10 lezioni', 'Validità 4 mesi', '1 lezione di musica d\'insieme'],
-        price: '550 CHF',
+        title: 'Pacchetto 2 ("Passione")',
+        features: ['minimo 1 a settimana', '80 chf all’ora'],
       },
       {
-        title: 'Pacchetto Avanzato',
-        features: ['20 lezioni', 'Validità 9 mesi', 'Masterclass annuale riservata', 'Sconto su acquisto strumenti parter'],
-        price: '1000 CHF',
+        title: 'Pacchetto 3 ("Master")',
+        features: ['per più di un’ora di lezione', '100chf a settimana', '(senza guardare l’orologio)'],
       },
     ],
     termsWarning:

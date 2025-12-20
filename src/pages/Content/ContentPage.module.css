@@ -130,6 +130,16 @@
   letter-spacing: 0.01em;
 }
 
+.subtitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: inherit;
+  opacity: 0.9;
+  margin-bottom: 0.5rem;
+  max-width: 80ch;
+}
+
 @media (max-width: 640px) {
   .description {
     font-size: 1.05rem;
@@ -290,6 +300,7 @@
   line-height: 1.85;
   color: inherit;
   opacity: 0.9;
+  white-space: pre-wrap;
 }
 
 .adminBar {
