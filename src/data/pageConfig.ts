@@ -409,7 +409,7 @@ export const PAGE_CONFIG: Record<string, PageContent> = {
       },
       {
         title: 'Master',
-        features: ['✦ Per chi vuole più tempo e libertà', '✦ 100 CHF a settimana', '✦ Lezioni senza guardare l\'orologio'],
+        features: ['✦ 100 CHF a settimana', '✦ Lezioni in libertà; senza guardare l\'orologio'],
       },
     ],
     termsWarning:
