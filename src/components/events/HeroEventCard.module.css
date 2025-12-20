@@ -19,11 +19,11 @@
 .cardContent {
   position: relative;
   z-index: 2;
-  padding: 2rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-  min-height: 240px;
+  gap: 1rem;
+  min-height: 200px;
   justify-content: flex-end;
 }
 
@@ -174,9 +174,9 @@
 }
 
 .imagePreviewContainer {
-  width: 160px;
-  height: 160px;
-  border-radius: 16px;
+  width: 120px;
+  height: 120px;
+  border-radius: 14px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.15);
   flex-shrink: 0;
@@ -194,25 +194,78 @@
   bottom: 80px;
   left: 50%;
   transform: translateX(-50%);
-  width: min(400px, 90%);
-  background: rgba(20, 20, 25, 0.8);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
-  padding: 0.8rem 1.2rem;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  width: min(420px, 92%);
+  background: rgba(20, 20, 25, 0.9);
+  backdrop-filter: blur(24px);
+  border: 1.5px solid rgba(245, 214, 123, 0.3);
+  border-radius: 24px;
+  padding: 1rem 1.4rem;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
   z-index: 100;
-  animation: slideUp 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  animation: slideUp 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+    glowBreathing 3s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shimmer effect sul bordo */
+.minimizedBar::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 24px;
+  padding: 2px;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(245, 214, 123, 0.4) 25%,
+      rgba(245, 214, 123, 0.8) 50%,
+      rgba(245, 214, 123, 0.4) 75%,
+      transparent 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  animation: borderShimmer 4s linear infinite;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+@keyframes glowBreathing {
+
+  0%,
+  100% {
+    box-shadow:
+      0 15px 40px rgba(0, 0, 0, 0.5),
+      0 0 20px rgba(245, 214, 123, 0.2),
+      0 0 40px rgba(245, 214, 123, 0.1);
+  }
+
+  50% {
+    box-shadow:
+      0 20px 50px rgba(0, 0, 0, 0.6),
+      0 0 30px rgba(245, 214, 123, 0.4),
+      0 0 60px rgba(245, 214, 123, 0.2);
+  }
+}
+
+@keyframes borderShimmer {
+  0% {
+    transform: translateX(-100%) rotate(0deg);
+  }
+
+  100% {
+    transform: translateX(100%) rotate(0deg);
+  }
 }
 
 @keyframes slideUp {
   from {
-    transform: translate(-50%, 20px);
+    transform: translateX(-50%) translateY(20px);
     opacity: 0;
   }
 
   to {
-    transform: translate(-50%, 0);
+    transform: translateX(-50%) translateY(0);
     opacity: 1;
   }
 }
@@ -220,7 +273,9 @@
 .minimizedContent {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
 }
 
 .minimizedInfo {
@@ -241,11 +296,12 @@
 }
 
 .minimizedIcon {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
   object-fit: cover;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1.5px solid rgba(245, 214, 123, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .minimizedTitle {
@@ -264,8 +320,9 @@
 }
 
 .expandButton {
-  background: none;
-  border: none;
+  background: rgba(245, 214, 123, 0.1);
+  border: 1px solid rgba(245, 214, 123, 0.2);
+  border-radius: 10px;
   color: #f5d67b;
   font-size: 1.2rem;
   cursor: pointer;
@@ -273,6 +330,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.expandButton:hover {
+  background: rgba(245, 214, 123, 0.2);
+  border-color: rgba(245, 214, 123, 0.4);
+  transform: scale(1.1);
 }
 
 .placeholder {

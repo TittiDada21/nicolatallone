@@ -46,7 +46,7 @@ const formatDateTimeCompact = (isoString: string) => {
 
 export function HeroEventCard() {
   const { upcomingEvent, loading, error, refresh, isConfigured } = useEvents()
-  const [isMinimized, setIsMinimized] = useState(false)
+  const [isMinimized, setIsMinimized] = useState(true)
 
   useEffect(() => {
     const handleVisibilityChange = () => {
