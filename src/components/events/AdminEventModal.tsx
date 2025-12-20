@@ -101,6 +101,7 @@ export function AdminEventModal({
         ...form,
         price: form.isFree ? undefined : form.price,
         externalUrl: form.externalUrl || undefined,
+        imageUrl: form.imageUrl || undefined,
       })
       // Close modal on successful save
       onClose()
