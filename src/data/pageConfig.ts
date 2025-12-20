@@ -401,15 +401,15 @@ export const PAGE_CONFIG: Record<string, PageContent> = {
     packages: [
       {
         title: 'Hobby',
-        features: ['per un’ora al mese 150chf', 'se piu di una (al mese) 100chf a lezione'],
+        features: ['♬ 1 lezione al mese: 150 CHF', '♬ Se fai più di una al mese: solo 100 CHF a lezione'],
       },
       {
         title: 'Passione',
-        features: ['minimo 1 a settimana', '80 chf all’ora'],
+        features: ['❖ Minimo 1 lezione a settimana', '❖ Solo 80 CHF all\'ora'],
       },
       {
         title: 'Master',
-        features: ['per più di un’ora di lezione', '100chf a settimana', '(senza guardare l’orologio)'],
+        features: ['✦ Per chi vuole più tempo e libertà', '✦ 100 CHF a settimana', '✦ Lezioni senza guardare l\'orologio'],
       },
     ],
     termsWarning:
