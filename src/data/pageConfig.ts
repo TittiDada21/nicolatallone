@@ -400,15 +400,15 @@ export const PAGE_CONFIG: Record<string, PageContent> = {
     subtitle: 'percorsi personalizzati in particolare per quegli adulti che non riescono a seguire un ritmo accademico o per quei giovani talenti che hanno bisogno di approfondire oltre le lezioni regolari di conservatorio.',
     packages: [
       {
-        title: 'Pacchetto 1 ("Hobby")',
+        title: 'Hobby',
         features: ['per un’ora al mese 150chf', 'se piu di una (al mese) 100chf a lezione'],
       },
       {
-        title: 'Pacchetto 2 ("Passione")',
+        title: 'Passione',
         features: ['minimo 1 a settimana', '80 chf all’ora'],
       },
       {
-        title: 'Pacchetto 3 ("Master")',
+        title: 'Master',
         features: ['per più di un’ora di lezione', '100chf a settimana', '(senza guardare l’orologio)'],
       },
     ],
